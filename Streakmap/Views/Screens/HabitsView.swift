@@ -30,11 +30,14 @@ struct HabitsView: View {
                     }
 
                     ForEach(appState.activeHabits) { habit in
-                        Button {
-                            appState.selectedHabitID = habit.id
+                        NavigationLink {
+                            HabitDetailView(habit: habit)
                         } label: {
                             HabitCard(habit: habit, streak: appState.streak(for: habit.id))
                         }
+                        .simultaneousGesture(TapGesture().onEnded {
+                            appState.selectedHabitID = habit.id
+                        })
                         .buttonStyle(.plain)
                     }
 

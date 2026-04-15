@@ -32,6 +32,8 @@
 		A00100010000000100000017 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000017 /* Assets.xcassets */; };
 		A00100010000000100000018 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000018 /* Preview Assets.xcassets */; };
 		A00100010000000100000019 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000019 /* Info.plist */; };
+		A0010001000000010000001A /* DayDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000001B /* DayDetailView.swift */; };
+		A0010001000000010000001B /* HabitDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000001C /* HabitDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +63,8 @@
 		A00200010000000100000018 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A00200010000000100000019 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A0020001000000010000001A /* Streakmap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Streakmap.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0020001000000010000001B /* DayDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailView.swift; sourceTree = "<group>"; };
+		A0020001000000010000001C /* HabitDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,7 +172,9 @@
 			isa = PBXGroup;
 			children = (
 				A00200010000000100000010 /* AddHabitView.swift */,
+				A0020001000000010000001B /* DayDetailView.swift */,
 				A00200010000000100000011 /* HabitsView.swift */,
+				A0020001000000010000001C /* HabitDetailView.swift */,
 				A00200010000000100000012 /* HomeView.swift */,
 				A00200010000000100000013 /* InsightsView.swift */,
 				A00200010000000100000014 /* OnboardingView.swift */,
@@ -251,6 +257,7 @@
 			files = (
 				A00100010000000100000010 /* AddHabitView.swift in Sources */,
 				A00100010000000100000004 /* AppState.swift in Sources */,
+				A0010001000000010000001A /* DayDetailView.swift in Sources */,
 				A00100010000000100000002 /* Color+Hex.swift in Sources */,
 				A0010001000000010000000B /* GlobalHeatmapView.swift in Sources */,
 				A00100010000000100000008 /* HapticService.swift in Sources */,
@@ -260,6 +267,7 @@
 				A00100010000000100000007 /* HabitEntry.swift in Sources */,
 				A0010001000000010000000D /* HabitHeatmapView.swift in Sources */,
 				A00100010000000100000011 /* HabitsView.swift in Sources */,
+				A0010001000000010000001B /* HabitDetailView.swift in Sources */,
 				A0010001000000010000000E /* HeatmapCell.swift in Sources */,
 				A00100010000000100000012 /* HomeView.swift in Sources */,
 				A00100010000000100000013 /* InsightsView.swift in Sources */,

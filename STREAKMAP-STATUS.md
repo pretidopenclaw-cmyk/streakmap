@@ -12,6 +12,8 @@
 - Insights screen
 - Add habit flow
 - Premium mock paywall
+- Habit detail screen
+- Day detail and note editing flow
 - Info.plist and asset catalogs scaffolded
 
 ## Current blocker on this machine
@@ -36,9 +38,9 @@ xcodebuild -project Streakmap.xcodeproj -scheme Streakmap -sdk iphonesimulator -
 
 ## Recommended next dev steps
 1. Build and fix any compile issues in Xcode
-2. Add detailed habit screen and day detail sheet
-3. Move persistence to SwiftData
-4. Replace premium mock with StoreKit 2
-5. Add notifications
-6. Polish animations, transitions, and haptics
-7. Add app icon and brand assets
+2. Move persistence to SwiftData
+3. Replace premium mock with StoreKit 2
+4. Add notifications
+5. Polish animations, transitions, and haptics
+6. Add app icon and brand assets
+7. Add widgets

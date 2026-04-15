@@ -3,6 +3,7 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject private var appState: AppState
     @State private var showAddHabit = false
+    @State private var showDayDetail = false
 
     var body: some View {
         NavigationStack {
@@ -45,44 +46,55 @@ struct HomeView: View {
                                     .font(.system(size: 28, weight: .bold, design: .rounded))
                             }
 
-                            GlobalHeatmapView()
-                                .frame(height: 140)
+                            GlobalHeatmapView { date in
+                                appState.selectedDate = date
+                                showDayDetail = true
+                            }
+                            .frame(height: 140)
                         }
                     }
 
                     if let selectedHabit = appState.selectedHabit {
-                        SectionCard {
-                            VStack(alignment: .leading, spacing: 16) {
-                                HStack {
-                                    VStack(alignment: .leading, spacing: 4) {
-                                        Text(selectedHabit.name)
-                                            .font(.system(size: 22, weight: .semibold, design: .rounded))
-                                        Text("Focused habit")
-                                            .font(.system(size: 14, weight: .medium, design: .rounded))
-                                            .foregroundStyle(StreakmapTheme.textSecondary)
+                        NavigationLink {
+                            HabitDetailView(habit: selectedHabit)
+                        } label: {
+                            SectionCard {
+                                VStack(alignment: .leading, spacing: 16) {
+                                    HStack {
+                                        VStack(alignment: .leading, spacing: 4) {
+                                            Text(selectedHabit.name)
+                                                .font(.system(size: 22, weight: .semibold, design: .rounded))
+                                            Text("Focused habit")
+                                                .font(.system(size: 14, weight: .medium, design: .rounded))
+                                                .foregroundStyle(StreakmapTheme.textSecondary)
+                                        }
+                                        Spacer()
+                                        Text("\(appState.streak(for: selectedHabit.id))d")
+                                            .font(.system(size: 26, weight: .bold, design: .rounded))
+                                            .foregroundStyle(Color(hex: selectedHabit.colorHex))
                                     }
-                                    Spacer()
-                                    Text("\(appState.streak(for: selectedHabit.id))d")
-                                        .font(.system(size: 26, weight: .bold, design: .rounded))
-                                        .foregroundStyle(Color(hex: selectedHabit.colorHex))
-                                }
 
-                                HabitHeatmapView(habit: selectedHabit)
+                                    HabitHeatmapView(habit: selectedHabit) { date in
+                                        appState.selectedDate = date
+                                        showDayDetail = true
+                                    }
                                     .frame(height: 118)
 
-                                Button {
-                                    appState.toggleHabit(selectedHabit.id, on: .now)
-                                } label: {
-                                    Text(appState.isHabitCompleted(selectedHabit.id, on: .now) ? "Completed today" : "Done today")
-                                        .font(.system(size: 17, weight: .semibold, design: .rounded))
-                                        .frame(maxWidth: .infinity)
-                                        .padding(.vertical, 16)
-                                        .background(Color(hex: selectedHabit.colorHex))
-                                        .foregroundStyle(Color.white)
-                                        .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                                    Button {
+                                        appState.toggleHabit(selectedHabit.id, on: .now)
+                                    } label: {
+                                        Text(appState.isHabitCompleted(selectedHabit.id, on: .now) ? "Completed today" : "Done today")
+                                            .font(.system(size: 17, weight: .semibold, design: .rounded))
+                                            .frame(maxWidth: .infinity)
+                                            .padding(.vertical, 16)
+                                            .background(Color(hex: selectedHabit.colorHex))
+                                            .foregroundStyle(Color.white)
+                                            .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                                    }
                                 }
                             }
                         }
+                        .buttonStyle(.plain)
                     }
                 }
                 .padding(20)
@@ -91,6 +103,11 @@ struct HomeView: View {
             .navigationBarHidden(true)
             .sheet(isPresented: $showAddHabit) {
                 AddHabitView()
+            }
+            .sheet(isPresented: $showDayDetail) {
+                if let habit = appState.selectedHabit, let selectedDate = appState.selectedDate {
+                    DayDetailView(habit: habit, date: selectedDate)
+                }
             }
         }
     }

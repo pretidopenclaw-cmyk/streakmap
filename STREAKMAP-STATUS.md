@@ -21,6 +21,7 @@
 - AppState bridge sync to SwiftData added
 - StoreKit-ready premium service scaffold added
 - Reminder scheduling groundwork added
+- Final premium UI polish pass started
 - Info.plist and asset catalogs scaffolded
 
 ## Current blocker on this machine

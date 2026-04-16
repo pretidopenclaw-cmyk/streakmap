@@ -9,9 +9,12 @@ struct HabitsView: View {
         NavigationStack {
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 16) {
-                    HStack {
-                        Text("Your habits")
-                            .font(.system(size: 32, weight: .bold, design: .rounded))
+                    HStack(alignment: .top) {
+                        ScreenHeader(
+                            eyebrow: "Collection",
+                            title: "Your habits",
+                            subtitle: "Each habit gets its own beautiful consistency map."
+                        )
                         Spacer()
                         Button {
                             if appState.isPremiumUnlocked || appState.activeHabits.count < 1 {

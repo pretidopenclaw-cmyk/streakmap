@@ -9,8 +9,11 @@ struct SettingsView: View {
         NavigationStack {
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 16) {
-                    Text("Settings")
-                        .font(.system(size: 32, weight: .bold, design: .rounded))
+                    ScreenHeader(
+                        eyebrow: "Control center",
+                        title: "Settings",
+                        subtitle: "Manage plan, reminders, and product preferences."
+                    )
 
                     SectionCard {
                         VStack(alignment: .leading, spacing: 12) {

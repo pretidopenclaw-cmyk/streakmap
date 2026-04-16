@@ -22,6 +22,11 @@ struct OnboardingView: View {
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 16)
                 }
+
+                HStack(spacing: 12) {
+                    HeroStatPill(title: "Free", value: "1 habit")
+                    HeroStatPill(title: "Premium", value: "Unlimited")
+                }
             }
 
             SectionCard {
@@ -45,6 +50,7 @@ struct OnboardingView: View {
                     .foregroundStyle(.white)
                     .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
             }
+            .buttonStyle(PrimaryButtonStyle())
 
             Spacer()
         }

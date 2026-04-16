@@ -10,14 +10,11 @@ struct HomeView: View {
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 20) {
                     HStack(alignment: .top) {
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("Streakmap")
-                                .font(.system(size: 34, weight: .bold, design: .rounded))
-                                .foregroundStyle(StreakmapTheme.textPrimary)
-                            Text("See your consistency, beautifully.")
-                                .font(.system(size: 16, weight: .medium, design: .rounded))
-                                .foregroundStyle(StreakmapTheme.textSecondary)
-                        }
+                        ScreenHeader(
+                            eyebrow: "Daily rhythm",
+                            title: "Streakmap",
+                            subtitle: "See your consistency, beautifully."
+                        )
                         Spacer()
                         Button {
                             showAddHabit = true
@@ -32,7 +29,7 @@ struct HomeView: View {
                     }
 
                     SectionCard {
-                        VStack(alignment: .leading, spacing: 16) {
+                        VStack(alignment: .leading, spacing: 18) {
                             HStack(alignment: .top) {
                                 VStack(alignment: .leading, spacing: 6) {
                                     Text("Year at a glance")
@@ -42,8 +39,7 @@ struct HomeView: View {
                                         .foregroundStyle(StreakmapTheme.textSecondary)
                                 }
                                 Spacer()
-                                Text(globalScore)
-                                    .font(.system(size: 28, weight: .bold, design: .rounded))
+                                HeroStatPill(title: "Today", value: globalScore)
                             }
 
                             GlobalHeatmapView { date in
@@ -82,6 +78,7 @@ struct HomeView: View {
 
                                     Button {
                                         appState.toggleHabit(selectedHabit.id, on: .now)
+                                        HapticService.success()
                                     } label: {
                                         Text(appState.isHabitCompleted(selectedHabit.id, on: .now) ? "Completed today" : "Done today")
                                             .font(.system(size: 17, weight: .semibold, design: .rounded))
@@ -91,6 +88,7 @@ struct HomeView: View {
                                             .foregroundStyle(Color.white)
                                             .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
                                     }
+                                    .buttonStyle(PrimaryButtonStyle())
                                 }
                             }
                         }

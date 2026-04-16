@@ -20,6 +20,11 @@ struct PremiumView: View {
                             .foregroundStyle(StreakmapTheme.textSecondary)
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 24)
+
+                        HStack(spacing: 12) {
+                            HeroStatPill(title: "Free", value: "1 habit")
+                            HeroStatPill(title: "Premium", value: "Unlimited")
+                        }
                     }
 
                     SectionCard {
@@ -51,6 +56,7 @@ struct PremiumView: View {
                             .foregroundStyle(.white)
                             .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
                     }
+                    .buttonStyle(PrimaryButtonStyle())
 
                     if case .failed(let message) = storeKit.purchaseState {
                         Text(message)

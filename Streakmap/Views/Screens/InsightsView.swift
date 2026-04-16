@@ -7,8 +7,11 @@ struct InsightsView: View {
         NavigationStack {
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 16) {
-                    Text("Insights")
-                        .font(.system(size: 32, weight: .bold, design: .rounded))
+                    ScreenHeader(
+                        eyebrow: "Patterns",
+                        title: "Insights",
+                        subtitle: "Understand how your consistency evolves over time."
+                    )
 
                     if let habit = appState.selectedHabit {
                         Text(habit.name)

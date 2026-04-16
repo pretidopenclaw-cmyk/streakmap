@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
 
+@MainActor
 final class AppState: ObservableObject {
     @Published var habits: [Habit]
     @Published var entries: [HabitEntry]
@@ -10,17 +11,43 @@ final class AppState: ObservableObject {
     @Published var hasCompletedOnboarding: Bool
 
     init() {
-        let meditation = Habit(name: "Meditation", icon: "brain.head.profile", colorHex: HabitColor.violet.hex)
-        self.habits = [meditation]
-        self.entries = AppState.makeSampleEntries(for: [meditation])
-        self.selectedHabitID = meditation.id
+        if let storedHabits = PersistenceService.load([Habit].self, forKey: AppStorageKeys.habits), !storedHabits.isEmpty {
+            self.habits = storedHabits
+        } else {
+            let meditation = Habit(name: "Meditation", icon: "brain.head.profile", colorHex: HabitColor.violet.hex)
+            self.habits = [meditation]
+        }
+
+        if let storedEntries = PersistenceService.load([HabitEntry].self, forKey: AppStorageKeys.entries) {
+            self.entries = storedEntries
+        } else {
+            self.entries = AppState.makeSampleEntries(for: self.habits)
+        }
+
+        let fallbackID = self.habits.first?.id
+        if let storedSelected = PersistenceService.loadString(forKey: AppStorageKeys.selectedHabitID),
+           let uuid = UUID(uuidString: storedSelected),
+           self.habits.contains(where: { $0.id == uuid && !$0.isArchived }) {
+            self.selectedHabitID = uuid
+        } else {
+            self.selectedHabitID = fallbackID
+        }
+
         self.selectedDate = nil
-        self.isPremiumUnlocked = false
-        self.hasCompletedOnboarding = false
+        self.isPremiumUnlocked = PersistenceService.loadBool(forKey: AppStorageKeys.isPremiumUnlocked)
+        self.hasCompletedOnboarding = PersistenceService.loadBool(forKey: AppStorageKeys.hasCompletedOnboarding)
     }
 
     var activeHabits: [Habit] {
         habits.filter { !$0.isArchived }
+    }
+
+    func persist() {
+        PersistenceService.save(habits, forKey: AppStorageKeys.habits)
+        PersistenceService.save(entries, forKey: AppStorageKeys.entries)
+        PersistenceService.saveString(selectedHabitID?.uuidString, forKey: AppStorageKeys.selectedHabitID)
+        PersistenceService.saveBool(isPremiumUnlocked, forKey: AppStorageKeys.isPremiumUnlocked)
+        PersistenceService.saveBool(hasCompletedOnboarding, forKey: AppStorageKeys.hasCompletedOnboarding)
     }
 
     var selectedHabit: Habit? {
@@ -34,6 +61,7 @@ final class AppState: ObservableObject {
         } else {
             entries.insert(HabitEntry(habitID: habitID, date: day, isCompleted: true), at: 0)
         }
+        persist()
     }
 
     @discardableResult
@@ -45,6 +73,7 @@ final class AppState: ObservableObject {
         let habit = Habit(name: trimmed, icon: icon, colorHex: color.hex, reminderTime: reminderTime)
         habits.append(habit)
         selectedHabitID = habit.id
+        persist()
         return true
     }
 
@@ -54,6 +83,7 @@ final class AppState: ObservableObject {
         if selectedHabitID == habitID {
             selectedHabitID = activeHabits.first?.id
         }
+        persist()
     }
 
     func updateNote(for habitID: UUID, on date: Date, note: String) {
@@ -63,6 +93,7 @@ final class AppState: ObservableObject {
         } else {
             entries.insert(HabitEntry(habitID: habitID, date: day, isCompleted: false, note: note.isEmpty ? nil : note), at: 0)
         }
+        persist()
     }
 
     func note(for habitID: UUID, on date: Date) -> String {

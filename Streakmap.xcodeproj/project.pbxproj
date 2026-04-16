@@ -34,6 +34,10 @@
 		A00100010000000100000019 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000019 /* Info.plist */; };
 		A0010001000000010000001A /* DayDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000001B /* DayDetailView.swift */; };
 		A0010001000000010000001B /* HabitDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000001C /* HabitDetailView.swift */; };
+		A0010001000000010000001C /* InsightStatCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000001D /* InsightStatCard.swift */; };
+		A0010001000000010000001D /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000001E /* PersistenceService.swift */; };
+		A0010001000000010000001E /* AppStorageKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000001F /* AppStorageKeys.swift */; };
+		A0010001000000010000001F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000020 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +69,10 @@
 		A0020001000000010000001A /* Streakmap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Streakmap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0020001000000010000001B /* DayDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailView.swift; sourceTree = "<group>"; };
 		A0020001000000010000001C /* HabitDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailView.swift; sourceTree = "<group>"; };
+		A0020001000000010000001D /* InsightStatCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightStatCard.swift; sourceTree = "<group>"; };
+		A0020001000000010000001E /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
+		A0020001000000010000001F /* AppStorageKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorageKeys.swift; sourceTree = "<group>"; };
+		A00200010000000100000020 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				A00200010000000100000004 /* AppState.swift */,
+				A0040001000000010000000B /* Persistence */,
 				A00200010000000100000005 /* Habit.swift */,
 				A00200010000000100000006 /* HabitColor.swift */,
 				A00200010000000100000007 /* HabitEntry.swift */,
@@ -124,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				A00200010000000100000008 /* HapticService.swift */,
+				A0020001000000010000001E /* PersistenceService.swift */,
 				A00200010000000100000009 /* PremiumService.swift */,
 				A0020001000000010000000A /* ReminderService.swift */,
 			);
@@ -163,6 +173,7 @@
 				A0020001000000010000000C /* HabitCard.swift */,
 				A0020001000000010000000D /* HabitHeatmapView.swift */,
 				A0020001000000010000000E /* HeatmapCell.swift */,
+				A0020001000000010000001D /* InsightStatCard.swift */,
 				A0020001000000010000000F /* SectionCard.swift */,
 			);
 			path = Components;
@@ -180,8 +191,17 @@
 				A00200010000000100000014 /* OnboardingView.swift */,
 				A00200010000000100000015 /* PremiumView.swift */,
 				A00200010000000100000016 /* RootTabView.swift */,
+				A00200010000000100000020 /* SettingsView.swift */,
 			);
 			path = Screens;
+			sourceTree = "<group>";
+		};
+		A0040001000000010000000B /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				A0020001000000010000001F /* AppStorageKeys.swift */,
+			);
+			path = Persistence;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,6 +277,7 @@
 			files = (
 				A00100010000000100000010 /* AddHabitView.swift in Sources */,
 				A00100010000000100000004 /* AppState.swift in Sources */,
+				A0010001000000010000001E /* AppStorageKeys.swift in Sources */,
 				A0010001000000010000001A /* DayDetailView.swift in Sources */,
 				A00100010000000100000002 /* Color+Hex.swift in Sources */,
 				A0010001000000010000000B /* GlobalHeatmapView.swift in Sources */,
@@ -269,13 +290,16 @@
 				A00100010000000100000011 /* HabitsView.swift in Sources */,
 				A0010001000000010000001B /* HabitDetailView.swift in Sources */,
 				A0010001000000010000000E /* HeatmapCell.swift in Sources */,
+				A0010001000000010000001C /* InsightStatCard.swift in Sources */,
 				A00100010000000100000012 /* HomeView.swift in Sources */,
 				A00100010000000100000013 /* InsightsView.swift in Sources */,
 				A00100010000000100000014 /* OnboardingView.swift in Sources */,
 				A00100010000000100000009 /* PremiumService.swift in Sources */,
 				A00100010000000100000015 /* PremiumView.swift in Sources */,
+				A0010001000000010000001D /* PersistenceService.swift in Sources */,
 				A0010001000000010000000A /* ReminderService.swift in Sources */,
 				A00100010000000100000016 /* RootTabView.swift in Sources */,
+				A0010001000000010000001F /* SettingsView.swift in Sources */,
 				A0010001000000010000000F /* SectionCard.swift in Sources */,
 				A00100010000000100000001 /* StreakmapApp.swift in Sources */,
 				A00100010000000100000003 /* StreakmapTheme.swift in Sources */,

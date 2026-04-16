@@ -1,6 +1,6 @@
 import SwiftUI
 
-enum HabitColor: String, CaseIterable, Identifiable {
+enum HabitColor: String, CaseIterable, Identifiable, Codable {
     case violet
     case sky
     case mint

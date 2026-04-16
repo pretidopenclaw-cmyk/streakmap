@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-struct Habit: Identifiable, Hashable {
+struct Habit: Identifiable, Hashable, Codable {
     let id: UUID
     var name: String
     var icon: String

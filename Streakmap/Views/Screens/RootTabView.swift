@@ -21,6 +21,11 @@ struct RootTabView: View {
                         .tabItem {
                             Label("Insights", systemImage: "chart.bar.fill")
                         }
+
+                    SettingsView()
+                        .tabItem {
+                            Label("Settings", systemImage: "gearshape.fill")
+                        }
                 }
                 .tint(StreakmapTheme.accent)
             } else {

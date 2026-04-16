@@ -18,7 +18,9 @@
 - Local persistence via UserDefaults JSON layer
 - SwiftData-ready model layer added
 - SwiftData container bootstrap wired at app level
+- AppState bridge sync to SwiftData added
 - StoreKit-ready premium service scaffold added
+- Reminder scheduling groundwork added
 - Info.plist and asset catalogs scaffolded
 
 ## Current blocker on this machine
@@ -43,9 +45,9 @@ xcodebuild -project Streakmap.xcodeproj -scheme Streakmap -sdk iphonesimulator -
 
 ## Recommended next dev steps
 1. Build and fix any compile issues in Xcode
-2. Cut AppState reads/writes over from JSON arrays to SwiftData-backed queries
+2. Replace AppState sync bridge with direct SwiftData-backed queries and writes
 3. Connect StoreKit 2 real product purchase flow and entitlement restore
-4. Wire scheduled notifications per habit
+4. Validate real scheduled notifications flow in simulator/device
 5. Polish animations, transitions, and haptics
 6. Add app icon and brand assets
 7. Add widgets

@@ -46,6 +46,7 @@
 		A00100010000000100000025 /* EmptyStateCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000026 /* EmptyStateCard.swift */; };
 		A00100010000000100000026 /* SwiftDataBootstrapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000027 /* SwiftDataBootstrapService.swift */; };
 		A00100010000000100000027 /* SwiftDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000028 /* SwiftDataStore.swift */; };
+		A00100010000000100000028 /* SwiftDataMigrationPlan.md in Resources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000029 /* SwiftDataMigrationPlan.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +90,7 @@
 		A00200010000000100000026 /* EmptyStateCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateCard.swift; sourceTree = "<group>"; };
 		A00200010000000100000027 /* SwiftDataBootstrapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataBootstrapService.swift; sourceTree = "<group>"; };
 		A00200010000000100000028 /* SwiftDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataStore.swift; sourceTree = "<group>"; };
+		A00200010000000100000029 /* SwiftDataMigrationPlan.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = SwiftDataMigrationPlan.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,6 +233,7 @@
 			children = (
 				A00200010000000100000021 /* HabitRecord.swift */,
 				A00200010000000100000022 /* HabitEntryRecord.swift */,
+				A00200010000000100000029 /* SwiftDataMigrationPlan.md */,
 			);
 			path = SwiftData;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				A00100010000000100000017 /* Assets.xcassets in Resources */,
 				A00100010000000100000018 /* Preview Assets.xcassets in Resources */,
 				A00100010000000100000019 /* Info.plist in Resources */,
+				A00100010000000100000028 /* SwiftDataMigrationPlan.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

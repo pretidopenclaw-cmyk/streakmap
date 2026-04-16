@@ -8,7 +8,7 @@ struct StreakmapApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RootTabView()
+            RootAppContainerView()
                 .environmentObject(appState)
                 .preferredColorScheme(.light)
                 .modelContainer(swiftDataStore.container)
@@ -16,5 +16,18 @@ struct StreakmapApp: App {
                 .onChange(of: appState.hasCompletedOnboarding) { _ in appState.persist() }
                 .onChange(of: appState.selectedHabitID) { _ in appState.persist() }
         }
+    }
+}
+
+struct RootAppContainerView: View {
+    @EnvironmentObject private var appState: AppState
+    @Environment(\.modelContext) private var modelContext
+
+    var body: some View {
+        RootTabView()
+            .task {
+                appState.attachModelContext(modelContext)
+                appState.loadFromSwiftDataIfAvailable()
+            }
     }
 }

@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import SwiftData
 
 @MainActor
 final class AppState: ObservableObject {
@@ -9,6 +10,7 @@ final class AppState: ObservableObject {
     @Published var selectedDate: Date?
     @Published var isPremiumUnlocked: Bool
     @Published var hasCompletedOnboarding: Bool
+    var modelContext: ModelContext?
 
     init() {
         if let storedHabits = PersistenceService.load([Habit].self, forKey: AppStorageKeys.habits), !storedHabits.isEmpty {
@@ -42,12 +44,96 @@ final class AppState: ObservableObject {
         habits.filter { !$0.isArchived }
     }
 
+    func attachModelContext(_ context: ModelContext) {
+        self.modelContext = context
+    }
+
+    func loadFromSwiftDataIfAvailable() {
+        guard let context = modelContext else { return }
+
+        do {
+            let habitRecords = try context.fetch(FetchDescriptor<HabitRecord>())
+            let entryRecords = try context.fetch(FetchDescriptor<HabitEntryRecord>())
+
+            if !habitRecords.isEmpty {
+                self.habits = habitRecords.map {
+                    Habit(
+                        id: $0.id,
+                        name: $0.name,
+                        icon: $0.icon,
+                        colorHex: $0.colorHex,
+                        createdAt: $0.createdAt,
+                        reminderTime: $0.reminderTime,
+                        isArchived: $0.isArchived
+                    )
+                }
+            }
+
+            if !entryRecords.isEmpty {
+                self.entries = entryRecords.map {
+                    HabitEntry(
+                        id: $0.id,
+                        habitID: $0.habitID,
+                        date: $0.date,
+                        isCompleted: $0.isCompleted,
+                        note: $0.note
+                    )
+                }
+            }
+        } catch {
+            return
+        }
+    }
+
     func persist() {
         PersistenceService.save(habits, forKey: AppStorageKeys.habits)
         PersistenceService.save(entries, forKey: AppStorageKeys.entries)
         PersistenceService.saveString(selectedHabitID?.uuidString, forKey: AppStorageKeys.selectedHabitID)
         PersistenceService.saveBool(isPremiumUnlocked, forKey: AppStorageKeys.isPremiumUnlocked)
         PersistenceService.saveBool(hasCompletedOnboarding, forKey: AppStorageKeys.hasCompletedOnboarding)
+        syncToSwiftData()
+    }
+
+    private func syncToSwiftData() {
+        guard let context = modelContext else { return }
+
+        do {
+            let existingHabits = try context.fetch(FetchDescriptor<HabitRecord>())
+            for record in existingHabits {
+                context.delete(record)
+            }
+
+            let existingEntries = try context.fetch(FetchDescriptor<HabitEntryRecord>())
+            for record in existingEntries {
+                context.delete(record)
+            }
+
+            for habit in habits {
+                context.insert(HabitRecord(
+                    id: habit.id,
+                    name: habit.name,
+                    icon: habit.icon,
+                    colorHex: habit.colorHex,
+                    createdAt: habit.createdAt,
+                    reminderTime: habit.reminderTime,
+                    isArchived: habit.isArchived
+                ))
+            }
+
+            for entry in entries {
+                context.insert(HabitEntryRecord(
+                    id: entry.id,
+                    habitID: entry.habitID,
+                    date: entry.date,
+                    isCompleted: entry.isCompleted,
+                    note: entry.note
+                ))
+            }
+
+            try context.save()
+        } catch {
+            return
+        }
     }
 
     var selectedHabit: Habit? {
@@ -74,6 +160,9 @@ final class AppState: ObservableObject {
         habits.append(habit)
         selectedHabitID = habit.id
         persist()
+        if reminderTime != nil {
+            Task { await ReminderService.scheduleReminder(for: habit) }
+        }
         return true
     }
 
@@ -83,6 +172,7 @@ final class AppState: ObservableObject {
         if selectedHabitID == habitID {
             selectedHabitID = activeHabits.first?.id
         }
+        ReminderService.removeReminder(for: habitID)
         persist()
     }
 

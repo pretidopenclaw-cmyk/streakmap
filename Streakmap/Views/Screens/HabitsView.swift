@@ -29,16 +29,24 @@ struct HabitsView: View {
                         }
                     }
 
-                    ForEach(appState.activeHabits) { habit in
-                        NavigationLink {
-                            HabitDetailView(habit: habit)
-                        } label: {
-                            HabitCard(habit: habit, streak: appState.streak(for: habit.id))
+                    if appState.activeHabits.isEmpty {
+                        EmptyStateCard(
+                            icon: "sparkles",
+                            title: "No habits yet",
+                            message: "Create your first habit to start building your heatmap."
+                        )
+                    } else {
+                        ForEach(appState.activeHabits) { habit in
+                            NavigationLink {
+                                HabitDetailView(habit: habit)
+                            } label: {
+                                HabitCard(habit: habit, streak: appState.streak(for: habit.id))
+                            }
+                            .simultaneousGesture(TapGesture().onEnded {
+                                appState.selectedHabitID = habit.id
+                            })
+                            .buttonStyle(.plain)
                         }
-                        .simultaneousGesture(TapGesture().onEnded {
-                            appState.selectedHabitID = habit.id
-                        })
-                        .buttonStyle(.plain)
                     }
 
                     SectionCard {

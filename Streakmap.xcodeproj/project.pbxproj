@@ -38,6 +38,12 @@
 		A0010001000000010000001D /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000001E /* PersistenceService.swift */; };
 		A0010001000000010000001E /* AppStorageKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000001F /* AppStorageKeys.swift */; };
 		A0010001000000010000001F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000020 /* SettingsView.swift */; };
+		A00100010000000100000020 /* HabitRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000021 /* HabitRecord.swift */; };
+		A00100010000000100000021 /* HabitEntryRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000022 /* HabitEntryRecord.swift */; };
+		A00100010000000100000022 /* StoreKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000023 /* StoreKitService.swift */; };
+		A00100010000000100000023 /* PremiumProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000024 /* PremiumProduct.swift */; };
+		A00100010000000100000024 /* PricingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000025 /* PricingCard.swift */; };
+		A00100010000000100000025 /* EmptyStateCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000026 /* EmptyStateCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +79,12 @@
 		A0020001000000010000001E /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
 		A0020001000000010000001F /* AppStorageKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorageKeys.swift; sourceTree = "<group>"; };
 		A00200010000000100000020 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A00200010000000100000021 /* HabitRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitRecord.swift; sourceTree = "<group>"; };
+		A00200010000000100000022 /* HabitEntryRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitEntryRecord.swift; sourceTree = "<group>"; };
+		A00200010000000100000023 /* StoreKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitService.swift; sourceTree = "<group>"; };
+		A00200010000000100000024 /* PremiumProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumProduct.swift; sourceTree = "<group>"; };
+		A00200010000000100000025 /* PricingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricingCard.swift; sourceTree = "<group>"; };
+		A00200010000000100000026 /* EmptyStateCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +134,7 @@
 			children = (
 				A00200010000000100000004 /* AppState.swift */,
 				A0040001000000010000000B /* Persistence */,
+				A0040001000000010000000C /* SwiftData */,
 				A00200010000000100000005 /* Habit.swift */,
 				A00200010000000100000006 /* HabitColor.swift */,
 				A00200010000000100000007 /* HabitEntry.swift */,
@@ -136,6 +149,7 @@
 				A0020001000000010000001E /* PersistenceService.swift */,
 				A00200010000000100000009 /* PremiumService.swift */,
 				A0020001000000010000000A /* ReminderService.swift */,
+				A0040001000000010000000D /* StoreKit */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -169,11 +183,13 @@
 		A00400010000000100000009 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A00200010000000100000026 /* EmptyStateCard.swift */,
 				A0020001000000010000000B /* GlobalHeatmapView.swift */,
 				A0020001000000010000000C /* HabitCard.swift */,
 				A0020001000000010000000D /* HabitHeatmapView.swift */,
 				A0020001000000010000000E /* HeatmapCell.swift */,
 				A0020001000000010000001D /* InsightStatCard.swift */,
+				A00200010000000100000025 /* PricingCard.swift */,
 				A0020001000000010000000F /* SectionCard.swift */,
 			);
 			path = Components;
@@ -202,6 +218,24 @@
 				A0020001000000010000001F /* AppStorageKeys.swift */,
 			);
 			path = Persistence;
+			sourceTree = "<group>";
+		};
+		A0040001000000010000000C /* SwiftData */ = {
+			isa = PBXGroup;
+			children = (
+				A00200010000000100000021 /* HabitRecord.swift */,
+				A00200010000000100000022 /* HabitEntryRecord.swift */,
+			);
+			path = SwiftData;
+			sourceTree = "<group>";
+		};
+		A0040001000000010000000D /* StoreKit */ = {
+			isa = PBXGroup;
+			children = (
+				A00200010000000100000024 /* PremiumProduct.swift */,
+				A00200010000000100000023 /* StoreKitService.swift */,
+			);
+			path = StoreKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -299,8 +333,14 @@
 				A0010001000000010000001D /* PersistenceService.swift in Sources */,
 				A0010001000000010000000A /* ReminderService.swift in Sources */,
 				A00100010000000100000016 /* RootTabView.swift in Sources */,
+				A00100010000000100000025 /* EmptyStateCard.swift in Sources */,
+				A00100010000000100000020 /* HabitRecord.swift in Sources */,
+				A00100010000000100000021 /* HabitEntryRecord.swift in Sources */,
 				A0010001000000010000001F /* SettingsView.swift in Sources */,
+				A00100010000000100000023 /* PremiumProduct.swift in Sources */,
+				A00100010000000100000024 /* PricingCard.swift in Sources */,
 				A0010001000000010000000F /* SectionCard.swift in Sources */,
+				A00100010000000100000022 /* StoreKitService.swift in Sources */,
 				A00100010000000100000001 /* StreakmapApp.swift in Sources */,
 				A00100010000000100000003 /* StreakmapTheme.swift in Sources */,
 			);

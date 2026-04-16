@@ -17,6 +17,7 @@
 - Day detail and note editing flow
 - Local persistence via UserDefaults JSON layer
 - SwiftData-ready model layer added
+- SwiftData container bootstrap wired at app level
 - StoreKit-ready premium service scaffold added
 - Info.plist and asset catalogs scaffolded
 
@@ -42,7 +43,7 @@ xcodebuild -project Streakmap.xcodeproj -scheme Streakmap -sdk iphonesimulator -
 
 ## Recommended next dev steps
 1. Build and fix any compile issues in Xcode
-2. Replace JSON persistence with SwiftData
+2. Cut AppState reads/writes over from JSON arrays to SwiftData-backed queries
 3. Connect StoreKit 2 real product purchase flow and entitlement restore
 4. Wire scheduled notifications per habit
 5. Polish animations, transitions, and haptics

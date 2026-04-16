@@ -44,6 +44,8 @@
 		A00100010000000100000023 /* PremiumProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000024 /* PremiumProduct.swift */; };
 		A00100010000000100000024 /* PricingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000025 /* PricingCard.swift */; };
 		A00100010000000100000025 /* EmptyStateCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000026 /* EmptyStateCard.swift */; };
+		A00100010000000100000026 /* SwiftDataBootstrapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000027 /* SwiftDataBootstrapService.swift */; };
+		A00100010000000100000027 /* SwiftDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000028 /* SwiftDataStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +87,8 @@
 		A00200010000000100000024 /* PremiumProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumProduct.swift; sourceTree = "<group>"; };
 		A00200010000000100000025 /* PricingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricingCard.swift; sourceTree = "<group>"; };
 		A00200010000000100000026 /* EmptyStateCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateCard.swift; sourceTree = "<group>"; };
+		A00200010000000100000027 /* SwiftDataBootstrapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataBootstrapService.swift; sourceTree = "<group>"; };
+		A00200010000000100000028 /* SwiftDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +154,8 @@
 				A00200010000000100000009 /* PremiumService.swift */,
 				A0020001000000010000000A /* ReminderService.swift */,
 				A0040001000000010000000D /* StoreKit */,
+				A00200010000000100000027 /* SwiftDataBootstrapService.swift */,
+				A00200010000000100000028 /* SwiftDataStore.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -341,6 +347,8 @@
 				A00100010000000100000024 /* PricingCard.swift in Sources */,
 				A0010001000000010000000F /* SectionCard.swift in Sources */,
 				A00100010000000100000022 /* StoreKitService.swift in Sources */,
+				A00100010000000100000026 /* SwiftDataBootstrapService.swift in Sources */,
+				A00100010000000100000027 /* SwiftDataStore.swift in Sources */,
 				A00100010000000100000001 /* StreakmapApp.swift in Sources */,
 				A00100010000000100000003 /* StreakmapTheme.swift in Sources */,
 			);

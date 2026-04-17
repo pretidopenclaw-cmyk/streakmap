@@ -214,28 +214,50 @@ final class AppState: ObservableObject {
     }
 
     func streak(for habitID: UUID) -> Int {
+        let calendar = Calendar.current
+        let completedDays = Set(
+            entries
+                .filter { $0.habitID == habitID && $0.isCompleted }
+                .map { calendar.startOfDay(for: $0.date) }
+        )
+
         var streak = 0
-        var cursor = Calendar.current.startOfDay(for: .now)
-        while isHabitCompleted(habitID, on: cursor) {
+        var cursor = calendar.startOfDay(for: .now)
+
+        while completedDays.contains(cursor) {
             streak += 1
-            guard let previous = Calendar.current.date(byAdding: .day, value: -1, to: cursor) else { break }
+            guard let previous = calendar.date(byAdding: .day, value: -1, to: cursor) else { break }
             cursor = previous
         }
+
         return streak
     }
 
     func bestStreak(for habitID: UUID, lookbackDays: Int = 365) -> Int {
-        let dates = (0..<lookbackDays).compactMap { Calendar.current.date(byAdding: .day, value: -$0, to: .now) }.reversed()
+        let calendar = Calendar.current
+        let completedDays = Set(
+            entries
+                .filter { $0.habitID == habitID && $0.isCompleted }
+                .map { calendar.startOfDay(for: $0.date) }
+        )
+
+        let dates = (0..<lookbackDays)
+            .compactMap { calendar.date(byAdding: .day, value: -$0, to: .now) }
+            .map { calendar.startOfDay(for: $0) }
+            .reversed()
+
         var best = 0
         var current = 0
+
         for date in dates {
-            if isHabitCompleted(habitID, on: date) {
+            if completedDays.contains(date) {
                 current += 1
                 best = max(best, current)
             } else {
                 current = 0
             }
         }
+
         return best
     }
 

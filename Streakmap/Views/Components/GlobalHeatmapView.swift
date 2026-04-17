@@ -10,14 +10,26 @@ struct GlobalHeatmapView: View {
         self.onSelectDate = onSelectDate
     }
 
-    private var columns: [GridItem] {
-        Array(repeating: GridItem(.fixed(cellSize), spacing: 5), count: 7)
-    }
+    private let calendar = Calendar.current
 
-    private var days: [Date] {
-        (0..<364)
-            .compactMap { Calendar.current.date(byAdding: .day, value: -$0, to: .now) }
-            .reversed()
+    private var grid: [[Date?]] {
+        let today = calendar.startOfDay(for: .now)
+        guard let start = calendar.date(byAdding: .day, value: -364, to: today) else { return [] }
+
+        let allDays = (0..<365).compactMap { calendar.date(byAdding: .day, value: $0, to: start) }
+        let leadingPadding = (calendar.component(.weekday, from: start) + 5) % 7
+
+        var padded: [Date?] = Array(repeating: nil, count: leadingPadding)
+        padded.append(contentsOf: allDays)
+
+        while padded.count % 7 != 0 {
+            padded.append(nil)
+        }
+
+        let weekCount = padded.count / 7
+        return (0..<weekCount).map { week in
+            Array(padded[(week * 7)..<((week + 1) * 7)])
+        }
     }
 
     var body: some View {
@@ -25,18 +37,27 @@ struct GlobalHeatmapView: View {
             HeatmapLegend(accent: Color(hex: appState.globalHeatmapColorHex), mode: .gradient)
 
             ScrollView(.horizontal, showsIndicators: false) {
-                LazyHGrid(rows: columns, spacing: 5) {
-                    ForEach(days, id: \.self) { day in
-                        Button {
-                            onSelectDate?(day)
-                        } label: {
-                            HeatmapCell(
-                                color: color(for: day),
-                                size: cellSize,
-                                isToday: Calendar.current.isDateInToday(day)
-                            )
+                HStack(alignment: .top, spacing: 5) {
+                    ForEach(Array(grid.enumerated()), id: \.offset) { _, week in
+                        VStack(spacing: 5) {
+                            ForEach(Array(week.enumerated()), id: \.offset) { _, day in
+                                if let day {
+                                    Button {
+                                        onSelectDate?(day)
+                                    } label: {
+                                        HeatmapCell(
+                                            color: color(for: day),
+                                            size: cellSize,
+                                            isToday: calendar.isDateInToday(day)
+                                        )
+                                    }
+                                    .buttonStyle(.plain)
+                                } else {
+                                    Color.clear
+                                        .frame(width: cellSize, height: cellSize)
+                                }
+                            }
                         }
-                        .buttonStyle(.plain)
                     }
                 }
                 .padding(.vertical, 2)

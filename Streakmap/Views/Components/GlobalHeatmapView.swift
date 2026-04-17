@@ -26,17 +26,18 @@ struct GlobalHeatmapView: View {
 
     private func color(for date: Date) -> Color {
         let rate = appState.completionRate(for: date)
+        let accent = Color(hex: appState.globalHeatmapColorHex)
         switch rate {
         case 0:
             return StreakmapTheme.neutralCell
         case 0..<0.26:
-            return StreakmapTheme.accent.opacity(0.25)
+            return accent.opacity(0.25)
         case 0..<0.51:
-            return StreakmapTheme.accent.opacity(0.45)
+            return accent.opacity(0.45)
         case 0..<0.76:
-            return StreakmapTheme.accent.opacity(0.7)
+            return accent.opacity(0.7)
         default:
-            return StreakmapTheme.accent
+            return accent
         }
     }
 }

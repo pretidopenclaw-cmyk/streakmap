@@ -10,6 +10,7 @@ final class AppState: ObservableObject {
     @Published var selectedDate: Date?
     @Published var isPremiumUnlocked: Bool
     @Published var hasCompletedOnboarding: Bool
+    @Published var globalHeatmapColorHex: String
     var modelContext: ModelContext?
 
     init() {
@@ -49,6 +50,7 @@ final class AppState: ObservableObject {
         self.selectedDate = nil
         self.isPremiumUnlocked = PersistenceService.loadBool(forKey: AppStorageKeys.isPremiumUnlocked)
         self.hasCompletedOnboarding = PersistenceService.loadBool(forKey: AppStorageKeys.hasCompletedOnboarding)
+        self.globalHeatmapColorHex = PersistenceService.loadString(forKey: "streakmap.globalHeatmapColorHex") ?? HabitColor.violet.hex
         self.modelContext = nil
     }
 
@@ -103,6 +105,7 @@ final class AppState: ObservableObject {
         PersistenceService.saveString(selectedHabitID?.uuidString, forKey: AppStorageKeys.selectedHabitID)
         PersistenceService.saveBool(isPremiumUnlocked, forKey: AppStorageKeys.isPremiumUnlocked)
         PersistenceService.saveBool(hasCompletedOnboarding, forKey: AppStorageKeys.hasCompletedOnboarding)
+        PersistenceService.saveString(globalHeatmapColorHex, forKey: "streakmap.globalHeatmapColorHex")
         syncToSwiftData()
     }
 
@@ -150,6 +153,11 @@ final class AppState: ObservableObject {
 
     var selectedHabit: Habit? {
         activeHabits.first(where: { $0.id == selectedHabitID }) ?? activeHabits.first
+    }
+
+    func updateGlobalHeatmapColor(_ color: HabitColor) {
+        globalHeatmapColorHex = color.hex
+        persist()
     }
 
     func toggleHabit(_ habitID: UUID, on date: Date) {

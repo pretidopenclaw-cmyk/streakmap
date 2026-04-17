@@ -42,11 +42,24 @@ struct HomeView: View {
                                 HeroStatPill(title: "Today", value: globalScore)
                             }
 
+                            HeatmapLegend(accent: Color(hex: appState.globalHeatmapColorHex), mode: .gradient)
+
                             GlobalHeatmapView { date in
                                 appState.selectedDate = date
                                 showDayDetail = true
                             }
                             .frame(height: 140)
+
+                            VStack(alignment: .leading, spacing: 10) {
+                                Text("Year color")
+                                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                                ColorSwatchPicker(selectedColor: Binding(
+                                    get: {
+                                        HabitColor.allCases.first(where: { $0.hex == appState.globalHeatmapColorHex }) ?? .violet
+                                    },
+                                    set: { appState.updateGlobalHeatmapColor($0) }
+                                ))
+                            }
                         }
                     }
 

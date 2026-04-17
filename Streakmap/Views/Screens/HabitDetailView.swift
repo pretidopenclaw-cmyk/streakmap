@@ -54,8 +54,13 @@ struct HabitDetailView: View {
         .background(StreakmapTheme.background)
         .navigationTitle(habit.name)
         .navigationBarTitleDisplayMode(.inline)
-        .sheet(item: $selectedDate) { date in
-            DayDetailView(habit: habit, date: date)
+        .sheet(isPresented: Binding(
+            get: { selectedDate != nil },
+            set: { if !$0 { selectedDate = nil } }
+        )) {
+            if let selectedDate {
+                DayDetailView(habit: habit, date: selectedDate)
+            }
         }
     }
 

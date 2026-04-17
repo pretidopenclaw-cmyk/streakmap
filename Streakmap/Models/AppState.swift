@@ -13,31 +13,43 @@ final class AppState: ObservableObject {
     var modelContext: ModelContext?
 
     init() {
-        if let storedHabits = PersistenceService.load([Habit].self, forKey: AppStorageKeys.habits), !storedHabits.isEmpty {
-            self.habits = storedHabits
+        let initialHabits: [Habit]
+        if let storedHabits = PersistenceService.load([Habit].self, forKey: AppStorageKeys.habits),
+           !storedHabits.isEmpty {
+            initialHabits = storedHabits
         } else {
-            let meditation = Habit(name: "Meditation", icon: "brain.head.profile", colorHex: HabitColor.violet.hex)
-            self.habits = [meditation]
+            let meditation = Habit(
+                name: "Meditation",
+                icon: "brain.head.profile",
+                colorHex: HabitColor.violet.hex
+            )
+            initialHabits = [meditation]
         }
 
+        let initialEntries: [HabitEntry]
         if let storedEntries = PersistenceService.load([HabitEntry].self, forKey: AppStorageKeys.entries) {
-            self.entries = storedEntries
+            initialEntries = storedEntries
         } else {
-            self.entries = AppState.makeSampleEntries(for: self.habits)
+            initialEntries = AppState.makeSampleEntries(for: initialHabits)
         }
 
-        let fallbackID = self.habits.first?.id
+        let fallbackID = initialHabits.first?.id
+        let initialSelectedHabitID: UUID?
         if let storedSelected = PersistenceService.loadString(forKey: AppStorageKeys.selectedHabitID),
            let uuid = UUID(uuidString: storedSelected),
-           self.habits.contains(where: { $0.id == uuid && !$0.isArchived }) {
-            self.selectedHabitID = uuid
+           initialHabits.contains(where: { $0.id == uuid && !$0.isArchived }) {
+            initialSelectedHabitID = uuid
         } else {
-            self.selectedHabitID = fallbackID
+            initialSelectedHabitID = fallbackID
         }
 
+        self.habits = initialHabits
+        self.entries = initialEntries
+        self.selectedHabitID = initialSelectedHabitID
         self.selectedDate = nil
         self.isPremiumUnlocked = PersistenceService.loadBool(forKey: AppStorageKeys.isPremiumUnlocked)
         self.hasCompletedOnboarding = PersistenceService.loadBool(forKey: AppStorageKeys.hasCompletedOnboarding)
+        self.modelContext = nil
     }
 
     var activeHabits: [Habit] {

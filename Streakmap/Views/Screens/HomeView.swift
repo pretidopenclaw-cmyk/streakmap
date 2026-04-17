@@ -50,49 +50,59 @@ struct HomeView: View {
                         }
                     }
 
-                    if let selectedHabit = appState.selectedHabit {
-                        NavigationLink {
-                            HabitDetailView(habit: selectedHabit)
-                        } label: {
-                            SectionCard {
-                                VStack(alignment: .leading, spacing: 16) {
-                                    HStack {
-                                        VStack(alignment: .leading, spacing: 4) {
-                                            Text(selectedHabit.name)
-                                                .font(.system(size: 22, weight: .semibold, design: .rounded))
-                                            Text("Focused habit")
-                                                .font(.system(size: 14, weight: .medium, design: .rounded))
-                                                .foregroundStyle(StreakmapTheme.textSecondary)
+                    if !appState.activeHabits.isEmpty {
+                        VStack(alignment: .leading, spacing: 14) {
+                            Text("Your habits")
+                                .font(.system(size: 22, weight: .semibold, design: .rounded))
+                                .foregroundStyle(StreakmapTheme.textPrimary)
+
+                            ForEach(appState.activeHabits) { habit in
+                                NavigationLink {
+                                    HabitDetailView(habit: habit)
+                                } label: {
+                                    SectionCard {
+                                        VStack(alignment: .leading, spacing: 16) {
+                                            HStack {
+                                                VStack(alignment: .leading, spacing: 4) {
+                                                    Text(habit.name)
+                                                        .font(.system(size: 22, weight: .semibold, design: .rounded))
+                                                    Text(appState.isHabitCompleted(habit.id, on: .now) ? "Completed today" : "Open today")
+                                                        .font(.system(size: 14, weight: .medium, design: .rounded))
+                                                        .foregroundStyle(StreakmapTheme.textSecondary)
+                                                }
+                                                Spacer()
+                                                Text("\(appState.streak(for: habit.id))d")
+                                                    .font(.system(size: 26, weight: .bold, design: .rounded))
+                                                    .foregroundStyle(Color(hex: habit.colorHex))
+                                            }
+
+                                            HabitHeatmapView(habit: habit, cellSize: 14) { date in
+                                                appState.selectedHabitID = habit.id
+                                                appState.selectedDate = date
+                                                showDayDetail = true
+                                            }
+                                            .frame(height: 140)
+
+                                            Button {
+                                                appState.selectedHabitID = habit.id
+                                                appState.toggleHabit(habit.id, on: .now)
+                                                HapticService.success()
+                                            } label: {
+                                                Text(appState.isHabitCompleted(habit.id, on: .now) ? "Completed today" : "Done today")
+                                                    .font(.system(size: 17, weight: .semibold, design: .rounded))
+                                                    .frame(maxWidth: .infinity)
+                                                    .padding(.vertical, 16)
+                                                    .background(Color(hex: habit.colorHex))
+                                                    .foregroundStyle(Color.white)
+                                                    .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                                            }
+                                            .buttonStyle(PrimaryButtonStyle())
                                         }
-                                        Spacer()
-                                        Text("\(appState.streak(for: selectedHabit.id))d")
-                                            .font(.system(size: 26, weight: .bold, design: .rounded))
-                                            .foregroundStyle(Color(hex: selectedHabit.colorHex))
                                     }
-
-                                    HabitHeatmapView(habit: selectedHabit, cellSize: 14) { date in
-                                        appState.selectedDate = date
-                                        showDayDetail = true
-                                    }
-                                    .frame(height: 140)
-
-                                    Button {
-                                        appState.toggleHabit(selectedHabit.id, on: .now)
-                                        HapticService.success()
-                                    } label: {
-                                        Text(appState.isHabitCompleted(selectedHabit.id, on: .now) ? "Completed today" : "Done today")
-                                            .font(.system(size: 17, weight: .semibold, design: .rounded))
-                                            .frame(maxWidth: .infinity)
-                                            .padding(.vertical, 16)
-                                            .background(Color(hex: selectedHabit.colorHex))
-                                            .foregroundStyle(Color.white)
-                                            .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
-                                    }
-                                    .buttonStyle(PrimaryButtonStyle())
                                 }
+                                .buttonStyle(.plain)
                             }
                         }
-                        .buttonStyle(.plain)
                     }
                 }
                 .padding(20)

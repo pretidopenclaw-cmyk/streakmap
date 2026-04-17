@@ -17,7 +17,11 @@ struct HabitHeatmapView: View {
     }
 
     private let calendar = Calendar.current
-    private let days = (0..<365).compactMap { Calendar.current.date(byAdding: .day, value: -$0, to: .now) }.reversed()
+    private let days: [Date] = Array(
+        (0..<365)
+            .compactMap { Calendar.current.date(byAdding: .day, value: -$0, to: .now) }
+            .reversed()
+    )
 
     private var weeks: [[Date]] {
         stride(from: 0, to: days.count, by: 7).map { start in

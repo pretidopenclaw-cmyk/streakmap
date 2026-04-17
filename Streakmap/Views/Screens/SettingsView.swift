@@ -60,6 +60,22 @@ struct SettingsView: View {
 
                     SectionCard {
                         VStack(alignment: .leading, spacing: 12) {
+                            Text("Global heatmap")
+                                .font(.system(size: 20, weight: .semibold, design: .rounded))
+                            Text("Choose the accent color used for your full-year overview.")
+                                .font(.system(size: 14, weight: .medium, design: .rounded))
+                                .foregroundStyle(StreakmapTheme.textSecondary)
+                            ColorSwatchPicker(selectedColor: Binding(
+                                get: {
+                                    HabitColor.allCases.first(where: { $0.hex == appState.globalHeatmapColorHex }) ?? .violet
+                                },
+                                set: { appState.updateGlobalHeatmapColor($0) }
+                            ))
+                        }
+                    }
+
+                    SectionCard {
+                        VStack(alignment: .leading, spacing: 12) {
                             Text("Developer")
                                 .font(.system(size: 20, weight: .semibold, design: .rounded))
                             Toggle("Premium unlock for testing", isOn: Binding(

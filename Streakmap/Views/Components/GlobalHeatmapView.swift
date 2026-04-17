@@ -2,24 +2,40 @@ import SwiftUI
 
 struct GlobalHeatmapView: View {
     @EnvironmentObject private var appState: AppState
+    let cellSize: CGFloat
     let onSelectDate: ((Date) -> Void)?
 
-    init(onSelectDate: ((Date) -> Void)? = nil) {
+    init(cellSize: CGFloat = 12, onSelectDate: ((Date) -> Void)? = nil) {
+        self.cellSize = cellSize
         self.onSelectDate = onSelectDate
     }
 
-    private let columns = Array(repeating: GridItem(.fixed(14), spacing: 6), count: 7)
-    private let days = (0..<98).compactMap { Calendar.current.date(byAdding: .day, value: -$0, to: .now) }.reversed()
+    private var columns: [GridItem] {
+        Array(repeating: GridItem(.fixed(cellSize), spacing: 5), count: 7)
+    }
+
+    private var days: [Date] {
+        (0..<364)
+            .compactMap { Calendar.current.date(byAdding: .day, value: -$0, to: .now) }
+            .reversed()
+    }
 
     var body: some View {
-        LazyHGrid(rows: columns, spacing: 6) {
-            ForEach(days, id: \.self) { day in
-                Button {
-                    onSelectDate?(day)
-                } label: {
-                    HeatmapCell(color: color(for: day), size: 14)
+        VStack(alignment: .leading, spacing: 10) {
+            HeatmapLegend(accent: Color(hex: appState.globalHeatmapColorHex), mode: .gradient)
+
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHGrid(rows: columns, spacing: 5) {
+                    ForEach(days, id: \.self) { day in
+                        Button {
+                            onSelectDate?(day)
+                        } label: {
+                            HeatmapCell(color: color(for: day), size: cellSize)
+                        }
+                        .buttonStyle(.plain)
+                    }
                 }
-                .buttonStyle(.plain)
+                .padding(.vertical, 2)
             }
         }
     }

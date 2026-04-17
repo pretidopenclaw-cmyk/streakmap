@@ -32,9 +32,9 @@ struct HomeView: View {
                         VStack(alignment: .leading, spacing: 18) {
                             HStack(alignment: .top) {
                                 VStack(alignment: .leading, spacing: 6) {
-                                    Text("Year at a glance")
+                                    Text("This year")
                                         .font(.system(size: 22, weight: .semibold, design: .rounded))
-                                    Text(todaySummary)
+                                    Text("A full-year view of your habit consistency")
                                         .font(.system(size: 14, weight: .medium, design: .rounded))
                                         .foregroundStyle(StreakmapTheme.textSecondary)
                                 }
@@ -42,24 +42,11 @@ struct HomeView: View {
                                 HeroStatPill(title: "Today", value: globalScore)
                             }
 
-                            HeatmapLegend(accent: Color(hex: appState.globalHeatmapColorHex), mode: .gradient)
-
-                            GlobalHeatmapView { date in
+                            GlobalHeatmapView(cellSize: 12) { date in
                                 appState.selectedDate = date
                                 showDayDetail = true
                             }
-                            .frame(height: 140)
-
-                            VStack(alignment: .leading, spacing: 10) {
-                                Text("Year color")
-                                    .font(.system(size: 16, weight: .semibold, design: .rounded))
-                                ColorSwatchPicker(selectedColor: Binding(
-                                    get: {
-                                        HabitColor.allCases.first(where: { $0.hex == appState.globalHeatmapColorHex }) ?? .violet
-                                    },
-                                    set: { appState.updateGlobalHeatmapColor($0) }
-                                ))
-                            }
+                            .frame(height: 150)
                         }
                     }
 

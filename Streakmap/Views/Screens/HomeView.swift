@@ -85,8 +85,10 @@ struct HomeView: View {
                                             .frame(height: 140)
 
                                             Button {
-                                                appState.selectedHabitID = habit.id
-                                                appState.toggleHabit(habit.id, on: .now)
+                                                withAnimation(.spring(response: 0.28, dampingFraction: 0.82)) {
+                                                    appState.selectedHabitID = habit.id
+                                                    appState.toggleHabit(habit.id, on: .now)
+                                                }
                                                 HapticService.success()
                                             } label: {
                                                 Text(appState.isHabitCompleted(habit.id, on: .now) ? "Completed today" : "Done today")

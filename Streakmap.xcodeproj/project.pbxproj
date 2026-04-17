@@ -61,6 +61,8 @@
 		A00100010000000100000034 /* FirstHabitSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000035 /* FirstHabitSetupView.swift */; };
 		A00100010000000100000035 /* HabitStatusRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000036 /* HabitStatusRow.swift */; };
 		A00100010000000100000036 /* GlobalDayDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000037 /* GlobalDayDetailView.swift */; };
+		A00100010000000100000037 /* FeatureBulletRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000038 /* FeatureBulletRow.swift */; };
+		A00100010000000100000038 /* PlanComparisonCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000039 /* PlanComparisonCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -119,6 +121,8 @@
 		A00200010000000100000035 /* FirstHabitSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstHabitSetupView.swift; sourceTree = "<group>"; };
 		A00200010000000100000036 /* HabitStatusRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitStatusRow.swift; sourceTree = "<group>"; };
 		A00200010000000100000037 /* GlobalDayDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalDayDetailView.swift; sourceTree = "<group>"; };
+		A00200010000000100000038 /* FeatureBulletRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureBulletRow.swift; sourceTree = "<group>"; };
+		A00200010000000100000039 /* PlanComparisonCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanComparisonCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +227,7 @@
 			children = (
 				A00200010000000100000031 /* ColorSwatchPicker.swift */,
 				A00200010000000100000026 /* EmptyStateCard.swift */,
+				A00200010000000100000038 /* FeatureBulletRow.swift */,
 				A0020001000000010000000B /* GlobalHeatmapView.swift */,
 				A00200010000000100000033 /* HeatmapLegend.swift */,
 				A0020001000000010000002A /* HeroStatPill.swift */,
@@ -232,6 +237,7 @@
 				A0020001000000010000000D /* HabitHeatmapView.swift */,
 				A0020001000000010000000E /* HeatmapCell.swift */,
 				A0020001000000010000001D /* InsightStatCard.swift */,
+				A00200010000000100000039 /* PlanComparisonCard.swift */,
 				A00200010000000100000025 /* PricingCard.swift */,
 				A0020001000000010000002B /* PrimaryButtonStyle.swift */,
 				A0020001000000010000002E /* SecondaryButtonStyle.swift */,
@@ -369,6 +375,7 @@
 				A0010001000000010000002C /* EditHabitView.swift in Sources */,
 				A00100010000000100000034 /* FirstHabitSetupView.swift in Sources */,
 				A00100010000000100000036 /* GlobalDayDetailView.swift in Sources */,
+				A00100010000000100000037 /* FeatureBulletRow.swift in Sources */,
 				A00100010000000100000002 /* Color+Hex.swift in Sources */,
 				A0010001000000010000000B /* GlobalHeatmapView.swift in Sources */,
 				A00100010000000100000032 /* HeatmapLegend.swift in Sources */,
@@ -384,6 +391,7 @@
 				A0010001000000010000001B /* HabitDetailView.swift in Sources */,
 				A0010001000000010000000E /* HeatmapCell.swift in Sources */,
 				A0010001000000010000001C /* InsightStatCard.swift in Sources */,
+				A00100010000000100000038 /* PlanComparisonCard.swift in Sources */,
 				A00100010000000100000012 /* HomeView.swift in Sources */,
 				A00100010000000100000013 /* InsightsView.swift in Sources */,
 				A00100010000000100000031 /* OnboardingFlowView.swift in Sources */,

@@ -9,32 +9,40 @@ struct PremiumView: View {
         NavigationStack {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 24) {
-                    VStack(spacing: 12) {
-                        Image(systemName: "crown.fill")
-                            .font(.system(size: 46))
-                            .foregroundStyle(.yellow)
-                        Text("Unlock Premium")
-                            .font(.system(size: 32, weight: .bold, design: .rounded))
-                        Text("Track unlimited habits, unlock premium palettes, widgets, and deeper insights.")
-                            .font(.system(size: 16, weight: .medium, design: .rounded))
-                            .foregroundStyle(StreakmapTheme.textSecondary)
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal, 24)
+                    header
 
-                        HStack(spacing: 12) {
-                            HeroStatPill(title: "Free", value: "1 habit")
-                            HeroStatPill(title: "Premium", value: "Unlimited")
+                    SectionCard {
+                        VStack(alignment: .leading, spacing: 16) {
+                            Text("Why upgrade?")
+                                .font(.system(size: 20, weight: .semibold, design: .rounded))
+                            FeatureBulletRow(title: "Track unlimited habits", subtitle: "The free version is perfect for one habit. Premium unlocks your full system.")
+                            FeatureBulletRow(title: "See more of your life at once", subtitle: "Build multiple streaks and compare your habits over time.")
+                            FeatureBulletRow(title: "Unlock the premium layer", subtitle: "Widgets, deeper insights, themes, and yearly recaps are part of the premium experience.")
                         }
                     }
 
-                    SectionCard {
-                        VStack(alignment: .leading, spacing: 14) {
-                            premiumRow("Unlimited habits")
-                            premiumRow("Premium themes")
-                            premiumRow("Widgets")
-                            premiumRow("Advanced insights")
-                            premiumRow("Yearly recap")
-                        }
+                    HStack(alignment: .top, spacing: 12) {
+                        PlanComparisonCard(
+                            planName: "Free",
+                            features: [
+                                "1 habit",
+                                "Full core experience",
+                                "Basic insights",
+                                "Simple reminders"
+                            ],
+                            isHighlighted: false
+                        )
+
+                        PlanComparisonCard(
+                            planName: "Premium",
+                            features: [
+                                "Unlimited habits",
+                                "Widgets",
+                                "Advanced insights",
+                                "Themes and yearly recap"
+                            ],
+                            isHighlighted: true
+                        )
                     }
 
                     VStack(spacing: 12) {
@@ -76,13 +84,23 @@ struct PremiumView: View {
         }
     }
 
-    private func premiumRow(_ text: String) -> some View {
-        HStack {
-            Image(systemName: "checkmark.circle.fill")
-                .foregroundStyle(StreakmapTheme.accent)
-            Text(text)
+    private var header: some View {
+        VStack(spacing: 12) {
+            Image(systemName: "crown.fill")
+                .font(.system(size: 46))
+                .foregroundStyle(.yellow)
+            Text("Unlock Premium")
+                .font(.system(size: 32, weight: .bold, design: .rounded))
+            Text("Streakmap is fully usable for one habit. Premium is for people who want to track their full system.")
                 .font(.system(size: 16, weight: .medium, design: .rounded))
-            Spacer()
+                .foregroundStyle(StreakmapTheme.textSecondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 24)
+
+            HStack(spacing: 12) {
+                HeroStatPill(title: "Free", value: "1 habit")
+                HeroStatPill(title: "Premium", value: "Unlimited")
+            }
         }
     }
 }

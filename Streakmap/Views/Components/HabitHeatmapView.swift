@@ -33,38 +33,27 @@ struct HabitHeatmapView: View {
         VStack(alignment: .leading, spacing: 10) {
             HeatmapLegend(accent: Color(hex: habit.colorHex), mode: .binary)
 
-            ScrollViewReader { proxy in
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(alignment: .top, spacing: 5) {
-                        ForEach(Array(weeks.enumerated()), id: \.offset) { weekIndex, week in
-                            VStack(spacing: 5) {
-                                ForEach(week, id: \.self) { day in
-                                    Button {
-                                        onSelectDate?(day)
-                                    } label: {
-                                        HeatmapCell(
-                                            color: appState.isHabitCompleted(habit.id, on: day) ? Color(hex: habit.colorHex) : StreakmapTheme.neutralCell,
-                                            size: cellSize,
-                                            isToday: calendar.isDateInToday(day)
-                                        )
-                                    }
-                                    .buttonStyle(.plain)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(alignment: .top, spacing: 5) {
+                    ForEach(Array(weeks.enumerated()), id: \.offset) { weekIndex, week in
+                        VStack(spacing: 5) {
+                            ForEach(week, id: \.self) { day in
+                                Button {
+                                    onSelectDate?(day)
+                                } label: {
+                                    HeatmapCell(
+                                        color: appState.isHabitCompleted(habit.id, on: day) ? Color(hex: habit.colorHex) : StreakmapTheme.neutralCell,
+                                        size: cellSize,
+                                        isToday: calendar.isDateInToday(day)
+                                    )
                                 }
+                                .buttonStyle(.plain)
                             }
-                            .id(weekIndex)
                         }
-                    }
-                    .padding(.vertical, 2)
-                }
-                .onAppear {
-                    if let todayWeekIndex = weeks.firstIndex(where: { week in
-                        week.contains(where: { calendar.isDateInToday($0) })
-                    }) {
-                        DispatchQueue.main.async {
-                            proxy.scrollTo(todayWeekIndex, anchor: .trailing)
-                        }
+                        .id(weekIndex)
                     }
                 }
+                .padding(.vertical, 2)
             }
         }
     }

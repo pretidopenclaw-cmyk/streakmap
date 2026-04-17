@@ -70,11 +70,11 @@ struct HomeView: View {
                                             .foregroundStyle(Color(hex: selectedHabit.colorHex))
                                     }
 
-                                    HabitHeatmapView(habit: selectedHabit) { date in
+                                    HabitHeatmapView(habit: selectedHabit, cellSize: 14) { date in
                                         appState.selectedDate = date
                                         showDayDetail = true
                                     }
-                                    .frame(height: 118)
+                                    .frame(height: 140)
 
                                     Button {
                                         appState.toggleHabit(selectedHabit.id, on: .now)

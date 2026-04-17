@@ -16,23 +16,50 @@ struct HabitHeatmapView: View {
         Array(repeating: GridItem(.fixed(cellSize), spacing: 5), count: 7)
     }
 
-    private let days = (0..<84).compactMap { Calendar.current.date(byAdding: .day, value: -$0, to: .now) }.reversed()
+    private let calendar = Calendar.current
+    private let days = (0..<365).compactMap { Calendar.current.date(byAdding: .day, value: -$0, to: .now) }.reversed()
+
+    private var weeks: [[Date]] {
+        stride(from: 0, to: days.count, by: 7).map { start in
+            Array(days[start..<min(start + 7, days.count)])
+        }
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             HeatmapLegend(accent: Color(hex: habit.colorHex), mode: .binary)
 
-            LazyHGrid(rows: rows, spacing: 5) {
-                ForEach(days, id: \.self) { day in
-                    Button {
-                        onSelectDate?(day)
-                    } label: {
-                        HeatmapCell(
-                            color: appState.isHabitCompleted(habit.id, on: day) ? Color(hex: habit.colorHex) : StreakmapTheme.neutralCell,
-                            size: cellSize
-                        )
+            ScrollViewReader { proxy in
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(alignment: .top, spacing: 5) {
+                        ForEach(Array(weeks.enumerated()), id: \.offset) { weekIndex, week in
+                            VStack(spacing: 5) {
+                                ForEach(week, id: \.self) { day in
+                                    Button {
+                                        onSelectDate?(day)
+                                    } label: {
+                                        HeatmapCell(
+                                            color: appState.isHabitCompleted(habit.id, on: day) ? Color(hex: habit.colorHex) : StreakmapTheme.neutralCell,
+                                            size: cellSize,
+                                            isToday: calendar.isDateInToday(day)
+                                        )
+                                    }
+                                    .buttonStyle(.plain)
+                                }
+                            }
+                            .id(weekIndex)
+                        }
                     }
-                    .buttonStyle(.plain)
+                    .padding(.vertical, 2)
+                }
+                .onAppear {
+                    if let todayWeekIndex = weeks.firstIndex(where: { week in
+                        week.contains(where: { calendar.isDateInToday($0) })
+                    }) {
+                        DispatchQueue.main.async {
+                            proxy.scrollTo(todayWeekIndex, anchor: .trailing)
+                        }
+                    }
                 }
             }
         }

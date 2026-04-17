@@ -50,6 +50,8 @@
 		A00100010000000100000029 /* HeroStatPill.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000002A /* HeroStatPill.swift */; };
 		A0010001000000010000002A /* PrimaryButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000002B /* PrimaryButtonStyle.swift */; };
 		A0010001000000010000002B /* ScreenHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000002C /* ScreenHeader.swift */; };
+		A0010001000000010000002C /* EditHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000002D /* EditHabitView.swift */; };
+		A0010001000000010000002D /* SecondaryButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000002E /* SecondaryButtonStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,6 +99,8 @@
 		A0020001000000010000002A /* HeroStatPill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroStatPill.swift; sourceTree = "<group>"; };
 		A0020001000000010000002B /* PrimaryButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButtonStyle.swift; sourceTree = "<group>"; };
 		A0020001000000010000002C /* ScreenHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenHeader.swift; sourceTree = "<group>"; };
+		A0020001000000010000002D /* EditHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHabitView.swift; sourceTree = "<group>"; };
+		A0020001000000010000002E /* SecondaryButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButtonStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +210,7 @@
 				A0020001000000010000001D /* InsightStatCard.swift */,
 				A00200010000000100000025 /* PricingCard.swift */,
 				A0020001000000010000002B /* PrimaryButtonStyle.swift */,
+				A0020001000000010000002E /* SecondaryButtonStyle.swift */,
 				A0020001000000010000002C /* ScreenHeader.swift */,
 				A0020001000000010000000F /* SectionCard.swift */,
 			);
@@ -217,6 +222,7 @@
 			children = (
 				A00200010000000100000010 /* AddHabitView.swift */,
 				A0020001000000010000001B /* DayDetailView.swift */,
+				A0020001000000010000002D /* EditHabitView.swift */,
 				A00200010000000100000011 /* HabitsView.swift */,
 				A0020001000000010000001C /* HabitDetailView.swift */,
 				A00200010000000100000012 /* HomeView.swift */,
@@ -332,6 +338,7 @@
 				A00100010000000100000004 /* AppState.swift in Sources */,
 				A0010001000000010000001E /* AppStorageKeys.swift in Sources */,
 				A0010001000000010000001A /* DayDetailView.swift in Sources */,
+				A0010001000000010000002C /* EditHabitView.swift in Sources */,
 				A00100010000000100000002 /* Color+Hex.swift in Sources */,
 				A0010001000000010000000B /* GlobalHeatmapView.swift in Sources */,
 				A00100010000000100000008 /* HapticService.swift in Sources */,
@@ -362,6 +369,7 @@
 				A00100010000000100000022 /* StoreKitService.swift in Sources */,
 				A00100010000000100000029 /* HeroStatPill.swift in Sources */,
 				A0010001000000010000002A /* PrimaryButtonStyle.swift in Sources */,
+				A0010001000000010000002D /* SecondaryButtonStyle.swift in Sources */,
 				A0010001000000010000002B /* ScreenHeader.swift in Sources */,
 				A00100010000000100000026 /* SwiftDataBootstrapService.swift in Sources */,
 				A00100010000000100000027 /* SwiftDataStore.swift in Sources */,

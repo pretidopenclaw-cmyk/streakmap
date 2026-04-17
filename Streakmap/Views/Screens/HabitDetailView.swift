@@ -5,6 +5,7 @@ struct HabitDetailView: View {
 
     @EnvironmentObject private var appState: AppState
     @State private var selectedDate: Date?
+    @State private var showEditHabit = false
 
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -54,6 +55,17 @@ struct HabitDetailView: View {
         .background(StreakmapTheme.background)
         .navigationTitle(habit.name)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button("Edit") {
+                    showEditHabit = true
+                }
+                .buttonStyle(SecondaryButtonStyle())
+            }
+        }
+        .sheet(isPresented: $showEditHabit) {
+            EditHabitView(habit: habit)
+        }
         .sheet(isPresented: Binding(
             get: { selectedDate != nil },
             set: { if !$0 { selectedDate = nil } }

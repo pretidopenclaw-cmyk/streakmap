@@ -178,6 +178,29 @@ final class AppState: ObservableObject {
         return true
     }
 
+    func updateHabit(
+        _ habitID: UUID,
+        name: String,
+        icon: String,
+        color: HabitColor,
+        reminderTime: Date?
+    ) {
+        guard let index = habits.firstIndex(where: { $0.id == habitID }) else { return }
+
+        habits[index].name = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        habits[index].icon = icon.isEmpty ? "sparkles" : icon
+        habits[index].colorHex = color.hex
+        habits[index].reminderTime = reminderTime
+
+        persist()
+
+        if reminderTime != nil {
+            Task { await ReminderService.scheduleReminder(for: habits[index]) }
+        } else {
+            ReminderService.removeReminder(for: habitID)
+        }
+    }
+
     func archiveHabit(_ habitID: UUID) {
         guard let index = habits.firstIndex(where: { $0.id == habitID }) else { return }
         habits[index].isArchived = true

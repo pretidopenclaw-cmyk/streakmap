@@ -60,6 +60,21 @@ struct SettingsView: View {
 
                     SectionCard {
                         VStack(alignment: .leading, spacing: 12) {
+                            Text("Developer")
+                                .font(.system(size: 20, weight: .semibold, design: .rounded))
+                            Toggle("Premium unlock for testing", isOn: Binding(
+                                get: { appState.isPremiumUnlocked },
+                                set: { newValue in
+                                    appState.isPremiumUnlocked = newValue
+                                    appState.persist()
+                                }
+                            ))
+                            .font(.system(size: 16, weight: .medium, design: .rounded))
+                        }
+                    }
+
+                    SectionCard {
+                        VStack(alignment: .leading, spacing: 12) {
                             Text("About")
                                 .font(.system(size: 20, weight: .semibold, design: .rounded))
                             infoRow(label: "App", value: "Streakmap")

@@ -20,7 +20,7 @@ struct HabitHeatmapView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            HeatmapLegend(accent: Color(hex: habit.colorHex))
+            HeatmapLegend(accent: Color(hex: habit.colorHex), mode: .binary)
 
             LazyHGrid(rows: rows, spacing: 5) {
                 ForEach(days, id: \.self) { day in

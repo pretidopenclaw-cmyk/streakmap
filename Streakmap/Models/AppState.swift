@@ -106,6 +106,7 @@ final class AppState: ObservableObject {
         PersistenceService.saveBool(isPremiumUnlocked, forKey: AppStorageKeys.isPremiumUnlocked)
         PersistenceService.saveBool(hasCompletedOnboarding, forKey: AppStorageKeys.hasCompletedOnboarding)
         PersistenceService.saveString(globalHeatmapColorHex, forKey: "streakmap.globalHeatmapColorHex")
+        WidgetStorage.saveGlobalSnapshot(WidgetDataBuilder.buildGlobalSnapshot(from: self))
         syncToSwiftData()
     }
 

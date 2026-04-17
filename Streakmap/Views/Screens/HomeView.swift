@@ -32,9 +32,9 @@ struct HomeView: View {
                         VStack(alignment: .leading, spacing: 18) {
                             HStack(alignment: .top) {
                                 VStack(alignment: .leading, spacing: 6) {
-                                    Text("This year")
+                                    Text("Last 365 days")
                                         .font(.system(size: 22, weight: .semibold, design: .rounded))
-                                    Text("A full-year view of your habit consistency")
+                                    Text("A rolling year of your habit consistency, including today")
                                         .font(.system(size: 14, weight: .medium, design: .rounded))
                                         .foregroundStyle(StreakmapTheme.textSecondary)
                                 }

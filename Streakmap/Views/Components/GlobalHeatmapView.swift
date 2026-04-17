@@ -30,7 +30,11 @@ struct GlobalHeatmapView: View {
                         Button {
                             onSelectDate?(day)
                         } label: {
-                            HeatmapCell(color: color(for: day), size: cellSize)
+                            HeatmapCell(
+                                color: color(for: day),
+                                size: cellSize,
+                                isToday: Calendar.current.isDateInToday(day)
+                            )
                         }
                         .buttonStyle(.plain)
                     }

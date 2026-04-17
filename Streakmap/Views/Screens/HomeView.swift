@@ -3,7 +3,8 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject private var appState: AppState
     @State private var showAddHabit = false
-    @State private var showDayDetail = false
+    @State private var showGlobalDayDetail = false
+    @State private var showHabitDayDetail = false
 
     var body: some View {
         NavigationStack {
@@ -44,7 +45,7 @@ struct HomeView: View {
 
                             GlobalHeatmapView(cellSize: 12) { date in
                                 appState.selectedDate = date
-                                showDayDetail = true
+                                showGlobalDayDetail = true
                             }
                             .frame(height: 150)
                         }
@@ -79,7 +80,7 @@ struct HomeView: View {
                                             HabitHeatmapView(habit: habit, cellSize: 14) { date in
                                                 appState.selectedHabitID = habit.id
                                                 appState.selectedDate = date
-                                                showDayDetail = true
+                                                showHabitDayDetail = true
                                             }
                                             .frame(height: 140)
 
@@ -112,7 +113,12 @@ struct HomeView: View {
             .sheet(isPresented: $showAddHabit) {
                 AddHabitView()
             }
-            .sheet(isPresented: $showDayDetail) {
+            .sheet(isPresented: $showGlobalDayDetail) {
+                if let selectedDate = appState.selectedDate {
+                    GlobalDayDetailView(date: selectedDate)
+                }
+            }
+            .sheet(isPresented: $showHabitDayDetail) {
                 if let habit = appState.selectedHabit, let selectedDate = appState.selectedDate {
                     DayDetailView(habit: habit, date: selectedDate)
                 }

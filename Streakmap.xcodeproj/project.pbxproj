@@ -59,6 +59,8 @@
 		A00100010000000100000032 /* HeatmapLegend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000033 /* HeatmapLegend.swift */; };
 		A00100010000000100000033 /* MockHeatmapCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000034 /* MockHeatmapCard.swift */; };
 		A00100010000000100000034 /* FirstHabitSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000035 /* FirstHabitSetupView.swift */; };
+		A00100010000000100000035 /* HabitStatusRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000036 /* HabitStatusRow.swift */; };
+		A00100010000000100000036 /* GlobalDayDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000037 /* GlobalDayDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -115,6 +117,8 @@
 		A00200010000000100000033 /* HeatmapLegend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatmapLegend.swift; sourceTree = "<group>"; };
 		A00200010000000100000034 /* MockHeatmapCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHeatmapCard.swift; sourceTree = "<group>"; };
 		A00200010000000100000035 /* FirstHabitSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstHabitSetupView.swift; sourceTree = "<group>"; };
+		A00200010000000100000036 /* HabitStatusRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitStatusRow.swift; sourceTree = "<group>"; };
+		A00200010000000100000037 /* GlobalDayDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalDayDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +173,7 @@
 				A00200010000000100000006 /* HabitColor.swift */,
 				A0020001000000010000002F /* HabitIcon.swift */,
 				A00200010000000100000007 /* HabitEntry.swift */,
+				A00200010000000100000036 /* HabitStatusRow.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -243,6 +248,7 @@
 				A0020001000000010000001B /* DayDetailView.swift */,
 				A0020001000000010000002D /* EditHabitView.swift */,
 				A00200010000000100000035 /* FirstHabitSetupView.swift */,
+				A00200010000000100000037 /* GlobalDayDetailView.swift */,
 				A00200010000000100000011 /* HabitsView.swift */,
 				A0020001000000010000001C /* HabitDetailView.swift */,
 				A00200010000000100000012 /* HomeView.swift */,
@@ -362,6 +368,7 @@
 				A00100010000000100000030 /* ColorSwatchPicker.swift in Sources */,
 				A0010001000000010000002C /* EditHabitView.swift in Sources */,
 				A00100010000000100000034 /* FirstHabitSetupView.swift in Sources */,
+				A00100010000000100000036 /* GlobalDayDetailView.swift in Sources */,
 				A00100010000000100000002 /* Color+Hex.swift in Sources */,
 				A0010001000000010000000B /* GlobalHeatmapView.swift in Sources */,
 				A00100010000000100000032 /* HeatmapLegend.swift in Sources */,
@@ -370,6 +377,7 @@
 				A0010001000000010000000C /* HabitCard.swift in Sources */,
 				A00100010000000100000006 /* HabitColor.swift in Sources */,
 				A0010001000000010000002E /* HabitIcon.swift in Sources */,
+				A00100010000000100000035 /* HabitStatusRow.swift in Sources */,
 				A00100010000000100000007 /* HabitEntry.swift in Sources */,
 				A0010001000000010000000D /* HabitHeatmapView.swift in Sources */,
 				A00100010000000100000011 /* HabitsView.swift in Sources */,

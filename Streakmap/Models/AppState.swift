@@ -234,6 +234,15 @@ final class AppState: ObservableObject {
         entries.first(where: { $0.habitID == habitID && Calendar.current.isDate($0.date, inSameDayAs: date) })?.note ?? ""
     }
 
+    func habitStatusRows(for date: Date) -> [HabitStatusRow] {
+        activeHabits.map { habit in
+            HabitStatusRow(
+                habit: habit,
+                isCompleted: isHabitCompleted(habit.id, on: date)
+            )
+        }
+    }
+
     func completionRate(for date: Date) -> Double {
         let habits = activeHabits
         guard !habits.isEmpty else { return 0 }

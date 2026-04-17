@@ -17,15 +17,24 @@ struct HabitHeatmapView: View {
     }
 
     private let calendar = Calendar.current
-    private let days: [Date] = Array(
-        (0..<365)
-            .compactMap { Calendar.current.date(byAdding: .day, value: -$0, to: .now) }
-            .reversed()
-    )
 
-    private var weeks: [[Date]] {
-        stride(from: 0, to: days.count, by: 7).map { start in
-            Array(days[start..<min(start + 7, days.count)])
+    private var weeks: [[Date?]] {
+        let today = calendar.startOfDay(for: .now)
+        guard let start = calendar.date(byAdding: .day, value: -364, to: today) else { return [] }
+
+        let allDays = (0..<365).compactMap { calendar.date(byAdding: .day, value: $0, to: start) }
+        let leadingPadding = (calendar.component(.weekday, from: start) + 5) % 7
+
+        var padded: [Date?] = Array(repeating: nil, count: leadingPadding)
+        padded.append(contentsOf: allDays)
+
+        while padded.count % 7 != 0 {
+            padded.append(nil)
+        }
+
+        let weekCount = padded.count / 7
+        return (0..<weekCount).map { week in
+            Array(padded[(week * 7)..<((week + 1) * 7)])
         }
     }
 
@@ -37,17 +46,22 @@ struct HabitHeatmapView: View {
                 HStack(alignment: .top, spacing: 5) {
                     ForEach(Array(weeks.enumerated()), id: \.offset) { weekIndex, week in
                         VStack(spacing: 5) {
-                            ForEach(week, id: \.self) { day in
-                                Button {
-                                    onSelectDate?(day)
-                                } label: {
-                                    HeatmapCell(
-                                        color: appState.isHabitCompleted(habit.id, on: day) ? Color(hex: habit.colorHex) : StreakmapTheme.neutralCell,
-                                        size: cellSize,
-                                        isToday: calendar.isDateInToday(day)
-                                    )
+                            ForEach(Array(week.enumerated()), id: \.offset) { _, day in
+                                if let day {
+                                    Button {
+                                        onSelectDate?(day)
+                                    } label: {
+                                        HeatmapCell(
+                                            color: appState.isHabitCompleted(habit.id, on: day) ? Color(hex: habit.colorHex) : StreakmapTheme.neutralCell,
+                                            size: cellSize,
+                                            isToday: calendar.isDateInToday(day)
+                                        )
+                                    }
+                                    .buttonStyle(.plain)
+                                } else {
+                                    Color.clear
+                                        .frame(width: cellSize, height: cellSize)
                                 }
-                                .buttonStyle(.plain)
                             }
                         }
                         .id(weekIndex)

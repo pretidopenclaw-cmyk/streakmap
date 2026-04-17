@@ -36,11 +36,23 @@ struct EditHabitView: View {
                                 .background(StreakmapTheme.background)
                                 .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
 
-                            TextField("SF Symbol icon", text: $icon)
-                                .textFieldStyle(.plain)
-                                .padding(16)
-                                .background(StreakmapTheme.background)
-                                .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                            VStack(alignment: .leading, spacing: 12) {
+                                Text("Icon")
+                                    .font(.system(size: 18, weight: .semibold, design: .rounded))
+                                HStack(spacing: 12) {
+                                    ZStack {
+                                        Circle()
+                                            .fill(selectedColor.color.opacity(0.16))
+                                            .frame(width: 44, height: 44)
+                                        Image(systemName: icon)
+                                            .foregroundStyle(selectedColor.color)
+                                    }
+                                    Text("Pick a symbol that visually represents the habit.")
+                                        .font(.system(size: 14, weight: .medium, design: .rounded))
+                                        .foregroundStyle(StreakmapTheme.textSecondary)
+                                }
+                                IconPickerGrid(selectedIcon: $icon, tint: selectedColor.color)
+                            }
                         }
                     }
 

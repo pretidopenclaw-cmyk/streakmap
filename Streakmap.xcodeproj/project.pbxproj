@@ -57,6 +57,8 @@
 		A00100010000000100000030 /* ColorSwatchPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000031 /* ColorSwatchPicker.swift */; };
 		A00100010000000100000031 /* OnboardingFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000032 /* OnboardingFlowView.swift */; };
 		A00100010000000100000032 /* HeatmapLegend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000033 /* HeatmapLegend.swift */; };
+		A00100010000000100000033 /* MockHeatmapCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000034 /* MockHeatmapCard.swift */; };
+		A00100010000000100000034 /* FirstHabitSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000035 /* FirstHabitSetupView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -111,6 +113,8 @@
 		A00200010000000100000031 /* ColorSwatchPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSwatchPicker.swift; sourceTree = "<group>"; };
 		A00200010000000100000032 /* OnboardingFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowView.swift; sourceTree = "<group>"; };
 		A00200010000000100000033 /* HeatmapLegend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatmapLegend.swift; sourceTree = "<group>"; };
+		A00200010000000100000034 /* MockHeatmapCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHeatmapCard.swift; sourceTree = "<group>"; };
+		A00200010000000100000035 /* FirstHabitSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstHabitSetupView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +222,7 @@
 				A00200010000000100000033 /* HeatmapLegend.swift */,
 				A0020001000000010000002A /* HeroStatPill.swift */,
 				A00200010000000100000030 /* IconPickerGrid.swift */,
+				A00200010000000100000034 /* MockHeatmapCard.swift */,
 				A0020001000000010000000C /* HabitCard.swift */,
 				A0020001000000010000000D /* HabitHeatmapView.swift */,
 				A0020001000000010000000E /* HeatmapCell.swift */,
@@ -237,6 +242,7 @@
 				A00200010000000100000010 /* AddHabitView.swift */,
 				A0020001000000010000001B /* DayDetailView.swift */,
 				A0020001000000010000002D /* EditHabitView.swift */,
+				A00200010000000100000035 /* FirstHabitSetupView.swift */,
 				A00200010000000100000011 /* HabitsView.swift */,
 				A0020001000000010000001C /* HabitDetailView.swift */,
 				A00200010000000100000012 /* HomeView.swift */,
@@ -355,6 +361,7 @@
 				A0010001000000010000001A /* DayDetailView.swift in Sources */,
 				A00100010000000100000030 /* ColorSwatchPicker.swift in Sources */,
 				A0010001000000010000002C /* EditHabitView.swift in Sources */,
+				A00100010000000100000034 /* FirstHabitSetupView.swift in Sources */,
 				A00100010000000100000002 /* Color+Hex.swift in Sources */,
 				A0010001000000010000000B /* GlobalHeatmapView.swift in Sources */,
 				A00100010000000100000032 /* HeatmapLegend.swift in Sources */,
@@ -387,6 +394,7 @@
 				A0010001000000010000000F /* SectionCard.swift in Sources */,
 				A00100010000000100000022 /* StoreKitService.swift in Sources */,
 				A00100010000000100000029 /* HeroStatPill.swift in Sources */,
+				A00100010000000100000033 /* MockHeatmapCard.swift in Sources */,
 				A0010001000000010000002A /* PrimaryButtonStyle.swift in Sources */,
 				A0010001000000010000002D /* SecondaryButtonStyle.swift in Sources */,
 				A0010001000000010000002F /* IconPickerGrid.swift in Sources */,

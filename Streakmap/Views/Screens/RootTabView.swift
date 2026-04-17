@@ -29,7 +29,7 @@ struct RootTabView: View {
                 }
                 .tint(StreakmapTheme.accent)
             } else {
-                OnboardingView()
+                OnboardingFlowView()
             }
         }
     }

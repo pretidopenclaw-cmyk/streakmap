@@ -50,23 +50,17 @@ struct AddHabitView: View {
                             Text("Color")
                                 .font(.system(size: 20, weight: .semibold, design: .rounded))
                             HStack(spacing: 12) {
-                                ForEach(HabitColor.allCases) { habitColor in
-                                    Button {
-                                        selectedColor = habitColor
-                                    } label: {
-                                        Circle()
-                                            .fill(habitColor.color)
-                                            .frame(width: 34, height: 34)
-                                            .overlay {
-                                                if selectedColor == habitColor {
-                                                    Circle().stroke(.white, lineWidth: 3)
-                                                        .padding(4)
-                                                }
-                                            }
-                                    }
-                                    .buttonStyle(.plain)
+                                ZStack {
+                                    Circle()
+                                        .fill(selectedColor.color.opacity(0.16))
+                                        .frame(width: 44, height: 44)
+                                    Image(systemName: icon)
+                                        .foregroundStyle(selectedColor.color)
                                 }
+                                Text(selectedColor.displayName)
+                                    .font(.system(size: 15, weight: .semibold, design: .rounded))
                             }
+                            ColorSwatchPicker(selectedColor: $selectedColor)
                         }
                     }
 

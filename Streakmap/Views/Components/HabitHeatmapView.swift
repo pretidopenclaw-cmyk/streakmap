@@ -19,17 +19,21 @@ struct HabitHeatmapView: View {
     private let days = (0..<84).compactMap { Calendar.current.date(byAdding: .day, value: -$0, to: .now) }.reversed()
 
     var body: some View {
-        LazyHGrid(rows: rows, spacing: 5) {
-            ForEach(days, id: \.self) { day in
-                Button {
-                    onSelectDate?(day)
-                } label: {
-                    HeatmapCell(
-                        color: appState.isHabitCompleted(habit.id, on: day) ? Color(hex: habit.colorHex) : StreakmapTheme.neutralCell,
-                        size: cellSize
-                    )
+        VStack(alignment: .leading, spacing: 10) {
+            HeatmapLegend(accent: Color(hex: habit.colorHex))
+
+            LazyHGrid(rows: rows, spacing: 5) {
+                ForEach(days, id: \.self) { day in
+                    Button {
+                        onSelectDate?(day)
+                    } label: {
+                        HeatmapCell(
+                            color: appState.isHabitCompleted(habit.id, on: day) ? Color(hex: habit.colorHex) : StreakmapTheme.neutralCell,
+                            size: cellSize
+                        )
+                    }
+                    .buttonStyle(.plain)
                 }
-                .buttonStyle(.plain)
             }
         }
     }

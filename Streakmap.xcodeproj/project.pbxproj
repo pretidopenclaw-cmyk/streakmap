@@ -54,6 +54,9 @@
 		A0010001000000010000002D /* SecondaryButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000002E /* SecondaryButtonStyle.swift */; };
 		A0010001000000010000002E /* HabitIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000002F /* HabitIcon.swift */; };
 		A0010001000000010000002F /* IconPickerGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000030 /* IconPickerGrid.swift */; };
+		A00100010000000100000030 /* ColorSwatchPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000031 /* ColorSwatchPicker.swift */; };
+		A00100010000000100000031 /* OnboardingFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000032 /* OnboardingFlowView.swift */; };
+		A00100010000000100000032 /* HeatmapLegend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000033 /* HeatmapLegend.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,6 +108,9 @@
 		A0020001000000010000002E /* SecondaryButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButtonStyle.swift; sourceTree = "<group>"; };
 		A0020001000000010000002F /* HabitIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitIcon.swift; sourceTree = "<group>"; };
 		A00200010000000100000030 /* IconPickerGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPickerGrid.swift; sourceTree = "<group>"; };
+		A00200010000000100000031 /* ColorSwatchPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSwatchPicker.swift; sourceTree = "<group>"; };
+		A00200010000000100000032 /* OnboardingFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowView.swift; sourceTree = "<group>"; };
+		A00200010000000100000033 /* HeatmapLegend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatmapLegend.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,8 +212,10 @@
 		A00400010000000100000009 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A00200010000000100000031 /* ColorSwatchPicker.swift */,
 				A00200010000000100000026 /* EmptyStateCard.swift */,
 				A0020001000000010000000B /* GlobalHeatmapView.swift */,
+				A00200010000000100000033 /* HeatmapLegend.swift */,
 				A0020001000000010000002A /* HeroStatPill.swift */,
 				A00200010000000100000030 /* IconPickerGrid.swift */,
 				A0020001000000010000000C /* HabitCard.swift */,
@@ -233,6 +241,7 @@
 				A0020001000000010000001C /* HabitDetailView.swift */,
 				A00200010000000100000012 /* HomeView.swift */,
 				A00200010000000100000013 /* InsightsView.swift */,
+				A00200010000000100000032 /* OnboardingFlowView.swift */,
 				A00200010000000100000014 /* OnboardingView.swift */,
 				A00200010000000100000015 /* PremiumView.swift */,
 				A00200010000000100000016 /* RootTabView.swift */,
@@ -344,9 +353,11 @@
 				A00100010000000100000004 /* AppState.swift in Sources */,
 				A0010001000000010000001E /* AppStorageKeys.swift in Sources */,
 				A0010001000000010000001A /* DayDetailView.swift in Sources */,
+				A00100010000000100000030 /* ColorSwatchPicker.swift in Sources */,
 				A0010001000000010000002C /* EditHabitView.swift in Sources */,
 				A00100010000000100000002 /* Color+Hex.swift in Sources */,
 				A0010001000000010000000B /* GlobalHeatmapView.swift in Sources */,
+				A00100010000000100000032 /* HeatmapLegend.swift in Sources */,
 				A00100010000000100000008 /* HapticService.swift in Sources */,
 				A00100010000000100000005 /* Habit.swift in Sources */,
 				A0010001000000010000000C /* HabitCard.swift in Sources */,
@@ -360,6 +371,7 @@
 				A0010001000000010000001C /* InsightStatCard.swift in Sources */,
 				A00100010000000100000012 /* HomeView.swift in Sources */,
 				A00100010000000100000013 /* InsightsView.swift in Sources */,
+				A00100010000000100000031 /* OnboardingFlowView.swift in Sources */,
 				A00100010000000100000014 /* OnboardingView.swift in Sources */,
 				A00100010000000100000009 /* PremiumService.swift in Sources */,
 				A00100010000000100000015 /* PremiumView.swift in Sources */,

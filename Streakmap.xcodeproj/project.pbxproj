@@ -69,6 +69,7 @@
 		A0010001000000010000003C /* SectionTitleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000003D /* SectionTitleRow.swift */; };
 		A0010001000000010000003D /* StatusBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000003E /* StatusBadge.swift */; };
 		A0010001000000010000003E /* SettingsActionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000003F /* SettingsActionRow.swift */; };
+		A0010001000000010000003F /* WidgetConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000040 /* WidgetConfig.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -135,6 +136,8 @@
 		A0020001000000010000003D /* SectionTitleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTitleRow.swift; sourceTree = "<group>"; };
 		A0020001000000010000003E /* StatusBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBadge.swift; sourceTree = "<group>"; };
 		A0020001000000010000003F /* SettingsActionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsActionRow.swift; sourceTree = "<group>"; };
+		A00200010000000100000040 /* WidgetConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetConfig.swift; sourceTree = "<group>"; };
+		A00200010000000100000041 /* WidgetAppGroupSetup.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = WidgetAppGroupSetup.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -314,9 +317,11 @@
 		A0040001000000010000000E /* WidgetSupport */ = {
 			isa = PBXGroup;
 			children = (
+				A00200010000000100000040 /* WidgetConfig.swift */,
 				A0020001000000010000003A /* WidgetEntryModels.swift */,
 				A0020001000000010000003B /* WidgetDataBuilder.swift */,
 				A0020001000000010000003C /* WidgetStorage.swift */,
+				A00200010000000100000041 /* WidgetAppGroupSetup.md */,
 			);
 			path = WidgetSupport;
 			sourceTree = "<group>";
@@ -451,6 +456,7 @@
 				A00100010000000100000039 /* WidgetEntryModels.swift in Sources */,
 				A0010001000000010000003A /* WidgetDataBuilder.swift in Sources */,
 				A0010001000000010000003B /* WidgetStorage.swift in Sources */,
+				A0010001000000010000003F /* WidgetConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

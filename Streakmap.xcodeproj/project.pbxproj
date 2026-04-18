@@ -63,6 +63,9 @@
 		A00100010000000100000036 /* GlobalDayDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000037 /* GlobalDayDetailView.swift */; };
 		A00100010000000100000037 /* FeatureBulletRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000038 /* FeatureBulletRow.swift */; };
 		A00100010000000100000038 /* PlanComparisonCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000039 /* PlanComparisonCard.swift */; };
+		A00100010000000100000039 /* WidgetEntryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000003A /* WidgetEntryModels.swift */; };
+		A0010001000000010000003A /* WidgetDataBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000003B /* WidgetDataBuilder.swift */; };
+		A0010001000000010000003B /* WidgetStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000003C /* WidgetStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -123,6 +126,9 @@
 		A00200010000000100000037 /* GlobalDayDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalDayDetailView.swift; sourceTree = "<group>"; };
 		A00200010000000100000038 /* FeatureBulletRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureBulletRow.swift; sourceTree = "<group>"; };
 		A00200010000000100000039 /* PlanComparisonCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanComparisonCard.swift; sourceTree = "<group>"; };
+		A0020001000000010000003A /* WidgetEntryModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetEntryModels.swift; sourceTree = "<group>"; };
+		A0020001000000010000003B /* WidgetDataBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDataBuilder.swift; sourceTree = "<group>"; };
+		A0020001000000010000003C /* WidgetStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +160,7 @@
 				A00400010000000100000005 /* Services */,
 				A00400010000000100000006 /* Views */,
 				A00400010000000100000007 /* Resources */,
+				A0040001000000010000000E /* WidgetSupport */,
 			);
 			path = Streakmap;
 			sourceTree = "<group>";
@@ -295,6 +302,16 @@
 			path = StoreKit;
 			sourceTree = "<group>";
 		};
+		A0040001000000010000000E /* WidgetSupport */ = {
+			isa = PBXGroup;
+			children = (
+				A0020001000000010000003A /* WidgetEntryModels.swift */,
+				A0020001000000010000003B /* WidgetDataBuilder.swift */,
+				A0020001000000010000003C /* WidgetStorage.swift */,
+			);
+			path = WidgetSupport;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -419,6 +436,9 @@
 				A00100010000000100000027 /* SwiftDataStore.swift in Sources */,
 				A00100010000000100000001 /* StreakmapApp.swift in Sources */,
 				A00100010000000100000003 /* StreakmapTheme.swift in Sources */,
+				A00100010000000100000039 /* WidgetEntryModels.swift in Sources */,
+				A0010001000000010000003A /* WidgetDataBuilder.swift in Sources */,
+				A0010001000000010000003B /* WidgetStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

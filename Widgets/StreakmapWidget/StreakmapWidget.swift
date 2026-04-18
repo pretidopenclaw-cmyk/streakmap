@@ -45,17 +45,17 @@ struct StreakmapWidgetProvider: TimelineProvider {
 
 struct StreakmapWidgetView: View {
     var entry: StreakmapWidgetProvider.Entry
-    @Environment(\.widgetFamily) private var family
 
     var body: some View {
-        switch family {
-        case .systemSmall:
-            heatmapWidget(days: Array(padded(entry.snapshot.days).suffix(7 * 12)), horizontalPadding: 10, verticalPadding: 10, horizontalSpacing: 3, verticalSpacing: 3, minCell: 7, maxCell: 11)
-        case .systemLarge:
-            heatmapWidget(days: padded(entry.snapshot.days), horizontalPadding: 12, verticalPadding: 12, horizontalSpacing: 4, verticalSpacing: 4, minCell: 5, maxCell: 10)
-        default:
-            heatmapWidget(days: padded(entry.snapshot.days), horizontalPadding: 10, verticalPadding: 10, horizontalSpacing: 3, verticalSpacing: 3, minCell: 4, maxCell: 8)
-        }
+        heatmapWidget(
+            days: padded(entry.snapshot.days),
+            horizontalPadding: 6,
+            verticalPadding: 6,
+            horizontalSpacing: 2,
+            verticalSpacing: 2,
+            minCell: 5,
+            maxCell: 12
+        )
     }
 
     private func heatmapWidget(days: [GlobalHeatmapWidgetDay?], horizontalPadding: CGFloat, verticalPadding: CGFloat, horizontalSpacing: CGFloat, verticalSpacing: CGFloat, minCell: CGFloat, maxCell: CGFloat) -> some View {
@@ -135,7 +135,7 @@ struct StreakmapWidget: Widget {
         }
         .configurationDisplayName("Streakmap Year")
         .description("See your last 365 days at a glance.")
-        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
+        .supportedFamilies([.systemLarge])
     }
 }
 

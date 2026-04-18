@@ -330,6 +330,11 @@ final class AppState: ObservableObject {
         return dates.filter { completionRate(for: $0) > 0 }.count
     }
 
+    func perfectDays(overLast days: Int) -> Int {
+        let dates = (0..<days).compactMap { Calendar.current.date(byAdding: .day, value: -$0, to: .now) }
+        return dates.filter { completionRate(for: $0) == 1 }.count
+    }
+
     func currentGlobalStreak() -> Int {
         let calendar = Calendar.current
         var streak = 0

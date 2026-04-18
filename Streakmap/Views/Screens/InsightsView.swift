@@ -21,13 +21,13 @@ struct InsightsView: View {
                         )
                     } else {
                         HStack(spacing: 12) {
-                            InsightStatCard(title: "Current streak", value: "\(appState.currentGlobalStreak())d")
+                            InsightStatCard(title: "Progress streak", value: "\(appState.currentGlobalStreak())d")
                             InsightStatCard(title: "Active habits", value: "\(appState.activeHabits.count)")
                         }
 
                         HStack(spacing: 12) {
-                            InsightStatCard(title: "30 days", value: percent(appState.globalCompletionRate(overLast: 30)))
-                            InsightStatCard(title: "90 days", value: percent(appState.globalCompletionRate(overLast: 90)))
+                            InsightStatCard(title: "Days with progress", value: "\(appState.totalCompletedDays(overLast: 30))/30")
+                            InsightStatCard(title: "Perfect days", value: "\(appState.perfectDays(overLast: 30))/30")
                         }
 
                         SectionCard {
@@ -35,7 +35,7 @@ struct InsightsView: View {
                                 SectionTitleRow(title: "Overview", subtitle: "How your full habit system is behaving right now.")
                                 statRow(title: "Today", value: todayStatus)
                                 statRow(title: "Days with progress (30d)", value: "\(appState.totalCompletedDays(overLast: 30))")
-                                statRow(title: "Plan", value: appState.isPremiumUnlocked ? "Premium unlocked" : "Free tier")
+                                statRow(title: "Perfect days (30d)", value: "\(appState.perfectDays(overLast: 30))")
                             }
                         }
 
@@ -108,7 +108,4 @@ struct InsightsView: View {
         }
     }
 
-    private func percent(_ value: Double) -> String {
-        "\(Int((value * 100).rounded()))%"
-    }
 }

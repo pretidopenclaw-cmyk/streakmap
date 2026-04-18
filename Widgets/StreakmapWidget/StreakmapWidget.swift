@@ -48,16 +48,83 @@ struct StreakmapWidgetView: View {
     @Environment(\.widgetFamily) private var family
 
     var body: some View {
+        switch family {
+        case .systemSmall:
+            smallWidget
+        case .systemLarge:
+            largeLikeWidget(horizontalPadding: 16, topPadding: 16, bottomPadding: 16, horizontalSpacing: 4, verticalSpacing: 4, headerHeight: 40)
+        default:
+            largeLikeWidget(horizontalPadding: 14, topPadding: 14, bottomPadding: 14, horizontalSpacing: 3, verticalSpacing: 3, headerHeight: 34)
+        }
+    }
+
+    private var smallWidget: some View {
+        GeometryReader { geometry in
+            let accent = Color(hex: entry.snapshot.accentHex)
+            let paddedDays = Array(padded(entry.snapshot.days).suffix(7 * 12))
+            let weekCount = max(paddedDays.count / 7, 1)
+            let horizontalPadding: CGFloat = 12
+            let topPadding: CGFloat = 12
+            let bottomPadding: CGFloat = 12
+            let horizontalSpacing: CGFloat = 3
+            let verticalSpacing: CGFloat = 3
+            let headerHeight: CGFloat = 30
+            let availableWidth = geometry.size.width - (horizontalPadding * 2)
+            let availableHeight = geometry.size.height - topPadding - bottomPadding - headerHeight
+            let cellWidth = max(7, min(10, (availableWidth - (CGFloat(weekCount - 1) * horizontalSpacing)) / CGFloat(weekCount)))
+            let cellHeight = max(7, min(10, (availableHeight - (6 * verticalSpacing)) / 7))
+            let cornerRadius = min(cellWidth, cellHeight) * 0.34
+
+            VStack(alignment: .leading, spacing: 0) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Last 84 days")
+                        .font(.system(size: 13, weight: .bold, design: .rounded))
+                        .lineLimit(1)
+                    Text("\(entry.snapshot.completedToday)/\(max(entry.snapshot.totalHabits, 1)) today")
+                        .font(.system(size: 10, weight: .medium, design: .rounded))
+                        .foregroundStyle(.secondary)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .frame(height: headerHeight)
+
+                Spacer(minLength: 8)
+
+                HStack(alignment: .top, spacing: horizontalSpacing) {
+                    ForEach(0..<weekCount, id: \.self) { week in
+                        VStack(spacing: verticalSpacing) {
+                            ForEach(0..<7, id: \.self) { weekday in
+                                let index = week * 7 + weekday
+                                if index < paddedDays.count, let day = paddedDays[index] {
+                                    RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                                        .fill(color(for: day, accent: accent))
+                                        .overlay {
+                                            if day.isToday {
+                                                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                                                    .stroke(Color.primary.opacity(0.7), lineWidth: 0.9)
+                                            }
+                                        }
+                                        .frame(width: cellWidth, height: cellHeight)
+                                } else {
+                                    Color.clear.frame(width: cellWidth, height: cellHeight)
+                                }
+                            }
+                        }
+                    }
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            }
+            .padding(.horizontal, horizontalPadding)
+            .padding(.top, topPadding)
+            .padding(.bottom, bottomPadding)
+        }
+        .containerBackground(.background, for: .widget)
+    }
+
+    private func largeLikeWidget(horizontalPadding: CGFloat, topPadding: CGFloat, bottomPadding: CGFloat, horizontalSpacing: CGFloat, verticalSpacing: CGFloat, headerHeight: CGFloat) -> some View {
         GeometryReader { geometry in
             let accent = Color(hex: entry.snapshot.accentHex)
             let paddedDays = padded(entry.snapshot.days)
             let weekCount = max(paddedDays.count / 7, 1)
-            let horizontalSpacing: CGFloat = family == .systemLarge ? 4 : 3
-            let verticalSpacing: CGFloat = family == .systemLarge ? 4 : 3
-            let horizontalPadding: CGFloat = family == .systemLarge ? 16 : 14
-            let topPadding: CGFloat = family == .systemLarge ? 16 : 14
-            let bottomPadding: CGFloat = family == .systemLarge ? 16 : 14
-            let headerHeight: CGFloat = family == .systemLarge ? 40 : 34
             let availableWidth = geometry.size.width - (horizontalPadding * 2)
             let availableHeight = geometry.size.height - topPadding - bottomPadding - headerHeight
             let cellWidth = max(4, min(8, (availableWidth - (CGFloat(weekCount - 1) * horizontalSpacing)) / CGFloat(weekCount)))
@@ -168,7 +235,7 @@ struct StreakmapWidget: Widget {
         }
         .configurationDisplayName("Streakmap Year")
         .description("See your last 365 days at a glance.")
-        .supportedFamilies([.systemMedium, .systemLarge])
+        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
     }
 }
 

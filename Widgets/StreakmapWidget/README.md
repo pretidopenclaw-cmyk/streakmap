@@ -16,7 +16,7 @@ The Swift code is ready, but the widget target still needs to be added in Xcode 
    - `WidgetEntryModels.swift`
    - `WidgetStorage.swift`
 7. In **Signing & Capabilities**, enable **App Groups** on both targets with:
-   - `group.ch.w5g.streakmap`
+   - `group.com.davidpreti.streakmap`
 8. Use `Streakmap/WidgetSupport/WidgetAppGroupSetup.md` as the checklist
 
 ## Current widget scope

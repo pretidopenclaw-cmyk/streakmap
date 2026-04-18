@@ -13,3 +13,4 @@ struct StatusBadge: View {
             .foregroundStyle(tint)
             .clipShape(Capsule())
     }
+}

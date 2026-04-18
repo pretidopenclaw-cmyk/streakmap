@@ -24,3 +24,4 @@ struct SettingsActionRow: View {
                 .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
         }
     }
+}

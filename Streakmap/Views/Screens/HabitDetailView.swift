@@ -14,8 +14,7 @@ struct HabitDetailView: View {
 
                 SectionCard {
                     VStack(alignment: .leading, spacing: 16) {
-                        Text("Consistency map")
-                            .font(.system(size: 22, weight: .semibold, design: .rounded))
+                        SectionTitleRow(title: "Consistency map", subtitle: "Tap any day to inspect and edit this habit.")
                         HabitHeatmapView(habit: habit, cellSize: 14) { date in
                             selectedDate = date
                         }
@@ -25,18 +24,18 @@ struct HabitDetailView: View {
 
                 SectionCard {
                     VStack(alignment: .leading, spacing: 16) {
-                        Text("Performance")
-                            .font(.system(size: 22, weight: .semibold, design: .rounded))
+                        SectionTitleRow(title: "Performance", subtitle: "Your recent rhythm and streak strength.")
                         statGrid
                     }
                 }
 
                 SectionCard {
                     VStack(alignment: .leading, spacing: 16) {
-                        Text("Actions")
-                            .font(.system(size: 20, weight: .semibold, design: .rounded))
+                        SectionTitleRow(title: "Actions", subtitle: "Quick control for today's completion.")
                         Button {
-                            appState.toggleHabit(habit.id, on: .now)
+                            withAnimation(.spring(response: 0.28, dampingFraction: 0.82)) {
+                                appState.toggleHabit(habit.id, on: .now)
+                            }
                             HapticService.success()
                         } label: {
                             Text(appState.isHabitCompleted(habit.id, on: .now) ? "Completed today" : "Done today")
@@ -88,9 +87,15 @@ struct HabitDetailView: View {
                         .foregroundStyle(Color(hex: habit.colorHex))
                 }
 
-                VStack(alignment: .leading, spacing: 6) {
-                    Text(habit.name)
-                        .font(.system(size: 26, weight: .bold, design: .rounded))
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack(spacing: 8) {
+                        Text(habit.name)
+                            .font(.system(size: 26, weight: .bold, design: .rounded))
+                        StatusBadge(
+                            text: appState.isHabitCompleted(habit.id, on: .now) ? "Done today" : "Open today",
+                            tint: appState.isHabitCompleted(habit.id, on: .now) ? Color(hex: habit.colorHex) : StreakmapTheme.textSecondary
+                        )
+                    }
                     Text("Daily habit")
                         .font(.system(size: 15, weight: .medium, design: .rounded))
                         .foregroundStyle(StreakmapTheme.textSecondary)

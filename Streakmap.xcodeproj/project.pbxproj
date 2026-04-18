@@ -66,6 +66,9 @@
 		A00100010000000100000039 /* WidgetEntryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000003A /* WidgetEntryModels.swift */; };
 		A0010001000000010000003A /* WidgetDataBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000003B /* WidgetDataBuilder.swift */; };
 		A0010001000000010000003B /* WidgetStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000003C /* WidgetStorage.swift */; };
+		A0010001000000010000003C /* SectionTitleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000003D /* SectionTitleRow.swift */; };
+		A0010001000000010000003D /* StatusBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000003E /* StatusBadge.swift */; };
+		A0010001000000010000003E /* SettingsActionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000003F /* SettingsActionRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -129,6 +132,9 @@
 		A0020001000000010000003A /* WidgetEntryModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetEntryModels.swift; sourceTree = "<group>"; };
 		A0020001000000010000003B /* WidgetDataBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDataBuilder.swift; sourceTree = "<group>"; };
 		A0020001000000010000003C /* WidgetStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetStorage.swift; sourceTree = "<group>"; };
+		A0020001000000010000003D /* SectionTitleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTitleRow.swift; sourceTree = "<group>"; };
+		A0020001000000010000003E /* StatusBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBadge.swift; sourceTree = "<group>"; };
+		A0020001000000010000003F /* SettingsActionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsActionRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,9 +253,12 @@
 				A00200010000000100000039 /* PlanComparisonCard.swift */,
 				A00200010000000100000025 /* PricingCard.swift */,
 				A0020001000000010000002B /* PrimaryButtonStyle.swift */,
-				A0020001000000010000002E /* SecondaryButtonStyle.swift */,
 				A0020001000000010000002C /* ScreenHeader.swift */,
+				A0020001000000010000003D /* SectionTitleRow.swift */,
 				A0020001000000010000000F /* SectionCard.swift */,
+				A0020001000000010000002E /* SecondaryButtonStyle.swift */,
+				A0020001000000010000003F /* SettingsActionRow.swift */,
+				A0020001000000010000003E /* StatusBadge.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -425,6 +434,9 @@
 				A00100010000000100000023 /* PremiumProduct.swift in Sources */,
 				A00100010000000100000024 /* PricingCard.swift in Sources */,
 				A0010001000000010000000F /* SectionCard.swift in Sources */,
+				A0010001000000010000003C /* SectionTitleRow.swift in Sources */,
+				A0010001000000010000003E /* SettingsActionRow.swift in Sources */,
+				A0010001000000010000003D /* StatusBadge.swift in Sources */,
 				A00100010000000100000022 /* StoreKitService.swift in Sources */,
 				A00100010000000100000029 /* HeroStatPill.swift in Sources */,
 				A00100010000000100000033 /* MockHeatmapCard.swift in Sources */,

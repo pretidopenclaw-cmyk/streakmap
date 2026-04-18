@@ -14,9 +14,24 @@ struct InsightsView: View {
                     )
 
                     if let habit = appState.selectedHabit {
-                        Text(habit.name)
-                            .font(.system(size: 18, weight: .semibold, design: .rounded))
-                            .foregroundStyle(StreakmapTheme.textSecondary)
+                        SectionCard {
+                            VStack(alignment: .leading, spacing: 14) {
+                                HStack(alignment: .center) {
+                                    VStack(alignment: .leading, spacing: 6) {
+                                        Text(habit.name)
+                                            .font(.system(size: 24, weight: .bold, design: .rounded))
+                                        Text("Focused insight view for your currently selected habit")
+                                            .font(.system(size: 14, weight: .medium, design: .rounded))
+                                            .foregroundStyle(StreakmapTheme.textSecondary)
+                                    }
+                                    Spacer()
+                                    StatusBadge(
+                                        text: appState.isHabitCompleted(habit.id, on: .now) ? "Completed" : "Open",
+                                        tint: appState.isHabitCompleted(habit.id, on: .now) ? Color(hex: habit.colorHex) : StreakmapTheme.textSecondary
+                                    )
+                                }
+                            }
+                        }
 
                         HStack(spacing: 12) {
                             InsightStatCard(title: "Current streak", value: "\(appState.streak(for: habit.id))d")
@@ -30,13 +45,18 @@ struct InsightsView: View {
 
                         SectionCard {
                             VStack(alignment: .leading, spacing: 14) {
-                                Text("Status")
-                                    .font(.system(size: 20, weight: .semibold, design: .rounded))
+                                SectionTitleRow(title: "Status", subtitle: "A quick read on your current habit context.")
                                 statRow(title: "Today", value: appState.isHabitCompleted(habit.id, on: .now) ? "Completed" : "Open")
                                 statRow(title: "Plan", value: appState.isPremiumUnlocked ? "Premium unlocked" : "Free tier")
                                 statRow(title: "Active habits", value: "\(appState.activeHabits.count)")
                             }
                         }
+                    } else {
+                        EmptyStateCard(
+                            title: "No habit selected",
+                            subtitle: "Open a habit first to see focused insights and performance details.",
+                            systemImage: "chart.line.uptrend.xyaxis"
+                        )
                     }
                 }
                 .padding(20)

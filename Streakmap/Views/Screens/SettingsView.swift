@@ -16,55 +16,42 @@ struct SettingsView: View {
                     )
 
                     SectionCard {
-                        VStack(alignment: .leading, spacing: 12) {
-                            Text("Plan")
-                                .font(.system(size: 20, weight: .semibold, design: .rounded))
-                            Text(appState.isPremiumUnlocked ? "Premium is active" : "You are currently on the free plan")
-                                .font(.system(size: 14, weight: .medium, design: .rounded))
-                                .foregroundStyle(StreakmapTheme.textSecondary)
+                        VStack(alignment: .leading, spacing: 14) {
+                            HStack {
+                                SectionTitleRow(title: "Plan", subtitle: appState.isPremiumUnlocked ? "Premium is active on this device." : "You are currently using the free plan.")
+                                Spacer()
+                                StatusBadge(text: appState.isPremiumUnlocked ? "Premium" : "Free", tint: appState.isPremiumUnlocked ? StreakmapTheme.accent : StreakmapTheme.textSecondary)
+                            }
 
                             if !appState.isPremiumUnlocked {
-                                Button("Unlock Premium") {
+                                SettingsActionRow(
+                                    title: "Upgrade",
+                                    subtitle: "Unlock unlimited habits, widgets, advanced insights, and premium visuals.",
+                                    actionTitle: "Unlock Premium",
+                                    isPrimary: true
+                                ) {
                                     showPremium = true
                                 }
-                                .font(.system(size: 16, weight: .semibold, design: .rounded))
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 14)
-                                .background(StreakmapTheme.textPrimary)
-                                .foregroundStyle(.white)
-                                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                            }
+                        }
+                    }
+
+                    SectionCard {
+                        SettingsActionRow(
+                            title: "Notifications",
+                            subtitle: reminderPermissionGranted ? "Notifications are enabled for your daily routine." : "Enable reminders to make your streaks easier to keep.",
+                            actionTitle: reminderPermissionGranted ? "Granted" : "Enable reminders",
+                            isPrimary: false
+                        ) {
+                            Task {
+                                reminderPermissionGranted = await ReminderService.requestAuthorization()
                             }
                         }
                     }
 
                     SectionCard {
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("Notifications")
-                                .font(.system(size: 20, weight: .semibold, design: .rounded))
-                            Text(reminderPermissionGranted ? "Notifications are enabled" : "Enable reminders for your daily habits")
-                                .font(.system(size: 14, weight: .medium, design: .rounded))
-                                .foregroundStyle(StreakmapTheme.textSecondary)
-                            Button(reminderPermissionGranted ? "Granted" : "Enable reminders") {
-                                Task {
-                                    reminderPermissionGranted = await ReminderService.requestAuthorization()
-                                }
-                            }
-                            .font(.system(size: 16, weight: .semibold, design: .rounded))
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 14)
-                            .background(StreakmapTheme.background)
-                            .foregroundStyle(StreakmapTheme.textPrimary)
-                            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                        }
-                    }
-
-                    SectionCard {
-                        VStack(alignment: .leading, spacing: 12) {
-                            Text("Global heatmap")
-                                .font(.system(size: 20, weight: .semibold, design: .rounded))
-                            Text("Choose the accent color used for your full-year overview.")
-                                .font(.system(size: 14, weight: .medium, design: .rounded))
-                                .foregroundStyle(StreakmapTheme.textSecondary)
+                            SectionTitleRow(title: "Global heatmap", subtitle: "Choose the accent color used for your full-year overview.")
                             ColorSwatchPicker(selectedColor: Binding(
                                 get: {
                                     HabitColor.allCases.first(where: { $0.hex == appState.globalHeatmapColorHex }) ?? .violet
@@ -76,8 +63,7 @@ struct SettingsView: View {
 
                     SectionCard {
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("Developer")
-                                .font(.system(size: 20, weight: .semibold, design: .rounded))
+                            SectionTitleRow(title: "Developer", subtitle: "Useful controls for local testing during MVP iteration.")
                             Toggle("Premium unlock for testing", isOn: Binding(
                                 get: { appState.isPremiumUnlocked },
                                 set: { newValue in
@@ -91,8 +77,7 @@ struct SettingsView: View {
 
                     SectionCard {
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("About")
-                                .font(.system(size: 20, weight: .semibold, design: .rounded))
+                            SectionTitleRow(title: "About", subtitle: "A lightweight streak product built around beautiful yearly heatmaps.")
                             infoRow(label: "App", value: "Streakmap")
                             infoRow(label: "Version", value: "0.1 MVP")
                             infoRow(label: "Focus", value: "Beautiful habit heatmaps")

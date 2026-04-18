@@ -53,9 +53,7 @@ struct HomeView: View {
 
                     if !appState.activeHabits.isEmpty {
                         VStack(alignment: .leading, spacing: 14) {
-                            Text("Your habits")
-                                .font(.system(size: 22, weight: .semibold, design: .rounded))
-                                .foregroundStyle(StreakmapTheme.textPrimary)
+                            SectionTitleRow(title: "Your habits", subtitle: "Track each habit individually while keeping the yearly view in sight.")
 
                             ForEach(appState.activeHabits) { habit in
                                 NavigationLink {

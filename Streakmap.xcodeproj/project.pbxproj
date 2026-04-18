@@ -3,10 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6389A96D2F9423ED000B62BF /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6389A96C2F9423ED000B62BF /* WidgetKit.framework */; };
+		6389A96F2F9423ED000B62BF /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6389A96E2F9423ED000B62BF /* SwiftUI.framework */; };
+		6389A97C2F9423EE000B62BF /* StreakmapWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6389A96A2F9423ED000B62BF /* StreakmapWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A00100010000000100000001 /* StreakmapApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000001 /* StreakmapApp.swift */; };
 		A00100010000000100000002 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000002 /* Color+Hex.swift */; };
 		A00100010000000100000003 /* StreakmapTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000003 /* StreakmapTheme.swift */; };
@@ -31,7 +34,6 @@
 		A00100010000000100000016 /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000016 /* RootTabView.swift */; };
 		A00100010000000100000017 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000017 /* Assets.xcassets */; };
 		A00100010000000100000018 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000018 /* Preview Assets.xcassets */; };
-		A00100010000000100000019 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000019 /* Info.plist */; };
 		A0010001000000010000001A /* DayDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000001B /* DayDetailView.swift */; };
 		A0010001000000010000001B /* HabitDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000001C /* HabitDetailView.swift */; };
 		A0010001000000010000001C /* InsightStatCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000001D /* InsightStatCard.swift */; };
@@ -72,7 +74,36 @@
 		A0010001000000010000003F /* WidgetConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000040 /* WidgetConfig.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		6389A97A2F9423EE000B62BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A00700010000000100000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6389A9692F9423ED000B62BF;
+			remoteInfo = StreakmapWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6389A97D2F9423EE000B62BF /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				6389A97C2F9423EE000B62BF /* StreakmapWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		633C4B792F942001001083FA /* Streakmap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Streakmap.entitlements; sourceTree = "<group>"; };
+		6389A96A2F9423ED000B62BF /* StreakmapWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StreakmapWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		6389A96C2F9423ED000B62BF /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		6389A96E2F9423ED000B62BF /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		6389A9822F942477000B62BF /* StreakmapWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StreakmapWidgetExtension.entitlements; sourceTree = "<group>"; };
 		A00200010000000100000001 /* StreakmapApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakmapApp.swift; sourceTree = "<group>"; };
 		A00200010000000100000002 /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 		A00200010000000100000003 /* StreakmapTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakmapTheme.swift; sourceTree = "<group>"; };
@@ -140,7 +171,30 @@
 		A00200010000000100000041 /* WidgetAppGroupSetup.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = WidgetAppGroupSetup.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		6389A9802F9423EE000B62BF /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 6389A9692F9423ED000B62BF /* StreakmapWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		6389A9702F9423ED000B62BF /* StreakmapWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (6389A9802F9423EE000B62BF /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = StreakmapWidget; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
+		6389A9672F9423ED000B62BF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6389A96F2F9423ED000B62BF /* SwiftUI.framework in Frameworks */,
+				6389A96D2F9423ED000B62BF /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A00300010000000100000001 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -151,10 +205,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6389A96B2F9423ED000B62BF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6389A96C2F9423ED000B62BF /* WidgetKit.framework */,
+				6389A96E2F9423ED000B62BF /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A00400010000000100000001 = {
 			isa = PBXGroup;
 			children = (
+				6389A9822F942477000B62BF /* StreakmapWidgetExtension.entitlements */,
 				A00400010000000100000002 /* Streakmap */,
+				6389A9702F9423ED000B62BF /* StreakmapWidget */,
+				6389A96B2F9423ED000B62BF /* Frameworks */,
 				A00400010000000100000008 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -162,6 +228,7 @@
 		A00400010000000100000002 /* Streakmap */ = {
 			isa = PBXGroup;
 			children = (
+				633C4B792F942001001083FA /* Streakmap.entitlements */,
 				A00200010000000100000019 /* Info.plist */,
 				A00200010000000100000001 /* StreakmapApp.swift */,
 				A00400010000000100000003 /* DesignSystem */,
@@ -234,6 +301,7 @@
 			isa = PBXGroup;
 			children = (
 				A0020001000000010000001A /* Streakmap.app */,
+				6389A96A2F9423ED000B62BF /* StreakmapWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -329,6 +397,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		6389A9692F9423ED000B62BF /* StreakmapWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6389A9812F9423EE000B62BF /* Build configuration list for PBXNativeTarget "StreakmapWidgetExtension" */;
+			buildPhases = (
+				6389A9662F9423ED000B62BF /* Sources */,
+				6389A9672F9423ED000B62BF /* Frameworks */,
+				6389A9682F9423ED000B62BF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				6389A9702F9423ED000B62BF /* StreakmapWidget */,
+			);
+			name = StreakmapWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = StreakmapWidgetExtension;
+			productReference = 6389A96A2F9423ED000B62BF /* StreakmapWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		A00500010000000100000001 /* Streakmap */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A00800010000000100000002 /* Build configuration list for PBXNativeTarget "Streakmap" */;
@@ -336,10 +426,12 @@
 				A00600010000000100000001 /* Sources */,
 				A00300010000000100000001 /* Frameworks */,
 				A00600010000000100000002 /* Resources */,
+				6389A97D2F9423EE000B62BF /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				6389A97B2F9423EE000B62BF /* PBXTargetDependency */,
 			);
 			name = Streakmap;
 			productName = Streakmap;
@@ -353,9 +445,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1600;
+				LastSwiftUpdateCheck = 2630;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
+					6389A9692F9423ED000B62BF = {
+						CreatedOnToolsVersion = 26.3;
+					};
 					A00500010000000100000001 = {
 						CreatedOnToolsVersion = 16.0;
 					};
@@ -375,18 +470,25 @@
 			projectRoot = "";
 			targets = (
 				A00500010000000100000001 /* Streakmap */,
+				6389A9692F9423ED000B62BF /* StreakmapWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6389A9682F9423ED000B62BF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A00600010000000100000002 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				A00100010000000100000017 /* Assets.xcassets in Resources */,
 				A00100010000000100000018 /* Preview Assets.xcassets in Resources */,
-				A00100010000000100000019 /* Info.plist in Resources */,
 				A00100010000000100000028 /* SwiftDataMigrationPlan.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -394,6 +496,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6389A9662F9423ED000B62BF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A00600010000000100000001 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -462,7 +571,147 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		6389A97B2F9423EE000B62BF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6389A9692F9423ED000B62BF /* StreakmapWidgetExtension */;
+			targetProxy = 6389A97A2F9423EE000B62BF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		6389A97E2F9423EE000B62BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = StreakmapWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HFVC9G5X5R;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StreakmapWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = StreakmapWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.davidpreti.streakmap.StreakmapWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6389A97F2F9423EE000B62BF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = StreakmapWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HFVC9G5X5R;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StreakmapWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = StreakmapWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.davidpreti.streakmap.StreakmapWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		A00900010000000100000001 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -511,8 +760,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				VALIDATE_PRODUCT = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -520,16 +769,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Streakmap/Streakmap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Streakmap/Resources/Preview Assets.xcassets\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = HFVC9G5X5R;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Streakmap/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -547,16 +797,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Streakmap/Streakmap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Streakmap/Resources/Preview Assets.xcassets\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = HFVC9G5X5R;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Streakmap/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -573,6 +824,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6389A9812F9423EE000B62BF /* Build configuration list for PBXNativeTarget "StreakmapWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6389A97E2F9423EE000B62BF /* Debug */,
+				6389A97F2F9423EE000B62BF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A00800010000000100000001 /* Build configuration list for PBXProject "Streakmap" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

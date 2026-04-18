@@ -19,12 +19,7 @@ final class AppState: ObservableObject {
            !storedHabits.isEmpty {
             initialHabits = storedHabits
         } else {
-            let meditation = Habit(
-                name: "Meditation",
-                icon: "brain.head.profile",
-                colorHex: HabitColor.violet.hex
-            )
-            initialHabits = [meditation]
+            initialHabits = []
         }
 
         let initialEntries: [HabitEntry]
@@ -34,7 +29,7 @@ final class AppState: ObservableObject {
             initialEntries = AppState.makeSampleEntries(for: initialHabits)
         }
 
-        let fallbackID = initialHabits.first?.id
+        let fallbackID = initialHabits.first(where: { !$0.isArchived })?.id
         let initialSelectedHabitID: UUID?
         if let storedSelected = PersistenceService.loadString(forKey: AppStorageKeys.selectedHabitID),
            let uuid = UUID(uuidString: storedSelected),

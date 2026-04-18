@@ -53,9 +53,9 @@ struct InsightsView: View {
                         }
                     } else {
                         EmptyStateCard(
+                            icon: "chart.line.uptrend.xyaxis",
                             title: "No habit selected",
-                            subtitle: "Open a habit first to see focused insights and performance details.",
-                            systemImage: "chart.line.uptrend.xyaxis"
+                            message: "Open a habit first to see focused insights and performance details."
                         )
                     }
                 }

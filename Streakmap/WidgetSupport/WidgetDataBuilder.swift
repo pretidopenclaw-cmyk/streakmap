@@ -1,5 +1,6 @@
 import Foundation
 
+@MainActor
 enum WidgetDataBuilder {
     static func buildGlobalSnapshot(from appState: AppState) -> GlobalHeatmapWidgetSnapshot {
         let calendar = Calendar.current

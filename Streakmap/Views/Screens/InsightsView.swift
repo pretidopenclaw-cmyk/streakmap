@@ -10,59 +10,90 @@ struct InsightsView: View {
                     ScreenHeader(
                         eyebrow: "Patterns",
                         title: "Insights",
-                        subtitle: "Understand how your consistency evolves over time."
+                        subtitle: "A global dashboard for your overall consistency, not just one habit."
                     )
 
-                    if let habit = appState.selectedHabit {
+                    if appState.activeHabits.isEmpty {
+                        EmptyStateCard(
+                            icon: "chart.line.uptrend.xyaxis",
+                            title: "No habits yet",
+                            message: "Create your first habit to unlock your global dashboard and consistency trends."
+                        )
+                    } else {
+                        HStack(spacing: 12) {
+                            InsightStatCard(title: "Current streak", value: "\(appState.currentGlobalStreak())d")
+                            InsightStatCard(title: "Active habits", value: "\(appState.activeHabits.count)")
+                        }
+
+                        HStack(spacing: 12) {
+                            InsightStatCard(title: "30 days", value: percent(appState.globalCompletionRate(overLast: 30)))
+                            InsightStatCard(title: "90 days", value: percent(appState.globalCompletionRate(overLast: 90)))
+                        }
+
                         SectionCard {
                             VStack(alignment: .leading, spacing: 14) {
-                                HStack(alignment: .center) {
-                                    VStack(alignment: .leading, spacing: 6) {
-                                        Text(habit.name)
-                                            .font(.system(size: 24, weight: .bold, design: .rounded))
-                                        Text("Focused insight view for your currently selected habit")
-                                            .font(.system(size: 14, weight: .medium, design: .rounded))
-                                            .foregroundStyle(StreakmapTheme.textSecondary)
-                                    }
-                                    Spacer()
-                                    StatusBadge(
-                                        text: appState.isHabitCompleted(habit.id, on: .now) ? "Completed" : "Open",
-                                        tint: appState.isHabitCompleted(habit.id, on: .now) ? Color(hex: habit.colorHex) : StreakmapTheme.textSecondary
-                                    )
+                                SectionTitleRow(title: "Overview", subtitle: "How your full habit system is behaving right now.")
+                                statRow(title: "Today", value: todayStatus)
+                                statRow(title: "Days with progress (30d)", value: "\(appState.totalCompletedDays(overLast: 30))")
+                                statRow(title: "Plan", value: appState.isPremiumUnlocked ? "Premium unlocked" : "Free tier")
+                            }
+                        }
+
+                        SectionCard {
+                            VStack(alignment: .leading, spacing: 14) {
+                                SectionTitleRow(title: "Best performing habit", subtitle: "Your most consistent habit over the last 30 days.")
+                                if let bestHabit = appState.bestPerformingHabit() {
+                                    habitSummaryRow(habit: bestHabit, value: percent(appState.completionRate(for: bestHabit.id, overLast: 30)))
                                 }
                             }
                         }
 
-                        HStack(spacing: 12) {
-                            InsightStatCard(title: "Current streak", value: "\(appState.streak(for: habit.id))d")
-                            InsightStatCard(title: "Best streak", value: "\(appState.bestStreak(for: habit.id))d")
-                        }
-
-                        HStack(spacing: 12) {
-                            InsightStatCard(title: "30 days", value: percent(appState.completionRate(for: habit.id, overLast: 30)))
-                            InsightStatCard(title: "90 days", value: percent(appState.completionRate(for: habit.id, overLast: 90)))
-                        }
-
                         SectionCard {
                             VStack(alignment: .leading, spacing: 14) {
-                                SectionTitleRow(title: "Status", subtitle: "A quick read on your current habit context.")
-                                statRow(title: "Today", value: appState.isHabitCompleted(habit.id, on: .now) ? "Completed" : "Open")
-                                statRow(title: "Plan", value: appState.isPremiumUnlocked ? "Premium unlocked" : "Free tier")
-                                statRow(title: "Active habits", value: "\(appState.activeHabits.count)")
+                                SectionTitleRow(title: "Needs attention", subtitle: "The habit that currently needs the most support.")
+                                if let attentionHabit = appState.needsAttentionHabit() {
+                                    habitSummaryRow(habit: attentionHabit, value: percent(appState.completionRate(for: attentionHabit.id, overLast: 30)))
+                                }
                             }
                         }
-                    } else {
-                        EmptyStateCard(
-                            icon: "chart.line.uptrend.xyaxis",
-                            title: "No habit selected",
-                            message: "Open a habit first to see focused insights and performance details."
-                        )
                     }
                 }
                 .padding(20)
             }
             .background(StreakmapTheme.background)
             .navigationBarHidden(true)
+        }
+    }
+
+    private var todayStatus: String {
+        let completed = appState.activeHabits.filter { appState.isHabitCompleted($0.id, on: .now) }.count
+        return "\(completed) of \(appState.activeHabits.count) habits completed"
+    }
+
+    private func habitSummaryRow(habit: Habit, value: String) -> some View {
+        HStack(spacing: 14) {
+            ZStack {
+                Circle()
+                    .fill(Color(hex: habit.colorHex).opacity(0.16))
+                    .frame(width: 40, height: 40)
+                Image(systemName: habit.icon)
+                    .foregroundStyle(Color(hex: habit.colorHex))
+            }
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(habit.name)
+                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                    .foregroundStyle(StreakmapTheme.textPrimary)
+                Text("Last 30 days")
+                    .font(.system(size: 13, weight: .medium, design: .rounded))
+                    .foregroundStyle(StreakmapTheme.textSecondary)
+            }
+
+            Spacer()
+
+            Text(value)
+                .font(.system(size: 16, weight: .bold, design: .rounded))
+                .foregroundStyle(Color(hex: habit.colorHex))
         }
     }
 

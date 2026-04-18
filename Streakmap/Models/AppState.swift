@@ -309,6 +309,41 @@ final class AppState: ObservableObject {
         return Double(completed) / Double(dates.count)
     }
 
+    func globalCompletionRate(overLast days: Int) -> Double {
+        let dates = (0..<days).compactMap { Calendar.current.date(byAdding: .day, value: -$0, to: .now) }
+        guard !dates.isEmpty else { return 0 }
+        let values = dates.map { completionRate(for: $0) }
+        let total = values.reduce(0, +)
+        return total / Double(values.count)
+    }
+
+    func bestPerformingHabit(overLast days: Int = 30) -> Habit? {
+        activeHabits.max { completionRate(for: $0.id, overLast: days) < completionRate(for: $1.id, overLast: days) }
+    }
+
+    func needsAttentionHabit(overLast days: Int = 30) -> Habit? {
+        activeHabits.min { completionRate(for: $0.id, overLast: days) < completionRate(for: $1.id, overLast: days) }
+    }
+
+    func totalCompletedDays(overLast days: Int) -> Int {
+        let dates = (0..<days).compactMap { Calendar.current.date(byAdding: .day, value: -$0, to: .now) }
+        return dates.filter { completionRate(for: $0) > 0 }.count
+    }
+
+    func currentGlobalStreak() -> Int {
+        let calendar = Calendar.current
+        var streak = 0
+        var cursor = calendar.startOfDay(for: .now)
+
+        while completionRate(for: cursor) > 0 {
+            streak += 1
+            guard let previous = calendar.date(byAdding: .day, value: -1, to: cursor) else { break }
+            cursor = previous
+        }
+
+        return streak
+    }
+
     func entry(for habitID: UUID, on date: Date) -> HabitEntry? {
         entries.first(where: { $0.habitID == habitID && Calendar.current.isDate($0.date, inSameDayAs: date) })
     }

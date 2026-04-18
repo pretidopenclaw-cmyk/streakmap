@@ -85,6 +85,7 @@ struct FirstHabitSetupView: View {
                     )
                     if didCreate {
                         appState.hasCompletedOnboarding = true
+                        appState.persist()
                         HapticService.success()
                     }
                 } label: {

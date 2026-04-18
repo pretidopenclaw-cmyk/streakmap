@@ -40,6 +40,7 @@ struct OnboardingView: View {
             Button {
                 withAnimation(.spring(response: 0.45, dampingFraction: 0.88)) {
                     appState.hasCompletedOnboarding = true
+                    appState.persist()
                 }
             } label: {
                 Text("Start building")

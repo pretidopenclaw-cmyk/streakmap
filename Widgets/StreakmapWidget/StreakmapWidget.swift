@@ -64,9 +64,13 @@ struct StreakmapWidgetView: View {
             let weekCount = max(days.count / 7, 1)
             let availableWidth = geometry.size.width - (horizontalPadding * 2)
             let availableHeight = geometry.size.height - (verticalPadding * 2)
-            let cellWidth = max(minCell, min(maxCell, (availableWidth - (CGFloat(weekCount - 1) * horizontalSpacing)) / CGFloat(weekCount)))
-            let cellHeight = max(minCell, min(maxCell, (availableHeight - (6 * verticalSpacing)) / 7))
-            let cornerRadius = min(cellWidth, cellHeight) * 0.34
+
+            let widthLimitedCell = (availableWidth - (CGFloat(weekCount - 1) * horizontalSpacing)) / CGFloat(weekCount)
+            let heightLimitedCell = (availableHeight - (6 * verticalSpacing)) / 7
+
+            let cellWidth = max(minCell, min(maxCell, widthLimitedCell))
+            let cellHeight = max(minCell, min(maxCell * 1.6, heightLimitedCell))
+            let cornerRadius = min(cellWidth, cellHeight) * 0.28
 
             HStack(alignment: .top, spacing: horizontalSpacing) {
                 ForEach(0..<weekCount, id: \.self) { week in
@@ -79,7 +83,7 @@ struct StreakmapWidgetView: View {
                                     .overlay {
                                         if day.isToday {
                                             RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-                                                .stroke(Color.primary.opacity(0.75), lineWidth: 0.9)
+                                                .stroke(Color.primary.opacity(0.8), lineWidth: 0.8)
                                         }
                                     }
                                     .frame(width: cellWidth, height: cellHeight)
@@ -101,13 +105,13 @@ struct StreakmapWidgetView: View {
     private func color(for day: GlobalHeatmapWidgetDay, accent: Color) -> Color {
         switch day.completionRate {
         case 0:
-            return Color(.systemGray5)
+            return Color(.systemGray5).opacity(0.95)
         case 0..<0.26:
-            return accent.opacity(0.25)
+            return accent.opacity(0.32)
         case 0..<0.51:
-            return accent.opacity(0.45)
+            return accent.opacity(0.52)
         case 0..<0.76:
-            return accent.opacity(0.7)
+            return accent.opacity(0.76)
         default:
             return accent
         }

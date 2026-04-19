@@ -72,6 +72,8 @@
 		A0010001000000010000003D /* StatusBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000003E /* StatusBadge.swift */; };
 		A0010001000000010000003E /* SettingsActionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000003F /* SettingsActionRow.swift */; };
 		A0010001000000010000003F /* WidgetConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000040 /* WidgetConfig.swift */; };
+		A00100010000000100000040 /* CompactYearHeatmapGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000042 /* CompactYearHeatmapGrid.swift */; };
+		A00100010000000100000041 /* HabitWidgetEntryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000043 /* HabitWidgetEntryModels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,6 +171,8 @@
 		A0020001000000010000003F /* SettingsActionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsActionRow.swift; sourceTree = "<group>"; };
 		A00200010000000100000040 /* WidgetConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetConfig.swift; sourceTree = "<group>"; };
 		A00200010000000100000041 /* WidgetAppGroupSetup.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = WidgetAppGroupSetup.md; sourceTree = "<group>"; };
+		A00200010000000100000042 /* CompactYearHeatmapGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactYearHeatmapGrid.swift; sourceTree = "<group>"; };
+		A00200010000000100000043 /* HabitWidgetEntryModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitWidgetEntryModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -310,6 +314,7 @@
 			isa = PBXGroup;
 			children = (
 				A00200010000000100000031 /* ColorSwatchPicker.swift */,
+				A00200010000000100000042 /* CompactYearHeatmapGrid.swift */,
 				A00200010000000100000026 /* EmptyStateCard.swift */,
 				A00200010000000100000038 /* FeatureBulletRow.swift */,
 				A0020001000000010000000B /* GlobalHeatmapView.swift */,
@@ -385,6 +390,7 @@
 		A0040001000000010000000E /* WidgetSupport */ = {
 			isa = PBXGroup;
 			children = (
+				A00200010000000100000043 /* HabitWidgetEntryModels.swift */,
 				A00200010000000100000040 /* WidgetConfig.swift */,
 				A0020001000000010000003A /* WidgetEntryModels.swift */,
 				A0020001000000010000003B /* WidgetDataBuilder.swift */,
@@ -512,6 +518,7 @@
 				A0010001000000010000001E /* AppStorageKeys.swift in Sources */,
 				A0010001000000010000001A /* DayDetailView.swift in Sources */,
 				A00100010000000100000030 /* ColorSwatchPicker.swift in Sources */,
+				A00100010000000100000040 /* CompactYearHeatmapGrid.swift in Sources */,
 				A0010001000000010000002C /* EditHabitView.swift in Sources */,
 				A00100010000000100000034 /* FirstHabitSetupView.swift in Sources */,
 				A00100010000000100000036 /* GlobalDayDetailView.swift in Sources */,
@@ -566,6 +573,7 @@
 				A0010001000000010000003A /* WidgetDataBuilder.swift in Sources */,
 				A0010001000000010000003B /* WidgetStorage.swift in Sources */,
 				A0010001000000010000003F /* WidgetConfig.swift in Sources */,
+				A00100010000000100000041 /* HabitWidgetEntryModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

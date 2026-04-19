@@ -36,33 +36,18 @@ struct GlobalHeatmapView: View {
         VStack(alignment: .leading, spacing: 10) {
             HeatmapLegend(accent: Color(hex: appState.globalHeatmapColorHex), mode: .gradient)
 
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(alignment: .top, spacing: 5) {
-                    ForEach(Array(grid.enumerated()), id: \.offset) { weekIndex, week in
-                        VStack(spacing: 5) {
-                            ForEach(Array(week.enumerated()), id: \.offset) { _, day in
-                                if let day {
-                                    Button {
-                                        onSelectDate?(day)
-                                    } label: {
-                                        HeatmapCell(
-                                            color: color(for: day),
-                                            size: cellSize,
-                                            isToday: calendar.isDateInToday(day)
-                                        )
-                                    }
-                                    .buttonStyle(.plain)
-                                } else {
-                                    Color.clear
-                                        .frame(width: cellSize, height: cellSize)
-                                }
-                            }
-                        }
-                        .id(weekIndex)
-                    }
-                }
-                .padding(.vertical, 2)
-            }
+            CompactYearHeatmapGrid(
+                days: grid.flatMap { $0 },
+                minCellWidth: 4,
+                maxCellWidth: max(cellSize, 9),
+                minCellHeight: 6,
+                maxCellHeight: max(cellSize + 2, 11),
+                horizontalSpacing: 3,
+                verticalSpacing: 3,
+                onSelectDate: onSelectDate,
+                isToday: { calendar.isDateInToday($0) },
+                colorForDate: color(for:)
+            )
         }
     }
 

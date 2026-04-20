@@ -154,6 +154,11 @@ final class AppState: ObservableObject {
         activeHabits.first(where: { $0.id == selectedHabitID }) ?? activeHabits.first
     }
 
+    func selectHabit(_ habitID: UUID) {
+        selectedHabitID = habitID
+        persist()
+    }
+
     func updateGlobalHeatmapColor(_ color: HabitColor) {
         globalHeatmapColorHex = color.hex
         persist()

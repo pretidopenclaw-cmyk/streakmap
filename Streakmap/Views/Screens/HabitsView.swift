@@ -46,7 +46,7 @@ struct HabitsView: View {
                                 HabitCard(habit: habit, streak: appState.streak(for: habit.id))
                             }
                             .simultaneousGesture(TapGesture().onEnded {
-                                appState.selectedHabitID = habit.id
+                                appState.selectHabit(habit.id)
                             })
                             .buttonStyle(.plain)
                         }

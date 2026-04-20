@@ -8,7 +8,7 @@ struct HabitWidgetCardView: View {
     var body: some View {
         let accent = Color(hex: snapshot.accentHex)
         let paddedDays = padded(snapshot.days)
-        let visibleDays: [HabitHeatmapWidgetDay?] = family == .systemSmall ? Array(paddedDays.suffix(7 * 12)) : Array(paddedDays.suffix(7 * 14))
+        let visibleDays: [HabitHeatmapWidgetDay?] = family == .systemSmall ? Array(paddedDays.suffix(7 * 12)) : Array(paddedDays.suffix(7 * 16))
 
         VStack(alignment: .leading, spacing: family == .systemSmall ? 10 : 10) {
             HStack(spacing: 10) {
@@ -38,12 +38,12 @@ struct HabitWidgetCardView: View {
             CompactWidgetHeatmap(
                 days: visibleDays,
                 accent: accent,
-                horizontalSpacing: family == .systemSmall ? 3 : 3,
+                horizontalSpacing: family == .systemSmall ? 3 : 2,
                 verticalSpacing: family == .systemSmall ? 3 : 3,
                 horizontalPadding: 0,
                 verticalPadding: 0,
-                minCellWidth: family == .systemSmall ? 8 : 7,
-                maxCellWidth: family == .systemSmall ? 12 : 10,
+                minCellWidth: family == .systemSmall ? 8 : 6,
+                maxCellWidth: family == .systemSmall ? 12 : 9,
                 minCellHeight: family == .systemSmall ? 8 : 7,
                 maxCellHeight: family == .systemSmall ? 12 : 10,
                 isCompleted: { $0.isCompleted },

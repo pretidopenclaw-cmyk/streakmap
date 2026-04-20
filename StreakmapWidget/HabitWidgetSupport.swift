@@ -31,13 +31,8 @@ struct HabitWidgetCardView: View {
                 }
             } else {
                 let visibleDays: [HabitHeatmapWidgetDay?] = Array(paddedDays.suffix(7 * 18))
-                HStack(spacing: 14) {
-                    VStack(alignment: .leading, spacing: 10) {
-                        header(accent: accent, compact: false)
-                        Spacer(minLength: 0)
-                    }
-                    .frame(width: 108, alignment: .topLeading)
-
+                VStack(alignment: .leading, spacing: 12) {
+                    header(accent: accent, compact: false)
                     CompactWidgetHeatmap(
                         days: visibleDays,
                         accent: accent,
@@ -46,9 +41,9 @@ struct HabitWidgetCardView: View {
                         horizontalPadding: 0,
                         verticalPadding: 0,
                         minCellWidth: 7,
-                        maxCellWidth: 10,
+                        maxCellWidth: 12,
                         minCellHeight: 8,
-                        maxCellHeight: 11,
+                        maxCellHeight: 12,
                         isCompleted: { $0.isCompleted },
                         isToday: { $0.isToday }
                     )
@@ -89,7 +84,7 @@ struct HabitWidgetCardView: View {
                     .lineLimit(1)
             }
 
-            if compact { Spacer() }
+            Spacer(minLength: 0)
         }
     }
 }

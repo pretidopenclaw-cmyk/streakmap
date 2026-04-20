@@ -30,20 +30,20 @@ struct HabitWidgetCardView: View {
                     )
                 }
             } else {
-                let visibleDays: [HabitHeatmapWidgetDay?] = Array(paddedDays.suffix(7 * 30))
+                let visibleDays: [HabitHeatmapWidgetDay?] = paddedDays
                 VStack(alignment: .leading, spacing: 12) {
                     header(accent: accent, compact: false)
                     CompactWidgetHeatmap(
                         days: visibleDays,
                         accent: accent,
                         horizontalSpacing: 2,
-                        verticalSpacing: 3,
+                        verticalSpacing: 2,
                         horizontalPadding: 0,
                         verticalPadding: 0,
-                        minCellWidth: 6,
-                        maxCellWidth: 9,
-                        minCellHeight: 8,
-                        maxCellHeight: 11,
+                        minCellWidth: 4,
+                        maxCellWidth: 8,
+                        minCellHeight: 6,
+                        maxCellHeight: 10,
                         isCompleted: { $0.isCompleted },
                         isToday: { $0.isToday }
                     )

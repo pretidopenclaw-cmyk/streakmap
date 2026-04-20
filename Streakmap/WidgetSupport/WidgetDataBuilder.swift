@@ -32,8 +32,8 @@ enum WidgetDataBuilder {
 
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: .now)
-        let start = calendar.date(byAdding: .day, value: -83, to: today) ?? today
-        let days = (0..<84).compactMap { offset -> HabitHeatmapWidgetDay? in
+        let start = calendar.date(byAdding: .day, value: -364, to: today) ?? today
+        let days = (0..<365).compactMap { offset -> HabitHeatmapWidgetDay? in
             guard let date = calendar.date(byAdding: .day, value: offset, to: start) else { return nil }
             return HabitHeatmapWidgetDay(
                 date: date,

@@ -65,33 +65,33 @@ struct HabitWidgetCardView: View {
             )
         }
     }
-+
-+    @ViewBuilder
-+    private func header(accent: Color, compact: Bool) -> some View {
-+        HStack(spacing: 10) {
-+            ZStack {
-+                RoundedRectangle(cornerRadius: 10, style: .continuous)
-+                    .fill(accent.opacity(0.16))
-+                    .frame(width: compact ? 28 : 32, height: compact ? 28 : 32)
-+                Image(systemName: snapshot.habitIcon)
-+                    .font(.system(size: compact ? 13 : 15, weight: .semibold))
-+                    .foregroundStyle(accent)
-+            }
-+
-+            VStack(alignment: .leading, spacing: 2) {
-+                Text(snapshot.habitName)
-+                    .font(.system(size: compact ? 14 : 16, weight: .semibold, design: .rounded))
-+                    .foregroundStyle(.white)
-+                    .lineLimit(1)
-+                Text("\(snapshot.currentStreak) day streak")
-+                    .font(.system(size: compact ? 11 : 12, weight: .medium, design: .rounded))
-+                    .foregroundStyle(Color.white.opacity(0.62))
-+                    .lineLimit(1)
-+            }
-+
-+            if compact { Spacer() }
-+        }
-+    }
+
+    @ViewBuilder
+    private func header(accent: Color, compact: Bool) -> some View {
+        HStack(spacing: 10) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    .fill(accent.opacity(0.16))
+                    .frame(width: compact ? 28 : 32, height: compact ? 28 : 32)
+                Image(systemName: snapshot.habitIcon)
+                    .font(.system(size: compact ? 13 : 15, weight: .semibold))
+                    .foregroundStyle(accent)
+            }
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(snapshot.habitName)
+                    .font(.system(size: compact ? 14 : 16, weight: .semibold, design: .rounded))
+                    .foregroundStyle(.white)
+                    .lineLimit(1)
+                Text("\(snapshot.currentStreak) day streak")
+                    .font(.system(size: compact ? 11 : 12, weight: .medium, design: .rounded))
+                    .foregroundStyle(Color.white.opacity(0.62))
+                    .lineLimit(1)
+            }
+
+            if compact { Spacer() }
+        }
+    }
 }
 
 struct CompactWidgetHeatmap<Day>: View {

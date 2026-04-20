@@ -26,4 +26,29 @@ enum WidgetDataBuilder {
             totalHabits: appState.activeHabits.count
         )
     }
+
+    static func buildHabitSnapshot(from appState: AppState) -> HabitHeatmapWidgetSnapshot? {
+        guard let habit = appState.selectedHabit else { return nil }
+
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: .now)
+        let start = calendar.date(byAdding: .day, value: -83, to: today) ?? today
+        let days = (0..<84).compactMap { offset -> HabitHeatmapWidgetDay? in
+            guard let date = calendar.date(byAdding: .day, value: offset, to: start) else { return nil }
+            return HabitHeatmapWidgetDay(
+                date: date,
+                isCompleted: appState.isHabitCompleted(habit.id, on: date),
+                isToday: calendar.isDateInToday(date)
+            )
+        }
+
+        return HabitHeatmapWidgetSnapshot(
+            habitID: habit.id,
+            habitName: habit.name,
+            habitIcon: habit.icon,
+            accentHex: habit.colorHex,
+            currentStreak: appState.streak(for: habit.id),
+            days: days
+        )
+    }
 }

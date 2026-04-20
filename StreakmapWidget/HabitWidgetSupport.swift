@@ -38,7 +38,7 @@ struct HabitWidgetCardView: View {
                         accent: accent,
                         horizontalSpacing: 2,
                         verticalSpacing: 2,
-                        horizontalPadding: 0,
+                        horizontalPadding: 2,
                         verticalPadding: 0,
                         minCellWidth: 4,
                         maxCellWidth: .greatestFiniteMagnitude,

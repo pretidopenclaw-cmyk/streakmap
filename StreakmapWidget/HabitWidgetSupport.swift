@@ -1,4 +1,5 @@
 import SwiftUI
+import WidgetKit
 
 struct HabitWidgetCardView: View {
     let snapshot: HabitHeatmapWidgetSnapshot

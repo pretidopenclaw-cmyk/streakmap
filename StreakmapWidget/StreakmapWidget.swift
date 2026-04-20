@@ -47,48 +47,65 @@ struct StreakmapWidgetView: View {
     var entry: StreakmapWidgetProvider.Entry
 
     var body: some View {
-        GeometryReader { geometry in
-            let accent = Color(hex: entry.snapshot.accentHex)
-            let days = padded(entry.snapshot.days)
-            let weekCount = max(days.count / 7, 1)
-            let availableWidth = geometry.size.width - 8
-            let availableHeight = geometry.size.height - 8
-            let cellWidth = max(5, min(12, (availableWidth - (CGFloat(weekCount - 1) * 2)) / CGFloat(weekCount)))
-            let cellHeight = max(6, min(16, (availableHeight - (6 * 2)) / 7))
-            let radius = min(cellWidth, cellHeight) * 0.26
+        let accent = Color(hex: entry.snapshot.accentHex)
+        let days = padded(entry.snapshot.days)
 
-            HStack(alignment: .top, spacing: 2) {
-                ForEach(0..<weekCount, id: \.self) { week in
-                    VStack(spacing: 2) {
-                        ForEach(0..<7, id: \.self) { weekday in
-                            let index = week * 7 + weekday
-                            if index < days.count, let day = days[index] {
-                                RoundedRectangle(cornerRadius: radius, style: .continuous)
-                                    .fill(color(for: day, accent: accent))
-                                    .overlay {
-                                        if day.isToday {
-                                            RoundedRectangle(cornerRadius: radius, style: .continuous)
-                                                .stroke(Color.white.opacity(0.82), lineWidth: 0.8)
-                                        }
-                                    }
-                                    .frame(width: cellWidth, height: cellHeight)
-                            } else {
-                                Color.clear.frame(width: cellWidth, height: cellHeight)
-                            }
-                        }
-                    }
+        VStack(alignment: .leading, spacing: 14) {
+            HStack(alignment: .center, spacing: 12) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        .fill(accent.opacity(0.16))
+                        .frame(width: 36, height: 36)
+                    Image(systemName: "globe.europe.africa.fill")
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundStyle(accent)
+                }
+
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Global heatmap")
+                        .font(.system(size: 18, weight: .semibold, design: .rounded))
+                        .foregroundStyle(.white)
+                        .lineLimit(1)
+                    Text(entry.snapshot.subtitle)
+                        .font(.system(size: 12, weight: .medium, design: .rounded))
+                        .foregroundStyle(Color.white.opacity(0.62))
+                        .lineLimit(1)
+                }
+
+                Spacer(minLength: 0)
+
+                HStack(spacing: 8) {
+                    statPill(value: "\(entry.snapshot.completedToday)", label: "today")
+                    statPill(value: "\(entry.snapshot.totalHabits)", label: "habits")
                 }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-            .padding(4)
+
+            GlobalWidgetHeatmap(days: days, accent: accent)
+                .frame(maxWidth: .infinity, minHeight: 120, maxHeight: 120, alignment: .leading)
         }
+        .padding(16)
         .containerBackground(for: .widget) {
             LinearGradient(
-                colors: [Color(red: 0.10, green: 0.10, blue: 0.12), Color(red: 0.07, green: 0.07, blue: 0.09)],
+                colors: [Color(red: 0.12, green: 0.12, blue: 0.14), Color(red: 0.09, green: 0.09, blue: 0.11)],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
         }
+    }
+
+    private func statPill(value: String, label: String) -> some View {
+        VStack(alignment: .leading, spacing: 1) {
+            Text(value)
+                .font(.system(size: 14, weight: .semibold, design: .rounded))
+                .foregroundStyle(.white)
+            Text(label)
+                .font(.system(size: 10, weight: .medium, design: .rounded))
+                .foregroundStyle(Color.white.opacity(0.55))
+        }
+        .padding(.horizontal, 10)
+        .padding(.vertical, 7)
+        .background(Color.white.opacity(0.06))
+        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
     }
 
     private func color(for day: GlobalHeatmapWidgetDay, accent: Color) -> Color {
@@ -116,6 +133,66 @@ struct StreakmapWidgetView: View {
             result.append(nil)
         }
         return result
+    }
+}
+
+struct GlobalWidgetHeatmap: View {
+    let days: [GlobalHeatmapWidgetDay?]
+    let accent: Color
+
+    var body: some View {
+        GeometryReader { geometry in
+            let weekCount = max(days.count / 7, 1)
+            let availableWidth = max(0, geometry.size.width)
+            let availableHeight = max(0, geometry.size.height)
+            let horizontalSpacing: CGFloat = 2
+            let verticalSpacing: CGFloat = 2
+            let rawCellWidth = (availableWidth - (CGFloat(weekCount - 1) * horizontalSpacing)) / CGFloat(weekCount)
+            let cellWidth = max(4, rawCellWidth)
+            let cellHeight = max(8, min(14, (availableHeight - (6 * verticalSpacing)) / 7))
+            let radius = min(cellWidth, cellHeight) * 0.28
+
+            HStack(alignment: .top, spacing: horizontalSpacing) {
+                ForEach(0..<weekCount, id: \.self) { week in
+                    VStack(spacing: verticalSpacing) {
+                        ForEach(0..<7, id: \.self) { weekday in
+                            let index = week * 7 + weekday
+                            if index < days.count, let day = days[index] {
+                                RoundedRectangle(cornerRadius: radius, style: .continuous)
+                                    .fill(color(for: day, accent: accent))
+                                    .overlay {
+                                        if day.isToday {
+                                            RoundedRectangle(cornerRadius: radius, style: .continuous)
+                                                .stroke(Color.white.opacity(0.82), lineWidth: 0.8)
+                                        }
+                                    }
+                                    .frame(width: cellWidth, height: cellHeight)
+                            } else {
+                                RoundedRectangle(cornerRadius: radius, style: .continuous)
+                                    .fill(Color.white.opacity(0.04))
+                                    .frame(width: cellWidth, height: cellHeight)
+                            }
+                        }
+                    }
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+        }
+    }
+
+    private func color(for day: GlobalHeatmapWidgetDay, accent: Color) -> Color {
+        switch day.completionRate {
+        case 0:
+            return Color.white.opacity(0.10)
+        case 0..<0.26:
+            return accent.opacity(0.32)
+        case 0..<0.51:
+            return accent.opacity(0.52)
+        case 0..<0.76:
+            return accent.opacity(0.76)
+        default:
+            return accent
+        }
     }
 }
 

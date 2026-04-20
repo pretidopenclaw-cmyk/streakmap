@@ -46,62 +46,61 @@ struct StreakmapWidgetProvider: TimelineProvider {
 struct StreakmapWidgetView: View {
     var entry: StreakmapWidgetProvider.Entry
 
-    private let columns = Array(repeating: GridItem(.fixed(6), spacing: 3), count: 7)
-
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            HStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(entry.snapshot.title)
-                        .font(.system(size: 12, weight: .bold, design: .rounded))
-                    Text("\(entry.snapshot.completedToday)/\(max(entry.snapshot.totalHabits, 1)) today")
-                        .font(.system(size: 10, weight: .medium, design: .rounded))
-                        .foregroundStyle(.secondary)
-                }
-                Spacer()
-            }
-
+        GeometryReader { geometry in
             let accent = Color(hex: entry.snapshot.accentHex)
-            let paddedDays = padded(entry.snapshot.days)
-            let weekCount = paddedDays.count / 7
+            let days = padded(entry.snapshot.days)
+            let weekCount = max(days.count / 7, 1)
+            let availableWidth = geometry.size.width - 8
+            let availableHeight = geometry.size.height - 8
+            let cellWidth = max(5, min(12, (availableWidth - (CGFloat(weekCount - 1) * 2)) / CGFloat(weekCount)))
+            let cellHeight = max(6, min(16, (availableHeight - (6 * 2)) / 7))
+            let radius = min(cellWidth, cellHeight) * 0.26
 
-            HStack(alignment: .top, spacing: 3) {
+            HStack(alignment: .top, spacing: 2) {
                 ForEach(0..<weekCount, id: \.self) { week in
-                    VStack(spacing: 3) {
+                    VStack(spacing: 2) {
                         ForEach(0..<7, id: \.self) { weekday in
                             let index = week * 7 + weekday
-                            if let day = paddedDays[index] {
-                                RoundedRectangle(cornerRadius: 2, style: .continuous)
+                            if index < days.count, let day = days[index] {
+                                RoundedRectangle(cornerRadius: radius, style: .continuous)
                                     .fill(color(for: day, accent: accent))
                                     .overlay {
                                         if day.isToday {
-                                            RoundedRectangle(cornerRadius: 2, style: .continuous)
-                                                .stroke(Color.primary.opacity(0.7), lineWidth: 0.8)
+                                            RoundedRectangle(cornerRadius: radius, style: .continuous)
+                                                .stroke(Color.white.opacity(0.82), lineWidth: 0.8)
                                         }
                                     }
-                                    .frame(width: 6, height: 6)
+                                    .frame(width: cellWidth, height: cellHeight)
                             } else {
-                                Color.clear.frame(width: 6, height: 6)
+                                Color.clear.frame(width: cellWidth, height: cellHeight)
                             }
                         }
                     }
                 }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            .padding(4)
         }
-        .padding(12)
-        .containerBackground(.background, for: .widget)
+        .containerBackground(for: .widget) {
+            LinearGradient(
+                colors: [Color(red: 0.10, green: 0.10, blue: 0.12), Color(red: 0.07, green: 0.07, blue: 0.09)],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        }
     }
 
     private func color(for day: GlobalHeatmapWidgetDay, accent: Color) -> Color {
         switch day.completionRate {
         case 0:
-            return Color(.systemGray5)
+            return Color.white.opacity(0.10)
         case 0..<0.26:
-            return accent.opacity(0.25)
+            return accent.opacity(0.32)
         case 0..<0.51:
-            return accent.opacity(0.45)
+            return accent.opacity(0.52)
         case 0..<0.76:
-            return accent.opacity(0.7)
+            return accent.opacity(0.76)
         default:
             return accent
         }
@@ -127,13 +126,13 @@ struct StreakmapWidget: Widget {
         StaticConfiguration(kind: kind, provider: StreakmapWidgetProvider()) { entry in
             StreakmapWidgetView(entry: entry)
         }
-        .configurationDisplayName("Streakmap Year")
-        .description("See your last 365 days at a glance.")
-        .supportedFamilies([.systemMedium, .systemLarge])
+        .configurationDisplayName("Year Heatmap")
+        .description("A full-year consistency map.")
+        .supportedFamilies([.systemLarge])
     }
 }
 
-#Preview(as: .systemMedium) {
+#Preview(as: .systemLarge) {
     StreakmapWidget()
 } timeline: {
     StreakmapWidgetEntry(

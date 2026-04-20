@@ -47,7 +47,7 @@ struct HabitWidgetCardView: View {
                         isCompleted: { $0.isCompleted },
                         isToday: { $0.isToday }
                     )
-                    .frame(maxWidth: .infinity)
+                    .frame(maxWidth: .infinity, minHeight: 72, maxHeight: 72, alignment: .leading)
                 }
             }
         }
@@ -106,9 +106,10 @@ struct CompactWidgetHeatmap<Day>: View {
     var body: some View {
         GeometryReader { geometry in
             let weekCount = max(days.count / 7, 1)
-            let availableWidth = geometry.size.width - (horizontalPadding * 2)
-            let availableHeight = geometry.size.height - (verticalPadding * 2)
-            let cellWidth = max(minCellWidth, min(maxCellWidth, (availableWidth - (CGFloat(weekCount - 1) * horizontalSpacing)) / CGFloat(weekCount)))
+            let availableWidth = max(0, geometry.size.width - (horizontalPadding * 2))
+            let availableHeight = max(0, geometry.size.height - (verticalPadding * 2))
+            let rawCellWidth = (availableWidth - (CGFloat(weekCount - 1) * horizontalSpacing)) / CGFloat(weekCount)
+            let cellWidth = max(minCellWidth, min(maxCellWidth, rawCellWidth))
             let cellHeight = max(minCellHeight, min(maxCellHeight, (availableHeight - (6 * verticalSpacing)) / 7))
             let radius = min(cellWidth, cellHeight) * 0.28
 
@@ -136,7 +137,7 @@ struct CompactWidgetHeatmap<Day>: View {
                     }
                 }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+            .frame(width: availableWidth, maxHeight: .infinity, alignment: .leading)
             .padding(.horizontal, horizontalPadding)
             .padding(.vertical, verticalPadding)
         }

@@ -8,47 +8,53 @@ struct HabitWidgetCardView: View {
     var body: some View {
         let accent = Color(hex: snapshot.accentHex)
         let paddedDays = padded(snapshot.days)
-        let visibleDays: [HabitHeatmapWidgetDay?] = family == .systemSmall ? Array(paddedDays.suffix(7 * 12)) : Array(paddedDays.suffix(7 * 16))
 
-        VStack(alignment: .leading, spacing: family == .systemSmall ? 10 : 10) {
-            HStack(spacing: 10) {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 10, style: .continuous)
-                        .fill(accent.opacity(0.16))
-                        .frame(width: family == .systemSmall ? 28 : 32, height: family == .systemSmall ? 28 : 32)
-                    Image(systemName: snapshot.habitIcon)
-                        .font(.system(size: family == .systemSmall ? 13 : 15, weight: .semibold))
-                        .foregroundStyle(accent)
+        Group {
+            if family == .systemSmall {
+                let visibleDays: [HabitHeatmapWidgetDay?] = Array(paddedDays.suffix(7 * 12))
+                VStack(alignment: .leading, spacing: 10) {
+                    header(accent: accent, compact: true)
+                    CompactWidgetHeatmap(
+                        days: visibleDays,
+                        accent: accent,
+                        horizontalSpacing: 3,
+                        verticalSpacing: 3,
+                        horizontalPadding: 0,
+                        verticalPadding: 0,
+                        minCellWidth: 8,
+                        maxCellWidth: 12,
+                        minCellHeight: 8,
+                        maxCellHeight: 12,
+                        isCompleted: { $0.isCompleted },
+                        isToday: { $0.isToday }
+                    )
                 }
+            } else {
+                let visibleDays: [HabitHeatmapWidgetDay?] = Array(paddedDays.suffix(7 * 18))
+                HStack(spacing: 14) {
+                    VStack(alignment: .leading, spacing: 10) {
+                        header(accent: accent, compact: false)
+                        Spacer(minLength: 0)
+                    }
+                    .frame(width: 108, alignment: .topLeading)
 
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(snapshot.habitName)
-                        .font(.system(size: family == .systemSmall ? 14 : 16, weight: .semibold, design: .rounded))
-                        .foregroundStyle(.white)
-                        .lineLimit(1)
-                    Text("\(snapshot.currentStreak) day streak")
-                        .font(.system(size: family == .systemSmall ? 11 : 12, weight: .medium, design: .rounded))
-                        .foregroundStyle(Color.white.opacity(0.62))
-                        .lineLimit(1)
+                    CompactWidgetHeatmap(
+                        days: visibleDays,
+                        accent: accent,
+                        horizontalSpacing: 2,
+                        verticalSpacing: 3,
+                        horizontalPadding: 0,
+                        verticalPadding: 0,
+                        minCellWidth: 7,
+                        maxCellWidth: 10,
+                        minCellHeight: 8,
+                        maxCellHeight: 11,
+                        isCompleted: { $0.isCompleted },
+                        isToday: { $0.isToday }
+                    )
+                    .frame(maxWidth: .infinity)
                 }
-
-                Spacer()
             }
-
-            CompactWidgetHeatmap(
-                days: visibleDays,
-                accent: accent,
-                horizontalSpacing: family == .systemSmall ? 3 : 2,
-                verticalSpacing: family == .systemSmall ? 3 : 3,
-                horizontalPadding: 0,
-                verticalPadding: 0,
-                minCellWidth: family == .systemSmall ? 8 : 6,
-                maxCellWidth: family == .systemSmall ? 12 : 9,
-                minCellHeight: family == .systemSmall ? 8 : 7,
-                maxCellHeight: family == .systemSmall ? 12 : 10,
-                isCompleted: { $0.isCompleted },
-                isToday: { $0.isToday }
-            )
         }
         .padding(family == .systemSmall ? 14 : 16)
         .containerBackground(for: .widget) {
@@ -59,6 +65,33 @@ struct HabitWidgetCardView: View {
             )
         }
     }
++
++    @ViewBuilder
++    private func header(accent: Color, compact: Bool) -> some View {
++        HStack(spacing: 10) {
++            ZStack {
++                RoundedRectangle(cornerRadius: 10, style: .continuous)
++                    .fill(accent.opacity(0.16))
++                    .frame(width: compact ? 28 : 32, height: compact ? 28 : 32)
++                Image(systemName: snapshot.habitIcon)
++                    .font(.system(size: compact ? 13 : 15, weight: .semibold))
++                    .foregroundStyle(accent)
++            }
++
++            VStack(alignment: .leading, spacing: 2) {
++                Text(snapshot.habitName)
++                    .font(.system(size: compact ? 14 : 16, weight: .semibold, design: .rounded))
++                    .foregroundStyle(.white)
++                    .lineLimit(1)
++                Text("\(snapshot.currentStreak) day streak")
++                    .font(.system(size: compact ? 11 : 12, weight: .medium, design: .rounded))
++                    .foregroundStyle(Color.white.opacity(0.62))
++                    .lineLimit(1)
++            }
++
++            if compact { Spacer() }
++        }
++    }
 }
 
 struct CompactWidgetHeatmap<Day>: View {
@@ -100,13 +133,15 @@ struct CompactWidgetHeatmap<Day>: View {
                                     }
                                     .frame(width: cellWidth, height: cellHeight)
                             } else {
-                                Color.clear.frame(width: cellWidth, height: cellHeight)
+                                RoundedRectangle(cornerRadius: radius, style: .continuous)
+                                    .fill(Color.white.opacity(0.04))
+                                    .frame(width: cellWidth, height: cellHeight)
                             }
                         }
                     }
                 }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
             .padding(.horizontal, horizontalPadding)
             .padding(.vertical, verticalPadding)
         }

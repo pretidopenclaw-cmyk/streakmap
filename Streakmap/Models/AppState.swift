@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
 import SwiftData
+import WidgetKit
 
 @MainActor
 final class AppState: ObservableObject {
@@ -105,6 +106,7 @@ final class AppState: ObservableObject {
         if let habitSnapshot = WidgetDataBuilder.buildHabitSnapshot(from: self) {
             WidgetStorage.saveHabitSnapshot(habitSnapshot)
         }
+        WidgetCenter.shared.reloadAllTimelines()
         syncToSwiftData()
     }
 

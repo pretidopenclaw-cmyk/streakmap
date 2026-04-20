@@ -137,7 +137,7 @@ struct CompactWidgetHeatmap<Day>: View {
                     }
                 }
             }
-            .frame(width: availableWidth, maxHeight: .infinity, alignment: .leading)
+            .frame(maxWidth: availableWidth, maxHeight: .infinity, alignment: .leading)
             .padding(.horizontal, horizontalPadding)
             .padding(.vertical, verticalPadding)
         }

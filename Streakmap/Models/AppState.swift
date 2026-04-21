@@ -27,7 +27,11 @@ final class AppState: ObservableObject {
         if let storedEntries = PersistenceService.load([HabitEntry].self, forKey: AppStorageKeys.entries) {
             initialEntries = storedEntries
         } else {
+            #if DEBUG
             initialEntries = AppState.makeSampleEntries(for: initialHabits)
+            #else
+            initialEntries = []
+            #endif
         }
 
         let fallbackID = initialHabits.first(where: { !$0.isArchived })?.id
@@ -360,6 +364,7 @@ final class AppState: ObservableObject {
         entries.first(where: { $0.habitID == habitID && Calendar.current.isDate($0.date, inSameDayAs: date) })
     }
 
+    #if DEBUG
     private static func makeSampleEntries(for habits: [Habit]) -> [HabitEntry] {
         var items: [HabitEntry] = []
         let calendar = Calendar.current
@@ -373,4 +378,5 @@ final class AppState: ObservableObject {
         }
         return items
     }
+    #endif
 }

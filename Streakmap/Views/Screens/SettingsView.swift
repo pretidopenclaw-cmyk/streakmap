@@ -84,6 +84,7 @@ struct SettingsView: View {
                         }
                     }
 
+                    #if DEBUG
                     SectionCard {
                         VStack(alignment: .leading, spacing: 12) {
                             SectionTitleRow(title: "Developer", subtitle: "Useful controls for local testing during MVP iteration.")
@@ -95,8 +96,21 @@ struct SettingsView: View {
                                 }
                             ))
                             .font(.system(size: 16, weight: .medium, design: .rounded))
+
+                            Button {
+                                generateDemoData()
+                            } label: {
+                                Text("Generate demo data")
+                                    .font(.system(size: 16, weight: .medium, design: .rounded))
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.vertical, 10)
+                                    .background(StreakmapTheme.accent.opacity(0.15))
+                                    .foregroundStyle(StreakmapTheme.accent)
+                                    .cornerRadius(10)
+                            }
                         }
                     }
+                    #endif
 
                     SectionCard {
                         VStack(alignment: .leading, spacing: 12) {

@@ -43,105 +43,78 @@ struct StreakmapWidgetProvider: TimelineProvider {
     }
 }
 
+// MARK: - Widget View
+
 struct StreakmapWidgetView: View {
     var entry: StreakmapWidgetProvider.Entry
-    @Environment(\.widgetRenderingMode) private var renderingMode
 
     var body: some View {
         let accent = Color(hex: entry.snapshot.accentHex)
-        let days = padded(entry.snapshot.days)
-        let isAccented = renderingMode == .accented
+        let paddedDays = paddedGlobal(entry.snapshot.days)
 
-        VStack(alignment: .leading, spacing: 14) {
-            HStack(alignment: .center, spacing: 12) {
+        VStack(alignment: .leading, spacing: 10) {
+            // Header — matches habit widget style
+            HStack(spacing: 10) {
                 ZStack {
-                    RoundedRectangle(cornerRadius: 12, style: .continuous)
-                        .fill(isAccented ? Color.primary.opacity(0.10) : accent.opacity(0.16))
-                        .frame(width: 36, height: 36)
-                    Image(systemName: "globe.europe.africa.fill")
-                        .font(.system(size: 16, weight: .semibold))
-                        .foregroundStyle(isAccented ? Color.primary : accent)
+                    RoundedRectangle(cornerRadius: 9, style: .continuous)
+                        .fill(accent.opacity(0.18))
+                        .frame(width: 30, height: 30)
+                    Image(systemName: "square.grid.3x3.fill")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundStyle(accent)
+                        .widgetAccentable()
                 }
 
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("Global heatmap")
-                        .font(.system(size: 18, weight: .semibold, design: .rounded))
-                        .foregroundStyle(isAccented ? Color.primary : .white)
+                VStack(alignment: .leading, spacing: 1) {
+                    Text("Your year")
+                        .font(.system(size: 16, weight: .semibold, design: .rounded))
+                        .foregroundStyle(.white)
                         .lineLimit(1)
-                    Text(entry.snapshot.subtitle)
-                        .font(.system(size: 12, weight: .medium, design: .rounded))
-                        .foregroundStyle(isAccented ? Color.primary.opacity(0.7) : Color.white.opacity(0.62))
+                    Text("\(entry.snapshot.completedToday)/\(entry.snapshot.totalHabits) completed today")
+                        .font(.system(size: 11, weight: .medium, design: .rounded))
+                        .foregroundStyle(Color.white.opacity(0.55))
                         .lineLimit(1)
                 }
 
                 Spacer(minLength: 0)
-
-                HStack(spacing: 8) {
-                    statPill(value: "\(entry.snapshot.completedToday)", label: "today", accented: isAccented)
-                    statPill(value: "\(entry.snapshot.totalHabits)", label: "habits", accented: isAccented)
-                }
             }
 
-            GlobalWidgetHeatmap(days: days, accent: accent, isAccented: isAccented)
-                .frame(maxWidth: .infinity, minHeight: 120, maxHeight: 120, alignment: .leading)
+            // Heatmap — fills all remaining space (same as habit widget)
+            FillingGlobalHeatmap(days: paddedDays, accent: accent)
         }
-        .padding(16)
+        .padding(.horizontal, 14)
+        .padding(.top, 14)
+        .padding(.bottom, 14)
         .containerBackground(for: .widget) {
-            if isAccented {
-                Color.clear
-            } else {
-                LinearGradient(
-                    colors: [Color(red: 0.12, green: 0.12, blue: 0.14), Color(red: 0.09, green: 0.09, blue: 0.11)],
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-            }
+            LinearGradient(
+                colors: [
+                    Color(red: 0.12, green: 0.12, blue: 0.14),
+                    Color(red: 0.08, green: 0.08, blue: 0.10)
+                ],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
         }
-    }
-
-    private func statPill(value: String, label: String, accented: Bool) -> some View {
-        VStack(alignment: .leading, spacing: 1) {
-            Text(value)
-                .font(.system(size: 14, weight: .semibold, design: .rounded))
-                .foregroundStyle(accented ? Color.primary : .white)
-            Text(label)
-                .font(.system(size: 10, weight: .medium, design: .rounded))
-                .foregroundStyle(accented ? Color.primary.opacity(0.7) : Color.white.opacity(0.55))
-        }
-        .padding(.horizontal, 10)
-        .padding(.vertical, 7)
-        .background(accented ? Color.primary.opacity(0.08) : Color.white.opacity(0.06))
-        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-    }
-
-    private func padded(_ days: [GlobalHeatmapWidgetDay]) -> [GlobalHeatmapWidgetDay?] {
-        guard let first = days.first else { return [] }
-        let weekday = Calendar.current.component(.weekday, from: first.date)
-        let leadingPadding = (weekday + 5) % 7
-        var result: [GlobalHeatmapWidgetDay?] = Array(repeating: nil, count: leadingPadding)
-        result.append(contentsOf: days)
-        while result.count % 7 != 0 {
-            result.append(nil)
-        }
-        return result
     }
 }
 
-struct GlobalWidgetHeatmap: View {
+// MARK: - Filling Heatmap (same approach as habit widget FillingWidgetHeatmap)
+
+struct FillingGlobalHeatmap: View {
     let days: [GlobalHeatmapWidgetDay?]
     let accent: Color
-    let isAccented: Bool
 
     var body: some View {
         GeometryReader { geometry in
             let weekCount = max(days.count / 7, 1)
-            let availableWidth = max(0, geometry.size.width)
-            let availableHeight = max(0, geometry.size.height)
-            let horizontalSpacing: CGFloat = 2
-            let verticalSpacing: CGFloat = 2
-            let rawCellWidth = (availableWidth - (CGFloat(weekCount - 1) * horizontalSpacing)) / CGFloat(weekCount)
-            let cellWidth = max(4, rawCellWidth)
-            let cellHeight = max(8, min(14, (availableHeight - (6 * verticalSpacing)) / 7))
+            let horizontalSpacing: CGFloat = 2.5
+            let verticalSpacing: CGFloat = 2.5
+            let w = geometry.size.width
+            let h = geometry.size.height
+
+            // Independent width & height — fills 100% of available space
+            let cellWidth = max(0, (w - CGFloat(weekCount - 1) * horizontalSpacing) / CGFloat(weekCount))
+            let cellHeight = max(0, (h - 6 * verticalSpacing) / 7)
             let radius = min(cellWidth, cellHeight) * 0.28
 
             HStack(alignment: .top, spacing: horizontalSpacing) {
@@ -150,43 +123,88 @@ struct GlobalWidgetHeatmap: View {
                         ForEach(0..<7, id: \.self) { weekday in
                             let index = week * 7 + weekday
                             if index < days.count, let day = days[index] {
-                                RoundedRectangle(cornerRadius: radius, style: .continuous)
-                                    .fill(color(for: day, accent: accent))
-                                    .overlay {
-                                        if day.isToday {
-                                            RoundedRectangle(cornerRadius: radius, style: .continuous)
-                                                .stroke((isAccented ? Color.primary : Color.white).opacity(0.82), lineWidth: 0.8)
-                                        }
-                                    }
-                                    .frame(width: cellWidth, height: cellHeight)
+                                cellView(for: day, width: cellWidth, height: cellHeight, radius: radius)
                             } else {
                                 RoundedRectangle(cornerRadius: radius, style: .continuous)
-                                    .fill(isAccented ? Color.primary.opacity(0.05) : Color.white.opacity(0.04))
+                                    .fill(Color.white.opacity(0.03))
                                     .frame(width: cellWidth, height: cellHeight)
                             }
                         }
                     }
                 }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+            .frame(width: w, height: h, alignment: .topLeading)
         }
     }
 
-    private func color(for day: GlobalHeatmapWidgetDay, accent: Color) -> Color {
+    @ViewBuilder
+    private func cellView(for day: GlobalHeatmapWidgetDay, width: CGFloat, height: CGFloat, radius: CGFloat) -> some View {
+        let filled = day.completionRate > 0
+
+        RoundedRectangle(cornerRadius: radius, style: .continuous)
+            .fill(
+                filled
+                ? LinearGradient(
+                    colors: [accent.opacity(opacity(for: day)), accent.opacity(opacity(for: day) * 0.82)],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                  )
+                : LinearGradient(
+                    colors: [Color.white.opacity(0.08), Color.white.opacity(0.05)],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                  )
+            )
+            .overlay {
+                if day.isToday {
+                    RoundedRectangle(cornerRadius: radius, style: .continuous)
+                        .stroke(Color.white.opacity(0.9), lineWidth: 1.1)
+                }
+            }
+            .frame(width: width, height: height)
+            .widgetAccentableIf(filled)
+    }
+
+    private func opacity(for day: GlobalHeatmapWidgetDay) -> Double {
         switch day.completionRate {
-        case 0:
-            return isAccented ? Color.primary.opacity(0.12) : Color.white.opacity(0.10)
         case 0..<0.26:
-            return isAccented ? Color.primary.opacity(0.35) : accent.opacity(0.32)
+            return 0.35
         case 0..<0.51:
-            return isAccented ? Color.primary.opacity(0.52) : accent.opacity(0.52)
+            return 0.55
         case 0..<0.76:
-            return isAccented ? Color.primary.opacity(0.75) : accent.opacity(0.76)
+            return 0.78
         default:
-            return isAccented ? Color.primary : accent
+            return 1.0
         }
     }
 }
+
+// MARK: - Helpers
+
+private extension View {
+    @ViewBuilder
+    func widgetAccentableIf(_ condition: Bool) -> some View {
+        if condition {
+            self.widgetAccentable()
+        } else {
+            self
+        }
+    }
+}
+
+private func paddedGlobal(_ days: [GlobalHeatmapWidgetDay]) -> [GlobalHeatmapWidgetDay?] {
+    guard let first = days.first else { return [] }
+    let weekday = Calendar.current.component(.weekday, from: first.date)
+    let leadingPadding = (weekday + 5) % 7
+    var result: [GlobalHeatmapWidgetDay?] = Array(repeating: nil, count: leadingPadding)
+    result.append(contentsOf: days)
+    while result.count % 7 != 0 {
+        result.append(nil)
+    }
+    return result
+}
+
+// MARK: - Widget Configuration
 
 struct StreakmapWidget: Widget {
     let kind: String = "StreakmapWidget"

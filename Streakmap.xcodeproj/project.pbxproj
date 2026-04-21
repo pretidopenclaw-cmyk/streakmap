@@ -18,7 +18,6 @@
 		A00100010000000100000006 /* HabitColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000006 /* HabitColor.swift */; };
 		A00100010000000100000007 /* HabitEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000007 /* HabitEntry.swift */; };
 		A00100010000000100000008 /* HapticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000008 /* HapticService.swift */; };
-		A00100010000000100000009 /* PremiumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200010000000100000009 /* PremiumService.swift */; };
 		A0010001000000010000000A /* ReminderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000000A /* ReminderService.swift */; };
 		A0010001000000010000000B /* GlobalHeatmapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000000B /* GlobalHeatmapView.swift */; };
 		A0010001000000010000000C /* HabitCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0020001000000010000000C /* HabitCard.swift */; };
@@ -114,7 +113,6 @@
 		A00200010000000100000006 /* HabitColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitColor.swift; sourceTree = "<group>"; };
 		A00200010000000100000007 /* HabitEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitEntry.swift; sourceTree = "<group>"; };
 		A00200010000000100000008 /* HapticService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticService.swift; sourceTree = "<group>"; };
-		A00200010000000100000009 /* PremiumService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumService.swift; sourceTree = "<group>"; };
 		A0020001000000010000000A /* ReminderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderService.swift; sourceTree = "<group>"; };
 		A0020001000000010000000B /* GlobalHeatmapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalHeatmapView.swift; sourceTree = "<group>"; };
 		A0020001000000010000000C /* HabitCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCard.swift; sourceTree = "<group>"; };
@@ -274,7 +272,6 @@
 			children = (
 				A00200010000000100000008 /* HapticService.swift */,
 				A0020001000000010000001E /* PersistenceService.swift */,
-				A00200010000000100000009 /* PremiumService.swift */,
 				A0020001000000010000000A /* ReminderService.swift */,
 				A0040001000000010000000D /* StoreKit */,
 				A00200010000000100000027 /* SwiftDataBootstrapService.swift */,
@@ -543,7 +540,6 @@
 				A00100010000000100000013 /* InsightsView.swift in Sources */,
 				A00100010000000100000031 /* OnboardingFlowView.swift in Sources */,
 				A00100010000000100000014 /* OnboardingView.swift in Sources */,
-				A00100010000000100000009 /* PremiumService.swift in Sources */,
 				A00100010000000100000015 /* PremiumView.swift in Sources */,
 				A0010001000000010000001D /* PersistenceService.swift in Sources */,
 				A0010001000000010000000A /* ReminderService.swift in Sources */,

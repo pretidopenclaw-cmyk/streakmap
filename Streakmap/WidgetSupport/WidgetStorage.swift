@@ -3,6 +3,7 @@ import Foundation
 enum WidgetStorage {
     static let globalSnapshotKey = "streakmap.widget.globalSnapshot"
     static let habitSnapshotKey = "streakmap.widget.habitSnapshot"
+    static let allHabitSnapshotsKey = "streakmap.widget.allHabitSnapshots"
 
     private static var defaults: UserDefaults {
         UserDefaults(suiteName: WidgetConfig.appGroupID) ?? .standard
@@ -34,5 +35,19 @@ enum WidgetStorage {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
         return try? decoder.decode(HabitHeatmapWidgetSnapshot.self, from: data)
+    }
+
+    static func saveAllHabitSnapshots(_ snapshots: [HabitHeatmapWidgetSnapshot]) {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        guard let data = try? encoder.encode(snapshots) else { return }
+        defaults.set(data, forKey: allHabitSnapshotsKey)
+    }
+
+    static func loadAllHabitSnapshots() -> [HabitHeatmapWidgetSnapshot] {
+        guard let data = defaults.data(forKey: allHabitSnapshotsKey) else { return [] }
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        return (try? decoder.decode([HabitHeatmapWidgetSnapshot].self, from: data)) ?? []
     }
 }

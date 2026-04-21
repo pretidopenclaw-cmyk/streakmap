@@ -103,6 +103,8 @@ final class AppState: ObservableObject {
         PersistenceService.saveBool(hasCompletedOnboarding, forKey: AppStorageKeys.hasCompletedOnboarding)
         PersistenceService.saveString(globalHeatmapColorHex, forKey: "streakmap.globalHeatmapColorHex")
         WidgetStorage.saveGlobalSnapshot(WidgetDataBuilder.buildGlobalSnapshot(from: self))
+        let allHabitSnapshots = WidgetDataBuilder.buildAllHabitSnapshots(from: self)
+        WidgetStorage.saveAllHabitSnapshots(allHabitSnapshots)
         if let habitSnapshot = WidgetDataBuilder.buildHabitSnapshot(from: self) {
             WidgetStorage.saveHabitSnapshot(habitSnapshot)
         }

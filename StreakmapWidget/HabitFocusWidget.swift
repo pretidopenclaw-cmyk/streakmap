@@ -6,21 +6,33 @@ struct HabitFocusWidgetEntry: TimelineEntry {
     let snapshot: HabitHeatmapWidgetSnapshot
 }
 
-struct HabitFocusWidgetProvider: TimelineProvider {
+struct HabitFocusWidgetProvider: AppIntentTimelineProvider {
     func placeholder(in context: Context) -> HabitFocusWidgetEntry {
         HabitFocusWidgetEntry(date: .now, snapshot: previewSnapshot)
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (HabitFocusWidgetEntry) -> Void) {
-        let snapshot = WidgetStorage.loadHabitSnapshot() ?? previewSnapshot
-        completion(HabitFocusWidgetEntry(date: .now, snapshot: snapshot))
+    func snapshot(for configuration: HabitSelectionIntent, in context: Context) async -> HabitFocusWidgetEntry {
+        let snapshot = resolveSnapshot(for: configuration)
+        return HabitFocusWidgetEntry(date: .now, snapshot: snapshot)
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<HabitFocusWidgetEntry>) -> Void) {
-        let snapshot = WidgetStorage.loadHabitSnapshot() ?? previewSnapshot
+    func timeline(for configuration: HabitSelectionIntent, in context: Context) async -> Timeline<HabitFocusWidgetEntry> {
+        let snapshot = resolveSnapshot(for: configuration)
         let entry = HabitFocusWidgetEntry(date: .now, snapshot: snapshot)
         let next = Calendar.current.date(byAdding: .minute, value: 30, to: .now) ?? .now.addingTimeInterval(1800)
-        completion(Timeline(entries: [entry], policy: .after(next)))
+        return Timeline(entries: [entry], policy: .after(next))
+    }
+
+    private func resolveSnapshot(for configuration: HabitSelectionIntent) -> HabitHeatmapWidgetSnapshot {
+        let allSnapshots = WidgetStorage.loadAllHabitSnapshots()
+        if let selectedHabit = configuration.habit,
+           let match = allSnapshots.first(where: { $0.habitID == selectedHabit.id }) {
+            return match
+        }
+        // Fallback: first available snapshot, then legacy single snapshot, then preview
+        return allSnapshots.first
+            ?? WidgetStorage.loadHabitSnapshot()
+            ?? previewSnapshot
     }
 
     private var previewSnapshot: HabitHeatmapWidgetSnapshot {
@@ -51,8 +63,9 @@ struct HabitFocusWidget: Widget {
     let kind: String = "HabitFocusWidget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: HabitFocusWidgetProvider()) { entry in
+        AppIntentConfiguration(kind: kind, intent: HabitSelectionIntent.self, provider: HabitFocusWidgetProvider()) { entry in
             HabitWidgetCardView(snapshot: entry.snapshot)
+                .widgetURL(URL(string: "streakmap://habit/\(entry.snapshot.habitID.uuidString)"))
         }
         .configurationDisplayName("Habit Focus")
         .description("A premium card for one habit.")

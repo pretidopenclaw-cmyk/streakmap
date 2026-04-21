@@ -13,6 +13,5 @@ struct StreakmapWidgetBundle: WidgetBundle {
     var body: some Widget {
         StreakmapWidget()
         HabitFocusWidget()
-        StreakmapWidgetControl()
     }
 }

@@ -71,7 +71,7 @@
         --radius-xl: 28px;
         --max: 1180px;
       }
-      * { box-sizing: border-box; }
+      * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
       html { scroll-behavior: smooth; }
       body {
         margin: 0;
@@ -105,6 +105,7 @@
       h1 { margin: 20px 0 18px; font-size: clamp(42px, 6vw, 74px); line-height: 0.96; letter-spacing: -0.045em; }
       .hero p { font-size: 19px; line-height: 1.7; color: var(--muted); max-width: 640px; }
       .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 30px; }
+      .hero-secondary-link { display: none; color: var(--text); text-decoration: underline; text-underline-offset: 4px; font-weight: 600; margin-top: 14px; }
       .waitlist-form { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; max-width: 560px; }
       .waitlist-form input { flex: 1 1 260px; min-height: 54px; border-radius: 999px; border: 1px solid rgba(21,21,36,0.08); background: rgba(255,255,255,0.86); padding: 0 18px; font: inherit; color: var(--text); box-shadow: 0 12px 24px rgba(25,19,53,0.06); }
       .waitlist-form button { min-height: 54px; padding: 0 22px; border: 0; border-radius: 999px; font: inherit; font-weight: 700; color: white; background: linear-gradient(135deg, var(--orange), var(--red)); box-shadow: 0 16px 30px rgba(255,107,87,0.24); cursor: pointer; }
@@ -139,15 +140,45 @@
       details.faq-item summary::-webkit-details-marker { display: none; }
       details.faq-item .faq-answer { margin-top: 12px; color: var(--muted); line-height: 1.75; }
       .builder-card { display: grid; grid-template-columns: 100px 1fr; gap: 22px; align-items: start; max-width: 900px; margin: 0 auto; }
-      .builder-avatar { width: 96px; height: 96px; border-radius: 999px; background: linear-gradient(135deg, var(--teal), var(--yellow), var(--red)); display: grid; place-items: center; color: white; font-size: 32px; font-weight: 800; box-shadow: 0 18px 30px rgba(255,107,87,0.18); }
+      .builder-avatar { width: 96px; height: 96px; border-radius: 999px; background: rgba(21,21,36,0.06); display: grid; place-items: center; color: var(--text); font-size: 28px; font-weight: 800; box-shadow: 0 18px 30px rgba(21,21,36,0.08); }
       .builder-links { margin-top: 14px; color: var(--muted); display: flex; gap: 10px; flex-wrap: wrap; }
       .cta-block { border-radius: 34px; padding: 34px; background: radial-gradient(circle at 10% 18%, rgba(84,210,165,0.30), transparent 24%), radial-gradient(circle at 50% 18%, rgba(255,215,94,0.28), transparent 26%), radial-gradient(circle at 88% 18%, rgba(255,94,98,0.30), transparent 24%), linear-gradient(135deg, #ff9f43, #ff5e62); color: white; text-align: center; box-shadow: 0 26px 60px rgba(255,107,87,0.26); }
       .cta-block p { color: rgba(255,255,255,0.82); max-width: 680px; margin: 14px auto 18px; line-height: 1.75; }
       .cta-block .waitlist-form { margin: 18px auto 0; justify-content: center; }
+      .sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; padding: 12px 16px; background: rgba(255,255,255,0.9); backdrop-filter: blur(12px); border-top: 1px solid rgba(0,0,0,0.06); display: none; justify-content: space-between; align-items: center; z-index: 50; box-shadow: 0 -10px 30px rgba(21,21,36,0.08); }
+      .sticky-cta button { border: 0; border-radius: 999px; min-height: 42px; padding: 0 16px; background: linear-gradient(135deg, var(--orange), var(--red)); color: white; font: inherit; font-weight: 700; }
       .footer { padding: 34px 0 60px; color: var(--muted); font-size: 14px; }
       .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+      @media (hover: none) {
+        button:active,
+        a:active,
+        .feature-card:active { transform: scale(0.98); transition: transform 0.1s ease; }
+      }
       @media (max-width: 1080px) { .hero-grid, .problem-grid, .benefits-grid, .steps, .builder-card { grid-template-columns: 1fr; } .phone-stack { min-height: 620px; max-width: 640px; margin: 0 auto; } }
-      @media (max-width: 760px) { .nav-links { display: none; } .hero { padding-top: 34px; } .phone-stack { min-height: 520px; } .phone { width: 220px; } .phone.front { left: 0; } .phone.back { right: 0; top: 88px; } .screen { min-height: 440px; } .hero-actions, .waitlist-form { flex-direction: column; } .btn, .waitlist-form button, .waitlist-form input { width: 100%; } }
+      @media (max-width: 640px) {
+        .section { padding-top: 48px; padding-bottom: 48px; }
+        .hero { padding-top: 24px; padding-bottom: 32px; }
+        #cta.section { padding-top: 56px; padding-bottom: 56px; }
+        .nav-links { display: none; }
+        .hero-grid { gap: 26px; }
+        .phone-stack { min-height: 410px; }
+        .phone { width: min(65vw, 270px); position: relative; left: auto; right: auto; top: auto; transform: none; margin: 0 auto; }
+        .phone.back { display: none; }
+        .screen { min-height: 420px; }
+        .hero-actions { display: none; }
+        .hero-secondary-link { display: inline-block; }
+        .waitlist-form { flex-direction: column; }
+        .waitlist-form button, .waitlist-form input { width: 100%; }
+        .feature-card, .step-card, .faq-item, .builder-card, .visual-placeholder { padding: 20px; }
+        .problem-grid, .benefits-grid, .steps, .placeholder-stack { grid-template-columns: 1fr; }
+        .icon-badge { width: auto; height: auto; border-radius: 999px; padding: 4px 8px; font-size: 13px; }
+        .feature-card h3 { margin-top: 10px; }
+        .builder-card { gap: 16px; }
+        .builder-avatar { width: 80px; height: 80px; font-size: 24px; }
+        .builder-links a { min-height: 44px; display: inline-flex; align-items: center; }
+        .sticky-cta { display: flex; }
+        body { padding-bottom: 76px; }
+      }
     </style>
   </head>
   <body>
@@ -175,11 +206,12 @@
               <a href="#cta" class="btn btn-primary">Join the waitlist</a>
               <a href="#showcase" class="btn btn-secondary">See the product</a>
             </div>
-            <form class="waitlist-form" action="https://formspree.io/f/mrerannz" method="POST">
+            <form id="hero-waitlist-form" class="waitlist-form" action="https://formspree.io/f/mrerannz" method="POST">
               <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" aria-label="Your email address" />
               <button type="submit">Join the waitlist</button>
               <p class="form-hint">No spam. Just one email when Streakmap launches.</p>
             </form>
+            <a href="#showcase" class="hero-secondary-link">See the product →</a>
           </div>
           <div class="phone-stack" aria-label="Streakmap app previews">
             <div class="phone front"><div class="screen" style="padding:0; background:#f4f1ef;"><img class="screenshot" src="./assets/home-screen.jpg" alt="Streakmap home screen with yearly heatmap and habit cards" /></div></div>
@@ -256,7 +288,7 @@
       <section class="section">
         <div class="container">
           <div class="builder-card">
-            <div class="builder-avatar">D</div>
+            <div class="builder-avatar">DP</div>
             <div>
               <div class="eyebrow">Built by one person</div>
               <h3>Hi, I’m David.</h3>
@@ -299,11 +331,33 @@
       </section>
     </main>
 
+    <div id="sticky-cta" class="sticky-cta" hidden>
+      <span>Be the first to try Streakmap</span>
+      <button type="button" onclick="document.getElementById('hero-waitlist-form').scrollIntoView({behavior:'smooth', block:'center'});">Join →</button>
+    </div>
+
     <footer class="footer">
       <div class="container footer-inner">
         <div>© 2026 Streakmap. Built for consistency.</div>
         <div><a href="./privacy.html">Privacy Policy</a> · Heatmaps, streaks, and premium iPhone widgets.</div>
       </div>
     </footer>
+    <script>
+      const stickyCta = document.getElementById('sticky-cta');
+      const finalCta = document.getElementById('cta');
+      const updateSticky = () => {
+        if (window.innerWidth > 640) {
+          stickyCta.hidden = true;
+          return;
+        }
+        const pastHero = window.scrollY > 600;
+        const finalRect = finalCta.getBoundingClientRect();
+        const finalVisible = finalRect.top < window.innerHeight && finalRect.bottom > 0;
+        stickyCta.hidden = !(pastHero && !finalVisible);
+      };
+      window.addEventListener('scroll', updateSticky, { passive: true });
+      window.addEventListener('resize', updateSticky);
+      updateSticky();
+    </script>
   </body>
 </html>

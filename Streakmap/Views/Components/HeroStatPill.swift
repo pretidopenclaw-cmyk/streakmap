@@ -15,7 +15,7 @@ struct HeroStatPill: View {
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 12)
-        .background(Color.white.opacity(0.88))
+        .background(StreakmapTheme.card.opacity(0.88))
         .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
     }
 }

@@ -15,7 +15,7 @@ struct InsightStatCard: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(16)
-        .background(Color.white)
+        .background(StreakmapTheme.card)
         .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
     }
 }

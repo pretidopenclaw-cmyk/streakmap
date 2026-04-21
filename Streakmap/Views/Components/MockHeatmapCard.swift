@@ -29,7 +29,7 @@ struct MockHeatmapCard: View {
             .frame(height: 110)
         }
         .padding(20)
-        .background(Color.white)
+        .background(StreakmapTheme.card)
         .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
         .shadow(color: StreakmapTheme.shadow, radius: 18, x: 0, y: 10)
     }

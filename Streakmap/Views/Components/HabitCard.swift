@@ -30,7 +30,7 @@ struct HabitCard: View {
                 .foregroundStyle(StreakmapTheme.textSecondary.opacity(0.7))
         }
         .padding(18)
-        .background(Color.white)
+        .background(StreakmapTheme.card)
         .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
     }
 }

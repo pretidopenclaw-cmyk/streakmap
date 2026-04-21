@@ -31,7 +31,7 @@ struct PlanComparisonCard: View {
             }
         }
         .padding(18)
-        .background(Color.white)
+        .background(StreakmapTheme.card)
         .overlay(
             RoundedRectangle(cornerRadius: 24, style: .continuous)
                 .stroke(isHighlighted ? StreakmapTheme.accent : Color.clear, lineWidth: 2)

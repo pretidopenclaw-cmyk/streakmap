@@ -20,7 +20,7 @@ struct EmptyStateCard: View {
         }
         .frame(maxWidth: .infinity)
         .padding(24)
-        .background(Color.white)
+        .background(StreakmapTheme.card)
         .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
     }
 }

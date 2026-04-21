@@ -33,7 +33,7 @@ struct PricingCard: View {
         }
         .padding(18)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color.white)
+        .background(StreakmapTheme.card)
         .overlay(
             RoundedRectangle(cornerRadius: 24, style: .continuous)
                 .stroke(isHighlighted ? StreakmapTheme.accent : Color.clear, lineWidth: 2)

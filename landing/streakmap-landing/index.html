@@ -31,16 +31,19 @@
     />
     <style>
       :root {
-        --bg: #f6f4ff;
+        --bg: #f7f8fb;
         --surface: rgba(255, 255, 255, 0.8);
         --surface-strong: #ffffff;
         --text: #151524;
         --muted: #67677c;
         --border: rgba(31, 24, 59, 0.08);
-        --primary: #7c3aed;
-        --primary-strong: #6d28d9;
-        --primary-soft: rgba(124, 58, 237, 0.1);
-        --success: #22c55e;
+        --primary: #ff6b57;
+        --primary-strong: #ef4444;
+        --primary-soft: rgba(255, 107, 87, 0.12);
+        --teal: #54d2a5;
+        --yellow: #ffd75e;
+        --orange: #ff9f43;
+        --red: #ff5e62;
         --shadow: 0 24px 60px rgba(34, 20, 84, 0.12);
         --radius-xl: 28px;
         --radius-lg: 22px;
@@ -61,9 +64,11 @@
         font-family: "Inter", system-ui, sans-serif;
         color: var(--text);
         background:
-          radial-gradient(circle at top left, rgba(124, 58, 237, 0.18), transparent 32%),
-          radial-gradient(circle at top right, rgba(59, 130, 246, 0.14), transparent 24%),
-          var(--bg);
+          radial-gradient(circle at 14% 14%, rgba(84, 210, 165, 0.34), transparent 26%),
+          radial-gradient(circle at 50% 10%, rgba(255, 215, 94, 0.34), transparent 28%),
+          radial-gradient(circle at 82% 16%, rgba(255, 94, 98, 0.30), transparent 24%),
+          radial-gradient(circle at 84% 76%, rgba(255, 159, 67, 0.22), transparent 24%),
+          linear-gradient(180deg, #fbfbfd 0%, #f7f8fb 100%);
         -webkit-font-smoothing: antialiased;
       }
 
@@ -113,8 +118,8 @@
         display: grid;
         place-items: center;
         color: white;
-        background: linear-gradient(135deg, #8b5cf6, #6d28d9);
-        box-shadow: 0 12px 24px rgba(124, 58, 237, 0.26);
+        background: linear-gradient(135deg, var(--teal), var(--yellow), var(--red));
+        box-shadow: 0 12px 24px rgba(255, 107, 87, 0.24);
         font-size: 18px;
       }
 
@@ -139,9 +144,9 @@
       }
 
       .btn-primary {
-        background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+        background: linear-gradient(135deg, var(--orange), var(--red));
         color: white;
-        box-shadow: 0 16px 30px rgba(109, 40, 217, 0.22);
+        box-shadow: 0 16px 30px rgba(255, 107, 87, 0.24);
       }
 
       .btn-primary:hover {
@@ -234,8 +239,11 @@
         border-radius: 30px;
         overflow: hidden;
         background:
-          radial-gradient(circle at top left, rgba(124, 58, 237, 0.3), transparent 35%),
-          linear-gradient(180deg, #15131d, #0f1016);
+          radial-gradient(circle at 10% 12%, rgba(84, 210, 165, 0.72), transparent 34%),
+          radial-gradient(circle at 48% 8%, rgba(255, 215, 94, 0.68), transparent 34%),
+          radial-gradient(circle at 88% 14%, rgba(255, 94, 98, 0.72), transparent 30%),
+          radial-gradient(circle at 78% 60%, rgba(255, 159, 67, 0.48), transparent 28%),
+          linear-gradient(180deg, rgba(255,255,255,0.36), rgba(255,255,255,0.18));
         padding: 20px;
         color: white;
       }
@@ -268,6 +276,9 @@
         border-radius: 28px;
         padding: 26px;
         margin-top: 18px;
+        background: rgba(255, 255, 255, 0.18);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        box-shadow: 0 22px 40px rgba(255, 107, 87, 0.12);
       }
 
       .widget-head {
@@ -301,13 +312,14 @@
       .cell {
         aspect-ratio: 1;
         border-radius: 7px;
-        background: rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.16);
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12);
       }
 
-      .c1 { background: rgba(124, 58, 237, 0.28); }
-      .c2 { background: rgba(124, 58, 237, 0.46); }
-      .c3 { background: rgba(124, 58, 237, 0.72); }
-      .c4 { background: #8b5cf6; }
+      .c1 { background: rgba(84, 210, 165, 0.50); }
+      .c2 { background: rgba(255, 215, 94, 0.68); }
+      .c3 { background: rgba(255, 159, 67, 0.84); }
+      .c4 { background: rgba(255, 94, 98, 0.96); }
 
       .section {
         padding: 34px 0 84px;
@@ -397,7 +409,11 @@
       .split-card {
         border-radius: 34px;
         padding: 28px;
-        background: linear-gradient(180deg, #16131f, #0f1015);
+        background:
+          radial-gradient(circle at 10% 12%, rgba(84, 210, 165, 0.30), transparent 30%),
+          radial-gradient(circle at 54% 8%, rgba(255, 215, 94, 0.26), transparent 28%),
+          radial-gradient(circle at 86% 18%, rgba(255, 94, 98, 0.24), transparent 26%),
+          linear-gradient(180deg, #16131f, #101118);
         color: white;
         box-shadow: 0 26px 54px rgba(22, 17, 45, 0.22);
       }
@@ -434,8 +450,12 @@
         border-radius: 30px;
         min-height: 560px;
         padding: 24px;
-        background: linear-gradient(160deg, rgba(124,58,237,0.12), rgba(255,255,255,0.82));
-        border: 1px dashed rgba(124,58,237,0.28);
+        background:
+          radial-gradient(circle at 14% 18%, rgba(84, 210, 165, 0.26), transparent 26%),
+          radial-gradient(circle at 50% 12%, rgba(255, 215, 94, 0.24), transparent 28%),
+          radial-gradient(circle at 84% 18%, rgba(255, 94, 98, 0.22), transparent 24%),
+          rgba(255,255,255,0.82);
+        border: 1px dashed rgba(255, 107, 87, 0.24);
       }
 
       .visual-placeholder h3 {
@@ -469,10 +489,14 @@
       .cta-block {
         border-radius: 34px;
         padding: 34px;
-        background: linear-gradient(135deg, #7c3aed, #4f46e5);
+        background:
+          radial-gradient(circle at 10% 18%, rgba(84, 210, 165, 0.30), transparent 24%),
+          radial-gradient(circle at 50% 18%, rgba(255, 215, 94, 0.28), transparent 26%),
+          radial-gradient(circle at 88% 18%, rgba(255, 94, 98, 0.30), transparent 24%),
+          linear-gradient(135deg, #ff9f43, #ff5e62);
         color: white;
         text-align: center;
-        box-shadow: 0 26px 60px rgba(90, 40, 200, 0.26);
+        box-shadow: 0 26px 60px rgba(255, 107, 87, 0.26);
       }
 
       .cta-block p {
@@ -573,12 +597,12 @@
       <section class="hero">
         <div class="container hero-grid">
           <div>
-            <div class="eyebrow">Visual habit tracking for iPhone</div>
-            <h1>See your consistency. Build better habits.</h1>
+            <div class="eyebrow">A brighter way to stay consistent on iPhone</div>
+            <h1>Turn your habits into color, clarity, and momentum.</h1>
             <p>
-              Streakmap turns your habits into beautiful heatmaps, clear streaks,
-              and premium home screen widgets, so staying consistent feels simple,
-              visual, and motivating every day.
+              Streakmap transforms everyday habits into luminous heatmaps, motivating streaks,
+              and premium home screen widgets, so your progress feels visible, rewarding,
+              and easy to come back to every day.
             </p>
             <div class="hero-actions">
               <a href="#cta" class="btn btn-primary">Join the waitlist</a>

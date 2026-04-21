@@ -27,7 +27,7 @@ struct HabitsView: View {
                                 .font(.system(size: 18, weight: .bold))
                                 .foregroundStyle(.white)
                                 .frame(width: 42, height: 42)
-                                .background(StreakmapTheme.textPrimary)
+                                .background(StreakmapTheme.accent)
                                 .clipShape(Circle())
                         }
                     }
@@ -64,7 +64,7 @@ struct HabitsView: View {
                                     .font(.system(size: 16, weight: .semibold, design: .rounded))
                                     .frame(maxWidth: .infinity)
                                     .padding(.vertical, 14)
-                                    .background(StreakmapTheme.textPrimary)
+                                    .background(StreakmapTheme.accent)
                                     .foregroundStyle(Color.white)
                                     .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
                             }

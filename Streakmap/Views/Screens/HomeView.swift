@@ -24,7 +24,7 @@ struct HomeView: View {
                                 .font(.system(size: 18, weight: .bold))
                                 .foregroundStyle(.white)
                                 .frame(width: 42, height: 42)
-                                .background(StreakmapTheme.textPrimary)
+                                .background(StreakmapTheme.accent)
                                 .clipShape(Circle())
                         }
                     }

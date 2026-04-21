@@ -94,7 +94,7 @@ struct PremiumView: View {
                         .font(.system(size: 17, weight: .semibold, design: .rounded))
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 18)
-                        .background(StreakmapTheme.textPrimary)
+                        .background(StreakmapTheme.accent)
                         .foregroundStyle(.white)
                         .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
                     }

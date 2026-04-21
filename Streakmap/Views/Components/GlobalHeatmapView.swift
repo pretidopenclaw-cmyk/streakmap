@@ -36,32 +36,37 @@ struct GlobalHeatmapView: View {
         VStack(alignment: .leading, spacing: 10) {
             HeatmapLegend(accent: Color(hex: appState.globalHeatmapColorHex), mode: .gradient)
 
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(alignment: .top, spacing: 5) {
-                    ForEach(Array(grid.enumerated()), id: \.offset) { weekIndex, week in
-                        VStack(spacing: 5) {
-                            ForEach(Array(week.enumerated()), id: \.offset) { _, day in
-                                if let day {
-                                    Button {
-                                        onSelectDate?(day)
-                                    } label: {
-                                        HeatmapCell(
-                                            color: color(for: day),
-                                            size: cellSize,
-                                            isToday: calendar.isDateInToday(day)
-                                        )
+            ScrollViewReader { proxy in
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(alignment: .top, spacing: 5) {
+                        ForEach(Array(grid.enumerated()), id: \.offset) { weekIndex, week in
+                            VStack(spacing: 5) {
+                                ForEach(Array(week.enumerated()), id: \.offset) { _, day in
+                                    if let day {
+                                        Button {
+                                            onSelectDate?(day)
+                                        } label: {
+                                            HeatmapCell(
+                                                color: color(for: day),
+                                                size: cellSize,
+                                                isToday: calendar.isDateInToday(day)
+                                            )
+                                        }
+                                        .buttonStyle(.plain)
+                                    } else {
+                                        Color.clear
+                                            .frame(width: cellSize, height: cellSize)
                                     }
-                                    .buttonStyle(.plain)
-                                } else {
-                                    Color.clear
-                                        .frame(width: cellSize, height: cellSize)
                                 }
                             }
+                            .id(weekIndex)
                         }
-                        .id(weekIndex)
                     }
+                    .padding(.vertical, 2)
                 }
-                .padding(.vertical, 2)
+                .onAppear {
+                    proxy.scrollTo(grid.count - 1, anchor: .trailing)
+                }
             }
         }
     }

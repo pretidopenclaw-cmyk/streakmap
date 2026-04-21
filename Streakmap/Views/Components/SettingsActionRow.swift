@@ -19,7 +19,7 @@ struct SettingsActionRow: View {
                 .font(.system(size: 16, weight: .semibold, design: .rounded))
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 14)
-                .background(isPrimary ? StreakmapTheme.textPrimary : StreakmapTheme.background)
+                .background(isPrimary ? StreakmapTheme.accent : StreakmapTheme.background)
                 .foregroundStyle(isPrimary ? Color.white : StreakmapTheme.textPrimary)
                 .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
         }

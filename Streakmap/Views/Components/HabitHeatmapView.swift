@@ -42,32 +42,37 @@ struct HabitHeatmapView: View {
         VStack(alignment: .leading, spacing: 10) {
             HeatmapLegend(accent: Color(hex: habit.colorHex), mode: .binary)
 
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(alignment: .top, spacing: 5) {
-                    ForEach(Array(weeks.enumerated()), id: \.offset) { weekIndex, week in
-                        VStack(spacing: 5) {
-                            ForEach(Array(week.enumerated()), id: \.offset) { _, day in
-                                if let day {
-                                    Button {
-                                        onSelectDate?(day)
-                                    } label: {
-                                        HeatmapCell(
-                                            color: appState.isHabitCompleted(habit.id, on: day) ? Color(hex: habit.colorHex) : StreakmapTheme.neutralCell,
-                                            size: cellSize,
-                                            isToday: calendar.isDateInToday(day)
-                                        )
+            ScrollViewReader { proxy in
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(alignment: .top, spacing: 5) {
+                        ForEach(Array(weeks.enumerated()), id: \.offset) { weekIndex, week in
+                            VStack(spacing: 5) {
+                                ForEach(Array(week.enumerated()), id: \.offset) { _, day in
+                                    if let day {
+                                        Button {
+                                            onSelectDate?(day)
+                                        } label: {
+                                            HeatmapCell(
+                                                color: appState.isHabitCompleted(habit.id, on: day) ? Color(hex: habit.colorHex) : StreakmapTheme.neutralCell,
+                                                size: cellSize,
+                                                isToday: calendar.isDateInToday(day)
+                                            )
+                                        }
+                                        .buttonStyle(.plain)
+                                    } else {
+                                        Color.clear
+                                            .frame(width: cellSize, height: cellSize)
                                     }
-                                    .buttonStyle(.plain)
-                                } else {
-                                    Color.clear
-                                        .frame(width: cellSize, height: cellSize)
                                 }
                             }
+                            .id(weekIndex)
                         }
-                        .id(weekIndex)
                     }
+                    .padding(.vertical, 2)
                 }
-                .padding(.vertical, 2)
+                .onAppear {
+                    proxy.scrollTo(weeks.count - 1, anchor: .trailing)
+                }
             }
         }
     }

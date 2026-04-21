@@ -105,6 +105,9 @@
 		6389A96C2F9423ED000B62BF /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		6389A96E2F9423ED000B62BF /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		6389A9822F942477000B62BF /* StreakmapWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StreakmapWidgetExtension.entitlements; sourceTree = "<group>"; };
+		6389A9C12F975BAE000B62BF /* Streakmap.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; name = Streakmap.storekit; path = Streakmap/Services/StoreKit/Streakmap.storekit; sourceTree = "<group>"; };
+		6389A9DC2F976D10000B62BF /* Streakmap.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Streakmap.storekit; sourceTree = "<group>"; };
+		6389A9DD2F976D8A000B62BF /* Products.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Products.storekit; sourceTree = "<group>"; };
 		A00200010000000100000001 /* StreakmapApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakmapApp.swift; sourceTree = "<group>"; };
 		A00200010000000100000002 /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 		A00200010000000100000003 /* StreakmapTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakmapTheme.swift; sourceTree = "<group>"; };
@@ -219,6 +222,9 @@
 		A00400010000000100000001 = {
 			isa = PBXGroup;
 			children = (
+				6389A9DD2F976D8A000B62BF /* Products.storekit */,
+				6389A9C12F975BAE000B62BF /* Streakmap.storekit */,
+				6389A9DC2F976D10000B62BF /* Streakmap.storekit */,
 				6389A9822F942477000B62BF /* StreakmapWidgetExtension.entitlements */,
 				A00400010000000100000002 /* Streakmap */,
 				6389A9702F9423ED000B62BF /* StreakmapWidget */,

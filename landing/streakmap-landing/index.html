@@ -82,6 +82,14 @@
         max-width: 100%;
       }
 
+      .screenshot {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+        border-radius: inherit;
+      }
+
       .container {
         width: min(calc(100% - 32px), var(--max));
         margin: 0 auto;
@@ -615,42 +623,13 @@
 
           <div class="phone-stack" aria-label="Streakmap app preview placeholders">
             <div class="phone front">
-              <div class="screen">
-                <div class="widget-head">
-                  <div>
-                    <strong>Meditation</strong>
-                    <span>12 day streak</span>
-                  </div>
-                  <div style="width:34px;height:34px;border-radius:12px;background:rgba(255,255,255,0.08);"></div>
-                </div>
-                <div class="widget-card">
-                  <div class="heatmap">
-                    <span class="cell c4"></span><span class="cell c3"></span><span class="cell c2"></span><span class="cell"></span><span class="cell c4"></span><span class="cell c4"></span><span class="cell c3"></span><span class="cell c2"></span><span class="cell c4"></span><span class="cell c3"></span><span class="cell"></span><span class="cell c2"></span>
-                    <span class="cell c3"></span><span class="cell c4"></span><span class="cell"></span><span class="cell c2"></span><span class="cell c4"></span><span class="cell c2"></span><span class="cell c3"></span><span class="cell c4"></span><span class="cell c2"></span><span class="cell"></span><span class="cell c3"></span><span class="cell c4"></span>
-                    <span class="cell c2"></span><span class="cell"></span><span class="cell c4"></span><span class="cell c3"></span><span class="cell c2"></span><span class="cell c4"></span><span class="cell c4"></span><span class="cell"></span><span class="cell c3"></span><span class="cell c2"></span><span class="cell c4"></span><span class="cell c3"></span>
-                  </div>
-                </div>
+              <div class="screen" style="padding:0; background:#f4f1ef;">
+                <img class="screenshot" src="./assets/home-screen.jpg" alt="Streakmap home screen with yearly heatmap and habit cards" />
               </div>
             </div>
             <div class="phone back">
-              <div class="screen">
-                <div class="widget-head">
-                  <div>
-                    <strong>Global heatmap</strong>
-                    <span>Last 365 days</span>
-                  </div>
-                  <div style="display:flex;gap:8px;">
-                    <div style="padding:8px 10px;border-radius:14px;background:rgba(255,255,255,0.08);font-size:12px;">3 today</div>
-                    <div style="padding:8px 10px;border-radius:14px;background:rgba(255,255,255,0.08);font-size:12px;">5 habits</div>
-                  </div>
-                </div>
-                <div class="widget-card">
-                  <div class="heatmap year">
-                    <span class="cell c2"></span><span class="cell c3"></span><span class="cell c4"></span><span class="cell"></span><span class="cell c2"></span><span class="cell c3"></span><span class="cell c4"></span><span class="cell c2"></span><span class="cell"></span><span class="cell c3"></span><span class="cell c4"></span><span class="cell c2"></span><span class="cell c3"></span><span class="cell"></span><span class="cell c2"></span><span class="cell c4"></span><span class="cell c3"></span><span class="cell c2"></span><span class="cell"></span><span class="cell c3"></span><span class="cell c4"></span><span class="cell c2"></span><span class="cell c3"></span><span class="cell"></span><span class="cell c2"></span><span class="cell c4"></span>
-                    <span class="cell c3"></span><span class="cell"></span><span class="cell c2"></span><span class="cell c4"></span><span class="cell c3"></span><span class="cell c2"></span><span class="cell"></span><span class="cell c3"></span><span class="cell c4"></span><span class="cell c2"></span><span class="cell c3"></span><span class="cell"></span><span class="cell c2"></span><span class="cell c4"></span><span class="cell c3"></span><span class="cell c2"></span><span class="cell"></span><span class="cell c3"></span><span class="cell c4"></span><span class="cell c2"></span><span class="cell c3"></span><span class="cell"></span><span class="cell c2"></span><span class="cell c4"></span><span class="cell c3"></span><span class="cell c2"></span>
-                    <span class="cell"></span><span class="cell c3"></span><span class="cell c4"></span><span class="cell c2"></span><span class="cell c3"></span><span class="cell"></span><span class="cell c2"></span><span class="cell c4"></span><span class="cell c3"></span><span class="cell c2"></span><span class="cell"></span><span class="cell c3"></span><span class="cell c4"></span><span class="cell c2"></span><span class="cell c3"></span><span class="cell"></span><span class="cell c2"></span><span class="cell c4"></span><span class="cell c3"></span><span class="cell c2"></span><span class="cell"></span><span class="cell c3"></span><span class="cell c4"></span><span class="cell c2"></span><span class="cell c3"></span><span class="cell"></span>
-                  </div>
-                </div>
+              <div class="screen" style="padding:0; background:#0d1017;">
+                <img class="screenshot" src="./assets/widgets-screen.jpg" alt="Streakmap widgets on iPhone home screen" />
               </div>
             </div>
           </div>
@@ -717,14 +696,14 @@
             </div>
           </div>
           <div class="visual-placeholder">
-            <h3>Your visuals go here</h3>
+            <h3>Real product, real screens</h3>
             <p>
-              I’ve designed the landing so you can drop in your real app screenshots, widget shots, and App Store style mockups as soon as you send them.
+              Streakmap already has a strong visual identity in the app itself, from the yearly overview to the per-habit consistency map and the premium widget system.
             </p>
             <div class="placeholder-stack">
-              <div class="shot">Habit widget screenshot</div>
-              <div class="shot">Global heatmap screenshot</div>
-              <div class="shot">App screen / mockup</div>
+              <div class="shot" style="padding:0; overflow:hidden; min-height:220px;"><img class="screenshot" src="./assets/habit-detail.jpg" alt="Streakmap habit detail screen" /></div>
+              <div class="shot" style="padding:0; overflow:hidden; min-height:220px;"><img class="screenshot" src="./assets/insights-screen.jpg" alt="Streakmap insights screen" /></div>
+              <div class="shot" style="padding:0; overflow:hidden; min-height:220px;"><img class="screenshot" src="./assets/habits-screen.jpg" alt="Streakmap habits collection screen" /></div>
             </div>
           </div>
         </div>
@@ -777,21 +756,21 @@
               <div class="icon-badge">S</div>
               <h3>Single-habit focus</h3>
               <p>
-                Keep one habit front and center with a compact widget that turns your daily rhythm into an elegant visual card.
+                Keep one habit front and center with a compact widget card that highlights your streak and recent consistency in one glance.
               </p>
             </article>
             <article class="feature-card">
               <div class="icon-badge">M</div>
               <h3>Medium heatmap</h3>
               <p>
-                See more history at once while keeping the title, streak, and visual progress balanced and easy to scan.
+                See more history at once with a wider heatmap layout that still feels clean, readable, and premium on the home screen.
               </p>
             </article>
             <article class="feature-card">
               <div class="icon-badge">L</div>
               <h3>Global yearly view</h3>
               <p>
-                Get a full-year overview of your consistency across habits with a premium large widget designed for glanceable motivation.
+                Get a full-year overview of your consistency across habits with a large widget built to keep your entire year visible at a glance.
               </p>
             </article>
           </div>

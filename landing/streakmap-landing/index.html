@@ -167,8 +167,15 @@
         .screen { min-height: 420px; }
         .hero-actions { display: none; }
         .hero-secondary-link { display: inline-block; }
-        .waitlist-form { flex-direction: column; }
-        .waitlist-form button, .waitlist-form input { width: 100%; }
+        .waitlist-form { flex-direction: column; gap: 10px; }
+        .waitlist-form input,
+        .waitlist-form button {
+          width: 100%;
+          min-height: 48px;
+          padding-left: 16px;
+          padding-right: 16px;
+          font-size: 16px;
+        }
         .feature-card, .step-card, .faq-item, .builder-card, .visual-placeholder { padding: 20px; }
         .problem-grid, .benefits-grid, .steps, .placeholder-stack { grid-template-columns: 1fr; }
         .icon-badge { width: auto; height: auto; border-radius: 999px; padding: 4px 8px; font-size: 13px; }

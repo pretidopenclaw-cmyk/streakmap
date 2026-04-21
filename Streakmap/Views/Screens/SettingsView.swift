@@ -4,6 +4,8 @@ struct SettingsView: View {
     @EnvironmentObject private var appState: AppState
     @State private var showPremium = false
     @State private var reminderPermissionGranted = false
+    @State private var isRestoring = false
+    @State private var restoreMessage: String?
 
     var body: some View {
         NavigationStack {
@@ -31,6 +33,27 @@ struct SettingsView: View {
                                     isPrimary: true
                                 ) {
                                     showPremium = true
+                                }
+
+                                Button {
+                                    Task { await restorePurchases() }
+                                } label: {
+                                    HStack {
+                                        Text("Restore purchases")
+                                            .font(.system(size: 15, weight: .medium, design: .rounded))
+                                            .foregroundStyle(StreakmapTheme.accent)
+                                        Spacer()
+                                        if isRestoring {
+                                            ProgressView()
+                                        }
+                                    }
+                                }
+                                .disabled(isRestoring)
+
+                                if let restoreMessage {
+                                    Text(restoreMessage)
+                                        .font(.system(size: 13, weight: .medium, design: .rounded))
+                                        .foregroundStyle(StreakmapTheme.textSecondary)
                                 }
                             }
                         }
@@ -91,6 +114,53 @@ struct SettingsView: View {
             .sheet(isPresented: $showPremium) {
                 PremiumView()
             }
+        }
+    }
+
+    #if DEBUG
+    private func generateDemoData() {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: .now)
+
+        var newEntries: [HabitEntry] = []
+
+        for habit in appState.activeHabits {
+            for dayOffset in 0..<365 {
+                guard let date = calendar.date(byAdding: .day, value: -dayOffset, to: today) else { continue }
+
+                // ~85% completion, with occasional rough weeks (~45%)
+                let weekOfYear = calendar.component(.weekOfYear, from: date)
+                let isBadWeek = (weekOfYear % 7 == 3)
+                let chance: Double = isBadWeek ? 0.45 : 0.88
+
+                let completed = Double.random(in: 0...1) < chance
+
+                newEntries.append(HabitEntry(
+                    habitID: habit.id,
+                    date: date,
+                    isCompleted: completed
+                ))
+            }
+        }
+
+        appState.entries = newEntries
+        appState.persist()
+    }
+    #endif
+
+    private func restorePurchases() async {
+        isRestoring = true
+        restoreMessage = nil
+        let service = StoreKitService()
+        let restored = await service.restorePurchases()
+        isRestoring = false
+        if restored {
+            appState.isPremiumUnlocked = true
+            appState.persist()
+            HapticService.success()
+            restoreMessage = "Premium restored!"
+        } else {
+            restoreMessage = "No previous purchase found."
         }
     }
 

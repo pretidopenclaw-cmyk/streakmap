@@ -28,6 +28,13 @@ struct RootAppContainerView: View {
             .task {
                 appState.attachModelContext(modelContext)
                 appState.loadFromSwiftDataIfAvailable()
+                // Verify entitlements on launch
+                let service = StoreKitService()
+                let entitled = await service.checkEntitlements()
+                if entitled != appState.isPremiumUnlocked {
+                    appState.isPremiumUnlocked = entitled
+                    appState.persist()
+                }
             }
     }
 }

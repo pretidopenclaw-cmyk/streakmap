@@ -10,11 +10,17 @@ struct StreakmapApp: App {
         WindowGroup {
             RootAppContainerView()
                 .environmentObject(appState)
-                .preferredColorScheme(.light)
                 .modelContainer(swiftDataStore.container)
                 .onChange(of: appState.isPremiumUnlocked) { _ in appState.persist() }
                 .onChange(of: appState.hasCompletedOnboarding) { _ in appState.persist() }
                 .onChange(of: appState.selectedHabitID) { _ in appState.persist() }
+                .onOpenURL { url in
+                    guard url.scheme == "streakmap",
+                          url.host == "habit",
+                          let idString = url.pathComponents.last,
+                          let habitID = UUID(uuidString: idString) else { return }
+                    appState.selectHabit(habitID)
+                }
         }
     }
 }
